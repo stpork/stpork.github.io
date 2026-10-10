@@ -18,7 +18,9 @@ jobs:
           python3 scripts/build.py
           python3 scripts/check.py
           node --check assets/site.js
-          git diff --exit-code -- index.html ru/index.html
+          node --check assets/theme.js
+          node scripts/check-theme.cjs
+          git diff --exit-code -- index.html ru/index.html 404.html
       - name: Package public files
         run: |
           mkdir -p _site

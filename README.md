@@ -12,6 +12,8 @@ No npm dependencies or framework. Requires Python 3 for generation and Node.js o
 python3 scripts/build.py
 python3 scripts/check.py
 node --check assets/site.js
+node --check assets/theme.js
+node scripts/check-theme.cjs
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
@@ -22,6 +24,12 @@ Open http://127.0.0.1:8765/. Edit copy in `scripts/build.py`, styling in `assets
 Push to `main`. The `Deploy MDVu website` workflow validates and deploys to GitHub Pages (Pages source must be **GitHub Actions**).
 
 The public site needs no JavaScript to read the content, follow download links or use the FAQ. The small script adds clipboard copy, accessible tabs and the screenshot dialog. No third-party scripts, external fonts, analytics or runtime API calls.
+
+## Themes
+
+The site follows the browser's `prefers-color-scheme` setting on first visit and reacts to system changes. The circular moon/sun button switches themes and stores the choice under `mdvu-theme` in local storage. A manual choice overrides the system setting, persists across pages and reloads, and synchronizes between tabs. Switching also works when local storage is unavailable.
+
+The small, versioned `assets/theme.js` loads before the stylesheet to apply the saved theme before first paint. CSS also follows the system preference without JavaScript. The English and Russian pages share the same behavior and have localized button labels. Color and surface tokens in `assets/site.css` style the entire page in both themes.
 
 ## Sitemaps
 

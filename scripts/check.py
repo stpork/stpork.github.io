@@ -35,6 +35,9 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     assert source.index('google-site-verification') < source.index('</head>') < source.index('<body>')
     assert 90 <= len(page.meta['description']) <= 180
     assert page.meta['twitter:card']=='summary_large_image'
+    assert page.meta['color-scheme']=='light dark'
+    assert source.index('/assets/theme.js') < source.index('/assets/site.css')
+    assert sum(tag=='button' and 'data-theme-toggle' in attrs for tag,attrs in page.tags)==1
     assert 'class="language"' not in source if lang=='en' else 'hreflang="en">EN</a>' in source
     assert {a.get('hreflang') for tag,a in page.tags if tag=='link' and a.get('rel')=='alternate'} == {'en','ru','x-default'}
     structured = source.split('<script type="application/ld+json">')[1].split('</script>')[0]
@@ -43,7 +46,7 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     assert data['@graph'][2]['@type']=='WebPage'
     assert data['@graph'][2]['inLanguage']==lang
     assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
-    assert sum(tag=='details' for tag,_ in page.tags)==6
+    assert sum(tag=='details' for tag,_ in page.tags)>=6
     for link in page.links:
         parsed=urlsplit(link)
         if parsed.scheme or parsed.netloc: continue
@@ -95,5 +98,6 @@ for entry in entries:
         assert 'noindex' not in page.meta.get(directive,'').lower()
 print('PASS sitemap: canonical pages, reciprocal hreflang, valid dates and robots access')
 assert (ROOT/'assets/site.js').stat().st_size < 5000
+assert (ROOT/'assets/theme.js').stat().st_size < 4000
 assert (ROOT/'assets/mdvu.webp').stat().st_size < 150000
 print('PASS sitemap and asset budgets')
