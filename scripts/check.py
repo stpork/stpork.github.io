@@ -4,6 +4,8 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import json
+from datetime import date
+from urllib.robotparser import RobotFileParser
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -53,7 +55,49 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
             assert parsed.fragment in page.ids, f'{rel}: missing anchor {link}'
     assert (ROOT/rel).stat().st_size < 50000
     print(f'PASS {rel}: metadata, verification, language links, structured data, internal links, image dimensions')
-ET.parse(ROOT/'sitemap.xml')
+# Validate the actual search-engine signals together, not just XML syntax.
+BASE = 'https://stpork.github.io'
+NS = {'sm':'http://www.sitemaps.org/schemas/sitemap/0.9', 'xhtml':'http://www.w3.org/1999/xhtml'}
+variants = {'en':BASE+'/', 'ru':BASE+'/ru/', 'x-default':BASE+'/'}
+expected_pages = {BASE+'/':ROOT/'index.html', BASE+'/ru/':ROOT/'ru/index.html'}
+robots = RobotFileParser()
+robots.parse((ROOT/'robots.txt').read_text().splitlines())
+assert BASE+'/sitemap.xml' in (robots.site_maps() or [])
+assert robots.can_fetch('Googlebot', BASE+'/sitemap.xml')
+assert robots.can_fetch('Googlebot', BASE+'/sitemaps.xml')
+sitemap_data = (ROOT/'sitemap.xml').read_bytes()
+assert len(sitemap_data) < 50 * 1024 * 1024
+sitemap_data.decode('utf-8')
+sitemap = ET.fromstring(sitemap_data)
+assert sitemap.tag == '{'+NS['sm']+'}urlset'
+entries = sitemap.findall('sm:url', NS)
+assert 0 < len(entries) <= 50000
+listed = [entry.findtext('sm:loc', namespaces=NS) for entry in entries]
+assert len(listed) == len(set(listed)), 'Duplicate sitemap URLs'
+assert set(listed) == set(expected_pages), 'Only canonical, indexable pages belong in sitemap'
+for entry in entries:
+    loc = entry.findtext('sm:loc', namespaces=NS)
+    parsed = urlsplit(loc)
+    assert parsed.scheme == 'https' and parsed.netloc == 'stpork.github.io'
+    assert not parsed.query and not parsed.fragment
+    date.fromisoformat(entry.findtext('sm:lastmod', namespaces=NS))
+    alternate_elements = entry.findall('xhtml:link', NS)
+    assert len(alternate_elements) == len(variants)
+    assert all(a.get('rel') == 'alternate' for a in alternate_elements)
+    alternates = {a.get('hreflang'):a.get('href') for a in alternate_elements}
+    assert alternates == variants, 'Incomplete or mismatched sitemap hreflang'
+    page = Page(expected_pages[loc].read_text())
+    canonical = [a.get('href') for tag,a in page.tags if tag=='link' and a.get('rel')=='canonical']
+    assert canonical == [loc], 'Sitemap URL must equal page canonical'
+    html_alternates = {a.get('hreflang'):a.get('href') for tag,a in page.tags if tag=='link' and a.get('rel')=='alternate'}
+    assert html_alternates == alternates, 'HTML and sitemap hreflang must agree'
+    assert robots.can_fetch('Googlebot', loc)
+    for directive in ('robots','googlebot'):
+        assert 'noindex' not in page.meta.get(directive,'').lower()
+index = ET.parse(ROOT/'sitemaps.xml').getroot()
+assert index.tag == '{'+NS['sm']+'}sitemapindex'
+assert [e.findtext('sm:loc', namespaces=NS) for e in index.findall('sm:sitemap', NS)] == [BASE+'/sitemap.xml']
+print('PASS sitemaps: canonical pages, reciprocal hreflang, valid dates, robots access and sitemap index')
 assert (ROOT/'assets/site.js').stat().st_size < 5000
 assert (ROOT/'assets/mdvu.webp').stat().st_size < 150000
 print('PASS sitemap and asset budgets')

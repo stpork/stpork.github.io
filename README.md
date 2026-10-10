@@ -23,6 +23,14 @@ Push to `main`. The `Deploy MDVu website` workflow validates and deploys to GitH
 
 The public site needs no JavaScript to read the content, follow download links or use the FAQ. The small script adds clipboard copy, accessible tabs and the screenshot dialog. No third-party scripts, external fonts, analytics or runtime API calls.
 
+## Sitemaps
+
+Submit **https://stpork.github.io/sitemap.xml** in Google Search Console. It lists the English and Russian canonical pages with reciprocal `en`, `ru` and `x-default` language annotations. `robots.txt` advertises this URL.
+
+**https://stpork.github.io/sitemaps.xml** is a sitemap index referencing the same sitemap, so the plural filename also works. Either URL may be submitted; the existing singular submission can stay in place.
+
+Keep redirects, error pages, downloads and assets out of the page URL list. Update `lastmod` only after significant page changes; do not reset it on each build. The deployment checks verify canonical URLs, indexability, language annotations, dates and robots access together. A live URL test confirms fetch access; successful sitemap processing is reported separately in Search Console.
+
 ## Release update checklist
 
 1. Update `RELEASE`, `DOWNLOAD`, release numbers and archive links in `scripts/build.py`.
