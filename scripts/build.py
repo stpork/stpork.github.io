@@ -64,7 +64,9 @@ def page(lang):
         (t('App license / price','Лицензия / стоимость'),t('MIT · free','MIT · бесплатно'),t('Proprietary · free','Закрытый код · бесплатно'),t('Proprietary · paid','Закрытый код · платно'),t('Free · source: MIT²','Бесплатно · исходники: MIT²')),
     ]
     rows = ''.join('<tr>'+''.join(f'<th scope="row">{v}</th>' if i==0 else f'<td>{v}</td>' for i,v in enumerate(row))+'</tr>' for row in compare_rows)
-    faq_html = ''.join(f'<details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>' for q,a in faqs)
+    faq_items = [f'<details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>' for q,a in faqs]
+    midpoint = (len(faq_items) + 1) // 2
+    faq_html = '<div class="faq-column">' + ''.join(faq_items[:midpoint]) + '</div><div class="faq-column">' + ''.join(faq_items[midpoint:]) + '</div>'
     return f'''<!doctype html>
 <html lang="{lang}">
 <head>
@@ -132,4 +134,4 @@ print('Built English and Russian pages.')
 
 css_version = hashlib.sha256((ROOT/'assets/site.css').read_bytes()).hexdigest()[:12]
 theme_version = hashlib.sha256((ROOT/'assets/theme.js').read_bytes()).hexdigest()[:12]
-(ROOT/'404.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f9fc"><title>Page not found — MDVu</title><script src="/assets/theme.js?v={theme_version}"></script><link rel="stylesheet" href="/assets/site.css?v={css_version}"><link rel="icon" href="/assets/favicon-96.png"></head><body><main class="container section"><div class="nav-wrap"><a class="brand" href="/"><img src="/assets/icon.webp" width="64" height="64" alt="">MDVu.</a>{theme_toggle('en')}</div><p class="eyebrow" style="margin-top:80px">404 / PAGE NOT FOUND</p><h1>A little detour.</h1><p class="section-intro">This page isn’t here. Your next Markdown viewer is.</p><a class="button" href="/" style="margin-top:30px">Back to MDVu →</a></main></body></html>''')
+(ROOT/'404.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f9fc"><title>Page not found — MDVu</title><script src="/assets/theme.js?v={theme_version}"></script><link rel="stylesheet" href="/assets/site.css?v={css_version}"><link rel="icon" href="/assets/favicon-96.png"></head><body><main class="container section"><div class="nav-wrap"><a class="brand" href="/"><img src="/assets/icon.webp" width="64" height="64" alt="">MDVu.</a>{theme_toggle('en')}</div><p class="eyebrow" style="margin-top:48px">404 / PAGE NOT FOUND</p><h1>A little detour.</h1><p class="section-intro">This page isn’t here. Your next Markdown viewer is.</p><a class="button" href="/" style="margin-top:24px">Back to MDVu →</a></main></body></html>''')
