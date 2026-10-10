@@ -2,6 +2,7 @@
 """Build both zero-dependency, fully rendered language versions."""
 from pathlib import Path
 import json
+import hashlib
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = 'https://stpork.github.io'
@@ -11,6 +12,8 @@ DOWNLOAD = REPO + '/releases/download/v0.4.1/mdvu-0.4.1-macos.dmg'
 
 def page(lang):
     ru = lang == 'ru'
+    css_version = hashlib.sha256((ROOT/'assets/site.css').read_bytes()).hexdigest()[:12]
+    js_version = hashlib.sha256((ROOT/'assets/site.js').read_bytes()).hexdigest()[:12]
     def t(en, ru_text): return ru_text if ru else en
     url = BASE + ('/ru/' if ru else '/')
     title = t('MDVu — Fast, Native Markdown Viewer for macOS', 'MDVu — быстрый нативный Markdown-просмотрщик для macOS')
@@ -65,7 +68,7 @@ def page(lang):
 <meta name="theme-color" content="#f7f9fc"><meta name="color-scheme" content="light">
 <link rel="canonical" href="{url}"><link rel="alternate" hreflang="en" href="{BASE}/"><link rel="alternate" hreflang="ru" href="{BASE}/ru/"><link rel="alternate" hreflang="x-default" href="{BASE}/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MDVu"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/assets/social.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="MDVu — native Markdown viewer for macOS"><meta property="og:locale" content="{'ru_RU' if ru else 'en_US'}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{description}"><meta name="twitter:image" content="{BASE}/assets/social.jpg">
-<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="stylesheet" href="/assets/site.css?v={css_version}"><script src="/assets/site.js?v={js_version}" defer></script>
 <script type="application/ld+json">{json.dumps(structured,ensure_ascii=False,separators=(',',':'))}</script>
 </head>
 <body>
