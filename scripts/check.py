@@ -38,7 +38,10 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     structured = source.split('<script type="application/ld+json">')[1].split('</script>')[0]
     data=json.loads(structured)
     assert data['@graph'][0]['offers']['price']=='0'
-    assert len(data['@graph'][2]['mainEntity'])==6
+    assert data['@graph'][2]['@type']=='WebPage'
+    assert data['@graph'][2]['inLanguage']==lang
+    assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
+    assert sum(tag=='details' for tag,_ in page.tags)==6
     for link in page.links:
         parsed=urlsplit(link)
         if parsed.scheme or parsed.netloc: continue

@@ -25,8 +25,8 @@ def page(lang):
     ]
     structured = {'@context':'https://schema.org','@graph':[
         {'@type':'SoftwareApplication','@id':BASE+'/#app','name':'MDVu','url':BASE+'/', 'applicationCategory':'UtilitiesApplication','operatingSystem':'macOS 13.0 or later','softwareVersion':'0.4.1','description':description,'image':BASE+'/assets/mdvu.jpg','screenshot':BASE+'/assets/mdvu.jpg','downloadUrl':DOWNLOAD,'license':'https://opensource.org/license/mit','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'},'author':{'@type':'Person','name':'Finn de Bear','url':'https://github.com/stpork'}},
-        {'@type':'WebSite','name':'MDVu','url':BASE+'/','inLanguage':['en','ru']},
-        {'@type':'FAQPage','inLanguage':lang,'mainEntity':[{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} for q,a in faqs]}
+        {'@type':'WebSite','@id':BASE+'/#website','name':'MDVu','url':BASE+'/','inLanguage':['en','ru']},
+        {'@type':'WebPage','@id':url+'#webpage','url':url,'name':title,'description':description,'inLanguage':lang,'isPartOf':{'@id':BASE+'/#website'},'about':{'@id':BASE+'/#app'}}
     ]}
     nav = [(t('Why MDVu','Почему MDVu'),'why'),(t('Features','Возможности'),'features'),(t('Compare','Сравнение'),'compare')]
     language_link = '<a class="language" href="/" lang="en" hreflang="en">EN</a>' if ru else ''
@@ -61,10 +61,11 @@ def page(lang):
 <meta name="google-site-verification" content="8hoHZ7azFNVSv9x07AUhAS5xpXH3vrk-LlH07z-cgBc">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title><meta name="description" content="{description}">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#f7f9fc"><meta name="color-scheme" content="light">
 <link rel="canonical" href="{url}"><link rel="alternate" hreflang="en" href="{BASE}/"><link rel="alternate" hreflang="ru" href="{BASE}/ru/"><link rel="alternate" hreflang="x-default" href="{BASE}/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MDVu"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/assets/social.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="MDVu — native Markdown viewer for macOS"><meta property="og:locale" content="{'ru_RU' if ru else 'en_US'}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{description}"><meta name="twitter:image" content="{BASE}/assets/social.jpg">
-<link rel="icon" type="image/png" href="/assets/favicon.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
 <script type="application/ld+json">{json.dumps(structured,ensure_ascii=False,separators=(',',':'))}</script>
 </head>
 <body>
@@ -72,8 +73,7 @@ def page(lang):
 <header class="header"><div class="container nav-wrap"><a class="brand" href="{'/ru/' if ru else '/'}" aria-label="MDVu — {t('home','главная')}"><img src="/assets/icon.webp" width="36" height="36" alt=""><span>MDVu<span class="brand-dot">.</span></span></a><nav aria-label="{t('Main navigation','Основная навигация')}">{nav_html}</nav><div class="nav-actions">{language_link}<a class="button button-small" href="#download">{t('Get MDVu','Скачать')} <span aria-hidden="true">↗</span></a></div></div></header>
 <main id="main">
 <section class="hero container" aria-labelledby="hero-title"><div class="hero-copy"><a class="release" href="{RELEASE}"><span class="status-dot"></span> v0.4.1 <span class="release-separator">/</span> {t('Small app. Big possibilities.','Маленький размер. Большие возможности.')} <span aria-hidden="true">↗</span></a>
-<p class="eyebrow">{t('THE NATIVE MARKDOWN VIEWER FOR MAC','НАТИВНЫЙ MARKDOWN-ПРОСМОТРЩИК ДЛЯ MAC')}</p>
-<h1 id="hero-title">{t('Less app.<br><span>More document.</span>','Меньше лишнего.<br><span>Больше смысла.</span>')}</h1>
+<h1 id="hero-title"><span class="hero-category">{t('MDVu — native Markdown viewer for macOS','MDVu — нативный Markdown-просмотрщик для macOS')}</span>{t('Less app.<br><span>More document.</span>','Меньше лишнего.<br><span>Больше смысла.</span>')}</h1>
 <p class="hero-description">{t('Your Markdown, beautifully in view. A tiny, fast Mac app for everything from a simple README to diagrams, equations and a whole vault of ideas.', 'Ваш Markdown — в лучшем виде. Компактное, быстрое приложение для Mac: от простого README до диаграмм, формул и целого хранилища идей.')}</p>
 <div class="hero-buttons"><a class="button" href="{DOWNLOAD}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>{t('Download for Mac','Скачать для Mac')}</a><a class="text-link" href="{REPO}">GitHub <span aria-hidden="true">↗</span></a></div>
 <p class="hero-meta">macOS 13+ <span>·</span> Apple Silicon &amp; Intel <span>·</span> {t('Free & open source','Бесплатно · открытый код')}</p>
