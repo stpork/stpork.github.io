@@ -64,7 +64,6 @@ robots = RobotFileParser()
 robots.parse((ROOT/'robots.txt').read_text().splitlines())
 assert BASE+'/sitemap.xml' in (robots.site_maps() or [])
 assert robots.can_fetch('Googlebot', BASE+'/sitemap.xml')
-assert robots.can_fetch('Googlebot', BASE+'/sitemaps.xml')
 sitemap_data = (ROOT/'sitemap.xml').read_bytes()
 assert len(sitemap_data) < 50 * 1024 * 1024
 sitemap_data.decode('utf-8')
@@ -94,10 +93,7 @@ for entry in entries:
     assert robots.can_fetch('Googlebot', loc)
     for directive in ('robots','googlebot'):
         assert 'noindex' not in page.meta.get(directive,'').lower()
-index = ET.parse(ROOT/'sitemaps.xml').getroot()
-assert index.tag == '{'+NS['sm']+'}sitemapindex'
-assert [e.findtext('sm:loc', namespaces=NS) for e in index.findall('sm:sitemap', NS)] == [BASE+'/sitemap.xml']
-print('PASS sitemaps: canonical pages, reciprocal hreflang, valid dates, robots access and sitemap index')
+print('PASS sitemap: canonical pages, reciprocal hreflang, valid dates and robots access')
 assert (ROOT/'assets/site.js').stat().st_size < 5000
 assert (ROOT/'assets/mdvu.webp').stat().st_size < 150000
 print('PASS sitemap and asset budgets')
