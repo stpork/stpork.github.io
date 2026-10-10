@@ -17,15 +17,15 @@ jobs:
         run: |
           python3 scripts/build.py
           python3 scripts/check.py
-          node --check assets/site.js
-          node --check assets/theme.js
+          node --check mdvu/assets/site.js
+          node --check mdvu/assets/theme.js
           node scripts/check-theme.cjs
-          git diff --exit-code -- index.html ru/index.html 404.html
+          git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html 404.html
       - name: Package public files
         run: |
           mkdir -p _site
           cp index.html 404.html robots.txt sitemap.xml _site/
-          cp -R assets ru mdvu _site/
+          cp -R ru mdvu _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

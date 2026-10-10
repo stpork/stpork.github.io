@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
 const path = require('node:path');
-const source = fs.readFileSync(path.join(__dirname, '../assets/theme.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../mdvu/assets/theme.js'), 'utf8');
 function browser({dark = false, saved = null, blocked = false, lang = 'en'} = {}) {
   let ready = false;
   const events = {}, mediaEvents = {}, clicks = {}, attributes = {};

@@ -1,8 +1,8 @@
 # MDVu website
 
-The official product website for [MDVu](https://github.com/stpork/mdvu), published at **https://stpork.github.io/**.
+The official product website for [MDVu](https://github.com/stpork/mdvu), published at **https://stpork.github.io/mdvu/**.
 
-English: `/`. Russian: `/ru/`. `/mdvu/` redirects to the homepage.
+English: `/mdvu/`. Russian: `/mdvu/ru/`. The domain root `/` redirects to `/mdvu/`, and the old `/ru/` route redirects to `/mdvu/ru/`. Redirects use instant meta refresh plus `location.replace`, preserving query parameters and section anchors when JavaScript is enabled.
 
 ## Develop
 
@@ -11,13 +11,13 @@ No npm dependencies or framework. Requires Python 3 for generation and Node.js o
 ```sh
 python3 scripts/build.py
 python3 scripts/check.py
-node --check assets/site.js
-node --check assets/theme.js
+node --check mdvu/assets/site.js
+node --check mdvu/assets/theme.js
 node scripts/check-theme.cjs
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8765/. Edit copy in `scripts/build.py`, styling in `assets/site.css`, interactions in `assets/site.js`. Commit both generated HTML files after changing the generator. GitHub Actions verifies the generated files and deploys only public assets.
+Open http://127.0.0.1:8765/. Edit copy in `scripts/build.py`, styling in `mdvu/assets/site.css`, interactions in `mdvu/assets/site.js`. Commit the generated landing pages, root redirects and 404 page after changing the generator. GitHub Actions verifies the generated files and deploys only public assets.
 
 ## Publishing
 
@@ -29,11 +29,11 @@ The public site needs no JavaScript to read the content, follow download links o
 
 The site follows the browser's `prefers-color-scheme` setting on first visit and reacts to system changes. The circular moon/sun button switches themes and stores the choice under `mdvu-theme` in local storage. A manual choice overrides the system setting, persists across pages and reloads, and synchronizes between tabs. Switching also works when local storage is unavailable.
 
-The small, versioned `assets/theme.js` loads before the stylesheet to apply the saved theme before first paint. CSS also follows the system preference without JavaScript. The English and Russian pages share the same behavior and have localized button labels. Color and surface tokens in `assets/site.css` style the entire page in both themes.
+The small, versioned `mdvu/assets/theme.js` loads before the stylesheet to apply the saved theme before first paint. CSS also follows the system preference without JavaScript. The English and Russian pages share the same behavior and have localized button labels. Color and surface tokens in `mdvu/assets/site.css` style the entire page in both themes.
 
 ## Sitemaps
 
-Submit **https://stpork.github.io/sitemap.xml** in Google Search Console. It lists the English and Russian canonical pages with reciprocal `en`, `ru` and `x-default` language annotations. `robots.txt` advertises this URL.
+Submit **https://stpork.github.io/sitemap.xml** in Google Search Console. It lists only `/mdvu/` and `/mdvu/ru/`, the English and Russian canonical pages with reciprocal `en`, `ru` and `x-default` language annotations. `robots.txt` advertises this URL.
 
 Keep redirects, error pages, downloads and assets out of the page URL list. Update `lastmod` only after significant page changes; do not reset it on each build. The deployment checks verify canonical URLs, indexability, language annotations, dates and robots access together. A live URL test confirms fetch access; successful sitemap processing is reported separately in Search Console.
 
@@ -44,8 +44,8 @@ Keep redirects, error pages, downloads and assets out of the page URL list. Upda
 3. Update benchmark values only from a recorded run; retain measurement scope and methodology.
 4. Recheck comparison sources and update the checked date.
 5. Update `sitemap.xml` modification dates. Generate and validate both pages.
-6. Keep the Google site-verification meta tag in the homepage head. The English page intentionally has no RU switch; the Russian page retains its EN switch. Both remain discoverable through hreflang and sitemap.
+6. Keep the Google site-verification meta tag in the root redirect head as well as the canonical landing pages. The English page intentionally has no RU switch; the Russian page retains its EN switch. Both remain discoverable through hreflang and sitemap.
 
-`assets/social.jpg` is the 1200×630 rendered share card; `scripts/social.html` is its source. The icon and application screenshot originate from the MDVu repository. The app screenshot is delivered as responsive WebP with a JPEG fallback.
+`mdvu/assets/social.jpg` is the 1200×630 rendered share card; `scripts/social.html` is its source. The icon and application screenshot originate from the MDVu repository. The app screenshot is delivered as responsive WebP with a JPEG fallback.
 
 Product facts: MDVu README, architecture and v0.4.1 changelog/release. Comparison sources are linked immediately below the comparison table. Site copy does not claim competitor benchmark results, notarization or unsupported editor functionality.

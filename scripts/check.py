@@ -26,7 +26,7 @@ class Page(HTMLParser):
             assert 'alt' in a and 'width' in a and 'height' in a
         if 'srcset' in a: self.links += [item.strip().split()[0] for item in a['srcset'].split(',')]
 
-for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
+for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
     source = (ROOT/rel).read_text(); page = Page(source)
     assert source.startswith('<!doctype html>')
     assert f'<html lang="{lang}">' in source
@@ -36,7 +36,7 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     assert 90 <= len(page.meta['description']) <= 180
     assert page.meta['twitter:card']=='summary_large_image'
     assert page.meta['color-scheme']=='light dark'
-    assert source.index('/assets/theme.js') < source.index('/assets/site.css')
+    assert source.index('/mdvu/assets/theme.js') < source.index('/mdvu/assets/site.css')
     assert sum(tag=='button' and 'data-theme-toggle' in attrs for tag,attrs in page.tags)==1
     assert 'class="language"' not in source if lang=='en' else 'hreflang="en">EN</a>' in source
     assert {a.get('hreflang') for tag,a in page.tags if tag=='link' and a.get('rel')=='alternate'} == {'en','ru','x-default'}
@@ -45,6 +45,14 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     assert data['@graph'][0]['offers']['price']=='0'
     assert data['@graph'][2]['@type']=='WebPage'
     assert data['@graph'][2]['inLanguage']==lang
+    canonical_url = 'https://stpork.github.io/mdvu/' + ('ru/' if lang=='ru' else '')
+    assert page.meta['og:url']==canonical_url
+    assert data['@graph'][0]['url']=='https://stpork.github.io/mdvu/'
+    assert data['@graph'][2]['url']==canonical_url
+    for image_url in [page.meta['og:image'], page.meta['twitter:image'], data['@graph'][0]['image'], data['@graph'][0]['screenshot']]:
+        parsed_image = urlsplit(image_url)
+        assert parsed_image.netloc=='stpork.github.io' and parsed_image.path.startswith('/mdvu/assets/')
+        assert (ROOT / parsed_image.path.lstrip('/')).is_file(), 'Missing SEO image: '+image_url
     assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
     assert sum(tag=='details' for tag,_ in page.tags)>=6
     for link in page.links:
@@ -59,14 +67,15 @@ for rel,lang in [('index.html','en'),('ru/index.html','ru')]:
     assert (ROOT/rel).stat().st_size < 50000
     print(f'PASS {rel}: metadata, verification, language links, structured data, internal links, image dimensions')
 # Validate the actual search-engine signals together, not just XML syntax.
-BASE = 'https://stpork.github.io'
+ORIGIN = 'https://stpork.github.io'
+BASE = ORIGIN + '/mdvu'
 NS = {'sm':'http://www.sitemaps.org/schemas/sitemap/0.9', 'xhtml':'http://www.w3.org/1999/xhtml'}
 variants = {'en':BASE+'/', 'ru':BASE+'/ru/', 'x-default':BASE+'/'}
-expected_pages = {BASE+'/':ROOT/'index.html', BASE+'/ru/':ROOT/'ru/index.html'}
+expected_pages = {BASE+'/':ROOT/'mdvu/index.html', BASE+'/ru/':ROOT/'mdvu/ru/index.html'}
 robots = RobotFileParser()
 robots.parse((ROOT/'robots.txt').read_text().splitlines())
-assert BASE+'/sitemap.xml' in (robots.site_maps() or [])
-assert robots.can_fetch('Googlebot', BASE+'/sitemap.xml')
+assert ORIGIN+'/sitemap.xml' in (robots.site_maps() or [])
+assert robots.can_fetch('Googlebot', ORIGIN+'/sitemap.xml')
 sitemap_data = (ROOT/'sitemap.xml').read_bytes()
 assert len(sitemap_data) < 50 * 1024 * 1024
 sitemap_data.decode('utf-8')
@@ -97,7 +106,21 @@ for entry in entries:
     for directive in ('robots','googlebot'):
         assert 'noindex' not in page.meta.get(directive,'').lower()
 print('PASS sitemap: canonical pages, reciprocal hreflang, valid dates and robots access')
-assert (ROOT/'assets/site.js').stat().st_size < 5000
-assert (ROOT/'assets/theme.js').stat().st_size < 4000
-assert (ROOT/'assets/mdvu.webp').stat().st_size < 150000
+# Old entry points must lead directly to the canonical route, without loops.
+for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
+    source = (ROOT/rel).read_text()
+    redirect = Page(source)
+    assert redirect.meta['google-site-verification']=='8hoHZ7azFNVSv9x07AUhAS5xpXH3vrk-LlH07z-cgBc'
+    canonical = [a.get('href') for tag,a in redirect.tags if tag=='link' and a.get('rel')=='canonical']
+    assert canonical == [ORIGIN+target]
+    refresh = [a.get('content') for tag,a in redirect.tags if tag=='meta' and a.get('http-equiv')=='refresh']
+    assert refresh == ['0;url='+target]
+    assert target in redirect.links and 'location.search + location.hash' in source
+    assert not any(tag=='h1' for tag,_ in redirect.tags)
+    assert robots.can_fetch('Googlebot', ORIGIN+'/'+rel.replace('index.html',''))
+    assert ORIGIN+target in expected_pages
+print('PASS migration: root and old Russian URL redirect to canonical pages, verification retained')
+assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5000
+assert (ROOT/'mdvu/assets/theme.js').stat().st_size < 4000
+assert (ROOT/'mdvu/assets/mdvu.webp').stat().st_size < 150000
 print('PASS sitemap and asset budgets')
