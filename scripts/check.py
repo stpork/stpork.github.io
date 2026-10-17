@@ -64,6 +64,28 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
             assert target.is_file(), f'{rel}: missing {link}'
         elif parsed.fragment:
             assert parsed.fragment in page.ids, f'{rel}: missing anchor {link}'
+    release = json.loads((ROOT/'mdvu/data/release.json').read_text())
+    measured = json.loads((ROOT/'mdvu/data/measurements.json').read_text())
+    assert source.count('macOS · DMG ↓') == 2
+    assert source.count('Windows · MSI') == 2
+    assert '/mdvu/data/measurements.json' in page.links
+    assert release['packages']['macos.dmg']['url'] in page.links
+    msi = release['packages'].get('windows-x86_64.msi')
+    if msi:
+        assert msi['url'] in page.links and 'MSI soon' not in source and 'MSI скоро' not in source
+    else:
+        assert ('MSI soon' if lang == 'en' else 'MSI скоро') in source
+        assert not any('/releases/download/' in link and link.endswith('.msi') for link in page.links)
+    assert all(a['name'] in source for a in measured['packages'])
+    assert len(measured['fixtures']) == 74 and len(measured['warmScrolling']) == 74
+    for platform in ['macos','windows']:
+        assert len([f for f in measured['fixtures'] if f['platform'] == platform]) == 37
+        for phase in ['before','after']:
+            intervals = sorted(v for f in measured['warmScrolling'] if f['platform'] == platform
+                               for values in f[phase]['frames'][1:] for v in values)
+            assert len(intervals) == 37 * 120
+            assert round(intervals[int(len(intervals)*.95)], 1) == measured['summary'][platform][phase]['warmP95Ms']
+    assert all(old not in source for old in ['cmark-gfm', '61.57', '~3.4'])
     assert (ROOT/rel).stat().st_size < 50000
     print(f'PASS {rel}: metadata, verification, language links, structured data, internal links, image dimensions')
 # Validate the actual search-engine signals together, not just XML syntax.
