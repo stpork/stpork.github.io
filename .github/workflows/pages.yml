@@ -15,20 +15,12 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - name: Generate both languages and verify the site
         run: |
-          python3 -m unittest discover -s scripts -p 'test_*.py'
           python3 scripts/build.py
           python3 scripts/check.py
           node --check mdvu/assets/site.js
           node --check mdvu/assets/theme.js
           node scripts/check-theme.cjs
           git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html 404.html
-      - name: Resolve currently published download assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python3 scripts/update-release.py
-          python3 scripts/build.py
-          python3 scripts/check.py
       - name: Package public files
         run: |
           mkdir -p _site

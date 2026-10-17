@@ -2,12 +2,13 @@
 
 The official product website for [MDVu](https://github.com/stpork/mdvu), published at **https://stpork.github.io/mdvu/**.
 
+English: `/mdvu/`. Russian: `/mdvu/ru/`. The domain root `/` redirects to `/mdvu/`, and the old `/ru/` route redirects to `/mdvu/ru/`. Redirects use instant meta refresh plus `location.replace`, preserving query parameters and section anchors when JavaScript is enabled.
+
 ## Develop
 
-Static HTML, CSS and a small script; no npm dependencies or framework. Python 3 generates the pages; Node.js checks the client scripts.
+No npm dependencies or framework. Requires Python 3 for generation and Node.js only for the JavaScript syntax check.
 
 ```sh
-python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/build.py
 python3 scripts/check.py
 node --check mdvu/assets/site.js
@@ -16,28 +17,35 @@ node scripts/check-theme.cjs
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Edit copy in `scripts/build.py`, styles in `mdvu/assets/site.css` and interactions in `mdvu/assets/site.js`. Commit the generated pages after changing the generator. The workflow checks deterministic output before resolving current release assets and rebuilding for deployment.
+Open http://127.0.0.1:8765/. Edit copy in `scripts/build.py`, styling in `mdvu/assets/site.css`, interactions in `mdvu/assets/site.js`. Commit the generated landing pages, root redirects and 404 page after changing the generator. GitHub Actions verifies the generated files and deploys only public assets.
 
-## Downloads and publishing
+## Publishing
 
-Push to `main` or dispatch **Deploy MDVu website**. GitHub Pages must use GitHub Actions as its source. The workflow runs `scripts/update-release.py` to query the latest stable GitHub Release at build time. `mdvu/data/release.json` is the checked-in snapshot for local builds; refresh it with the same command.
+Push to `main`. The `Deploy MDVu website` workflow validates and deploys to GitHub Pages (Pages source must be **GitHub Actions**).
 
-DMG and MSI are the primary buttons. **Others** links to GitHub Releases for portable macOS ARM, Universal, Intel and Windows x64 ZIPs. No download URL is invented: older macOS-only releases show MSI as upcoming. Starting with 0.5.0, metadata refresh rejects incomplete six-package releases. After an app release, its publish helper dispatches this website workflow; manual tag releases need the same dispatch.
+The public site needs no JavaScript to read the content, follow download links or use the FAQ. The small script adds clipboard copy, accessible tabs and the screenshot dialog. No third-party scripts, external fonts, analytics or runtime API calls.
 
-Pages remain usable without JavaScript. No runtime API calls, analytics, external fonts or third-party scripts. Clipboard copy, accessible tabs, screenshot preview and theme selection are progressive enhancements.
+## Themes
 
-## Measurements and copy
+The site follows the browser's `prefers-color-scheme` setting on first visit and reacts to system changes. The circular moon/sun button switches themes and stores the choice under `mdvu-theme` in local storage. A manual choice overrides the system setting, persists across pages and reloads, and synchronizes between tabs. Switching also works when local storage is unavailable.
 
-`mdvu/data/measurements.json` records build 0.5.0 / commit `40892c5`, package hashes and sizes from CI run 39052275911, and real native before/after measurements from 37 fixtures per OS. It contains all fixture metrics and all five scroll-pass frame arrays, with frame intervals rounded to 0.001 ms. It excludes local paths, account names and transport details.
+The small, versioned `mdvu/assets/theme.js` loads before the stylesheet to apply the saved theme before first paint. CSS also follows the system preference without JavaScript. The English and Russian pages share the same behavior and have localized button labels. Color and surface tokens in `mdvu/assets/site.css` style the entire page in both themes.
 
-The page derives its tables from that file. Keep measured revision/date separate from the current download version. Distinguish compressed download, installed app, executable, system runtime and process memory. Frame intervals are not input latency; document-ready is not completion of every diagram. Preserve regressions and test conditions. This is not a competitor benchmark or a claim of complete compatibility with every Markdown ecosystem plugin.
+## Sitemaps
 
-When refreshing evidence, replace the recorded dataset, check the visible tables and methodology, then update `sitemap.xml` dates. Product capabilities come from the app README and source. Snapshot PNG export is macOS-only; HTML export works on both platforms.
+Submit **https://stpork.github.io/sitemap.xml** in Google Search Console. It lists only `/mdvu/` and `/mdvu/ru/`, the English and Russian canonical pages with reciprocal `en`, `ru` and `x-default` language annotations. `robots.txt` advertises this URL.
 
-## Presentation and search
+Keep redirects, error pages, downloads and assets out of the page URL list. Update `lastmod` only after significant page changes; do not reset it on each build. The deployment checks verify canonical URLs, indexability, language annotations, dates and robots access together. A live URL test confirms fetch access; successful sitemap processing is reported separately in Search Console.
 
-The site follows the system light/dark preference and offers a persistent manual override. `theme.js` runs before the stylesheet to avoid a theme flash; `scripts/check-theme.cjs` checks storage and system-change behavior.
+## Release update checklist
 
-Keep canonical URLs, reciprocal language annotations, root redirects, Google verification and sitemap entries consistent. Submit **https://stpork.github.io/sitemap.xml** in Search Console. The static checker validates links, metadata, release availability, measurement aggregates and asset budgets.
+1. Update `RELEASE`, `DOWNLOAD`, release numbers and archive links in `scripts/build.py`.
+2. Verify sizes against GitHub release assets; distinguish native app allocation from Universal app size and compressed download size.
+3. Update benchmark values only from a recorded run; retain measurement scope and methodology.
+4. Recheck comparison sources and update the checked date.
+5. Update `sitemap.xml` modification dates. Generate and validate both pages.
+6. Keep the Google site-verification meta tag in the root redirect head as well as the canonical landing pages. The English page intentionally has no RU switch; the Russian page retains its EN switch. Both remain discoverable through hreflang and sitemap.
 
-`mdvu/assets/social.jpg` is the 1200×630 share card rendered from `scripts/social.html`. The icon and real app screenshot originate from the MDVu repository. Responsive WebP images have a JPEG fallback.
+`mdvu/assets/social.jpg` is the 1200×630 rendered share card; `scripts/social.html` is its source. The icon and application screenshot originate from the MDVu repository. The app screenshot is delivered as responsive WebP with a JPEG fallback.
+
+Product facts: MDVu README, architecture and v0.4.1 changelog/release. Comparison sources are linked immediately below the comparison table. Site copy does not claim competitor benchmark results, notarization or unsupported editor functionality.
