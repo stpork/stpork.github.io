@@ -1,0 +1,185 @@
+{
+  "checked": "2026-10-17",
+  "products": [
+    {
+      "name": "MDVu",
+      "version": "0.5.0 RC",
+      "source": "https://github.com/stpork/mdvu/releases",
+      "macos": {
+        "bytes": 7773160,
+        "format": "Universal DMG",
+        "source": "https://github.com/stpork/mdvu/actions/runs/39052275911"
+      },
+      "windows": {
+        "bytes": 4714496,
+        "format": "x64 MSI",
+        "source": "https://github.com/stpork/mdvu/actions/runs/39052275911"
+      },
+      "purpose": [
+        "Viewer",
+        "Просмотрщик"
+      ],
+      "mermaid": [
+        "Built in",
+        "Встроено"
+      ],
+      "plantuml": [
+        "Built in · offline",
+        "Встроено · офлайн"
+      ],
+      "platforms": "Mac · Windows",
+      "license": [
+        "MIT · free",
+        "MIT · бесплатно"
+      ]
+    },
+    {
+      "name": "Typora",
+      "version": "macOS 1.14.10",
+      "source": "https://typora.io/",
+      "macos": {
+        "bytes": 15101370,
+        "format": "DMG",
+        "source": "https://downloads.typoraio.cn/mac/Typora-1.14.10.dmg"
+      },
+      "windows": {
+        "bytes": 113641648,
+        "format": "x64 EXE",
+        "source": "https://downloads.typoraio.cn/windows/typora-setup-x64.exe"
+      },
+      "purpose": [
+        "Editor",
+        "Редактор"
+      ],
+      "mermaid": [
+        "Built in",
+        "Встроено"
+      ],
+      "plantuml": [
+        "Not documented",
+        "Не заявлено"
+      ],
+      "platforms": "Mac · Windows · Linux",
+      "license": [
+        "Paid",
+        "Платная"
+      ]
+    },
+    {
+      "name": "Obsidian",
+      "version": "1.14.4",
+      "source": "https://obsidian.md/download",
+      "macos": {
+        "bytes": 233704463,
+        "format": "Universal DMG",
+        "source": "https://github.com/obsidianmd/obsidian-releases/releases/tag/v1.14.4"
+      },
+      "windows": {
+        "bytes": 341331008,
+        "format": "Universal EXE",
+        "source": "https://github.com/obsidianmd/obsidian-releases/releases/tag/v1.14.4"
+      },
+      "purpose": [
+        "Notes & knowledge base",
+        "Заметки и база знаний"
+      ],
+      "mermaid": [
+        "Built in",
+        "Встроено"
+      ],
+      "plantuml": [
+        "Plugin",
+        "Плагин"
+      ],
+      "platforms": "Mac · Windows · Linux",
+      "license": [
+        "Free · proprietary",
+        "Бесплатная · закрытая"
+      ]
+    },
+    {
+      "name": "Marked 3",
+      "version": "build 1239",
+      "source": "https://markedapp.com/",
+      "macos": {
+        "bytes": 87884959,
+        "format": "ZIP",
+        "source": "https://cdn.markedapp.com/download/Marked.1239.zip"
+      },
+      "windows": null,
+      "purpose": [
+        "Viewer & export",
+        "Просмотр и экспорт"
+      ],
+      "mermaid": [
+        "Built in",
+        "Встроено"
+      ],
+      "plantuml": [
+        "Not documented",
+        "Не заявлено"
+      ],
+      "platforms": "Mac",
+      "license": [
+        "Paid",
+        "Платная"
+      ]
+    },
+    {
+      "name": "VS Code",
+      "version": "1.142.0",
+      "source": "https://code.visualstudio.com/",
+      "macos": {
+        "bytes": 549683366,
+        "format": "Universal ZIP",
+        "source": "https://vscode.download.prss.microsoft.com/dbazure/download/stable/6d62b1d5dace93a33b3a6d3eca1317bd5e15bcb1/VSCode-darwin-universal.zip"
+      },
+      "windows": {
+        "bytes": 243024232,
+        "format": "x64 EXE",
+        "source": "https://vscode.download.prss.microsoft.com/dbazure/download/stable/6d62b1d5dace93a33b3a6d3eca1317bd5e15bcb1/VSCodeUserSetup-x64-1.142.0.exe"
+      },
+      "purpose": [
+        "Code editor & preview",
+        "Редактор кода и просмотр"
+      ],
+      "mermaid": [
+        "Built in",
+        "Встроено"
+      ],
+      "plantuml": [
+        "Extension",
+        "Расширение"
+      ],
+      "platforms": "Mac · Windows · Linux",
+      "license": [
+        "Free · Microsoft license",
+        "Бесплатная · лицензия Microsoft"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Typora",
+      "url": "https://support.typora.io/Draw-Diagrams-With-Markdown/"
+    },
+    {
+      "name": "Obsidian",
+      "url": "https://obsidian.md/help/syntax"
+    },
+    {
+      "name": "Marked 3",
+      "url": "https://markedapp.com/"
+    },
+    {
+      "name": "VS Code",
+      "url": "https://code.visualstudio.com/docs/languages/markdown"
+    }
+  ],
+  "notes": [
+    "Download byte counts: GitHub release asset API for MDVu and Obsidian; HTTP Content-Length for Marked and Microsoft official CDN.",
+    "Typora macOS 1.14.10 version/URL from Homebrew cask; package sizes from vendor Chinese download mirror linked on typoraio.cn. Windows size is the current unversioned installer as of the checked date.",
+    "Startup and rendering timings have not been compared under a common protocol. Earlier uncited estimates are not reused.",
+    "System WebKit/WebView2 runtimes are not bundled with MDVu; download sizes do not represent installed size or RAM."
+  ]
+}

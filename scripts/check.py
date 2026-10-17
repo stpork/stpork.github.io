@@ -39,7 +39,10 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
     assert source.index('/mdvu/assets/theme.js') < source.index('/mdvu/assets/site.css')
     assert sum(tag=='button' and 'data-theme-toggle' in attrs for tag,attrs in page.tags)==1
     assert 'class="language"' not in source if lang=='en' else 'hreflang="en">EN</a>' in source
-    assert {a.get('hreflang') for tag,a in page.tags if tag=='link' and a.get('rel')=='alternate'} == {'en','ru','x-default'}
+    assert not any(tag=='link' and a.get('rel')=='alternate' for tag,a in page.tags)
+    assert ('noindex' in page.meta['robots']) == (lang == 'ru')
+    if lang == 'en':
+        assert '/mdvu/ru/' not in source
     structured = source.split('<script type="application/ld+json">')[1].split('</script>')[0]
     data=json.loads(structured)
     assert data['@graph'][0]['offers']['price']=='0'
@@ -65,35 +68,21 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
         elif parsed.fragment:
             assert parsed.fragment in page.ids, f'{rel}: missing anchor {link}'
     release = json.loads((ROOT/'mdvu/data/release.json').read_text())
-    measured = json.loads((ROOT/'mdvu/data/measurements.json').read_text())
-    assert source.count('macOS · DMG ↓') == 2
-    assert source.count('Windows · MSI') == 2
-    assert '/mdvu/data/measurements.json' in page.links
+    comparison = json.loads((ROOT/'mdvu/data/comparison.json').read_text())
+    assert source.count('macOS · DMG ↓') == 1 and source.count('Windows · MSI ↗') == 1
+    assert 'GitHub Releases ↗' in source and '>Performance</h2>' in source
     assert release['packages']['macos.dmg']['url'] in page.links
-    msi = release['packages'].get('windows-x86_64.msi')
-    if msi:
-        assert msi['url'] in page.links and 'MSI soon' not in source and 'MSI скоро' not in source
-    else:
-        assert ('MSI soon' if lang == 'en' else 'MSI скоро') in source
-        assert not any('/releases/download/' in link and link.endswith('.msi') for link in page.links)
-    assert all(a['name'] in source for a in measured['packages'])
-    assert len(measured['fixtures']) == 74 and len(measured['warmScrolling']) == 74
-    for platform in ['macos','windows']:
-        assert len([f for f in measured['fixtures'] if f['platform'] == platform]) == 37
-        for phase in ['before','after']:
-            intervals = sorted(v for f in measured['warmScrolling'] if f['platform'] == platform
-                               for values in f[phase]['frames'][1:] for v in values)
-            assert len(intervals) == 37 * 120
-            assert round(intervals[int(len(intervals)*.95)], 1) == measured['summary'][platform][phase]['warmP95Ms']
-    assert all(old not in source for old in ['cmark-gfm', '61.57', '~3.4'])
+    assert all(p['name'] in source for p in comparison['products'])
+    assert '/mdvu/data/measurements.json' not in page.links
+    assert all(removed not in source for removed in ['class="release"', 'class="enlarge"', 'proof-strip', 'size-section', 'measurement-cards', '37 × 2', 'warm scroll', 'тёплый скролл', 'Замеры', 'Less app.', 'Меньше лишнего.'])
     assert (ROOT/rel).stat().st_size < 50000
     print(f'PASS {rel}: metadata, verification, language links, structured data, internal links, image dimensions')
 # Validate the actual search-engine signals together, not just XML syntax.
 ORIGIN = 'https://stpork.github.io'
 BASE = ORIGIN + '/mdvu'
 NS = {'sm':'http://www.sitemaps.org/schemas/sitemap/0.9', 'xhtml':'http://www.w3.org/1999/xhtml'}
-variants = {'en':BASE+'/', 'ru':BASE+'/ru/', 'x-default':BASE+'/'}
-expected_pages = {BASE+'/':ROOT/'mdvu/index.html', BASE+'/ru/':ROOT/'mdvu/ru/index.html'}
+variants = {}
+expected_pages = {BASE+'/':ROOT/'mdvu/index.html'}
 robots = RobotFileParser()
 robots.parse((ROOT/'robots.txt').read_text().splitlines())
 assert ORIGIN+'/sitemap.xml' in (robots.site_maps() or [])
@@ -127,7 +116,7 @@ for entry in entries:
     assert robots.can_fetch('Googlebot', loc)
     for directive in ('robots','googlebot'):
         assert 'noindex' not in page.meta.get(directive,'').lower()
-print('PASS sitemap: canonical pages, reciprocal hreflang, valid dates and robots access')
+print('PASS sitemap: only English is listed; Russian is direct-URL and noindex')
 # Old entry points must lead directly to the canonical route, without loops.
 for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     source = (ROOT/rel).read_text()
@@ -140,7 +129,10 @@ for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     assert target in redirect.links and 'location.search + location.hash' in source
     assert not any(tag=='h1' for tag,_ in redirect.tags)
     assert robots.can_fetch('Googlebot', ORIGIN+'/'+rel.replace('index.html',''))
-    assert ORIGIN+target in expected_pages
+    if rel == 'index.html':
+        assert ORIGIN+target in expected_pages
+    else:
+        assert 'noindex' in redirect.meta['robots']
 print('PASS migration: root and old Russian URL redirect to canonical pages, verification retained')
 assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5000
 assert (ROOT/'mdvu/assets/theme.js').stat().st_size < 4000

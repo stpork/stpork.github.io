@@ -43,18 +43,24 @@ class ReleaseTests(unittest.TestCase):
 
 
 class DownloadButtonsTests(unittest.TestCase):
-    def test_pending_msi_has_no_fabricated_asset_link(self):
+    def test_hero_links_to_releases_and_does_not_invent_msi(self):
         with patch.dict(build.page.__globals__, WINDOWS=None):
-            for lang, label in [('en', 'MSI soon'), ('ru', 'MSI скоро')]:
+            for lang in ['en', 'ru']:
                 html = build.page(lang)
-                self.assertEqual(html.count(label), 2)
+                self.assertIn('>GitHub Releases ↗</a>', html)
+                self.assertNotIn('MSI soon', html)
+                self.assertNotIn('MSI скоро', html)
                 self.assertNotIn('href="https://github.com/stpork/mdvu/releases/download/v0.5.0/mdvu-0.5.0-windows-x86_64.msi"', html)
 
-    def test_published_msi_is_primary_in_both_languages(self):
+    def test_published_msi_is_in_installation_section(self):
         url = release.REPO + '/releases/download/v0.5.0/mdvu-0.5.0-windows-x86_64.msi'
         with patch.dict(build.page.__globals__, WINDOWS=url, VERSION='0.5.0'):
             for lang in ['en', 'ru']:
-                html = build.page(lang)
-                self.assertEqual(html.count(f'href="{url}"'), 2)
-                self.assertNotIn('MSI soon', html)
-                self.assertNotIn('MSI скоро', html)
+                self.assertEqual(build.page(lang).count(f'href="{url}"'), 1)
+
+    def test_russian_is_not_advertised_or_indexable(self):
+        en, ru = build.page('en'), build.page('ru')
+        self.assertNotIn('/mdvu/ru/', en)
+        self.assertNotIn('hreflang="ru"', en + ru)
+        self.assertIn('content="noindex, follow"', ru)
+        self.assertNotIn('content="noindex, follow"', en)
