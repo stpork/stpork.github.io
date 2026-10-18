@@ -51,11 +51,48 @@ document.querySelectorAll('[data-copy]').forEach(button => {
 });
 const dialog = document.querySelector('.image-dialog');
 if (dialog && typeof dialog.showModal === 'function') {
-  document.querySelector('[data-preview]').addEventListener('click', event => {
+  const image = dialog.querySelector('img');
+  const content = dialog.querySelector('.preview-content');
+  let opener, previousOverflow;
+  function fitContent() {
+    if (!dialog.open || content.hidden) return;
+    const copy = content.firstElementChild;
+    const scale = dialog.clientWidth / copy.offsetWidth;
+    content.style.height = copy.offsetHeight * scale + 'px';
+    copy.style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', fitContent);
+  document.querySelectorAll('[data-preview],[data-preview-content]').forEach(link => link.addEventListener('click', event => {
+    if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
+    const isContent = !!link.dataset.previewContent;
+    const source = isContent ? document.getElementById(link.dataset.previewContent) : link.querySelector('img');
+    const rect = source.getBoundingClientRect();
+    const width = Number(source.getAttribute('width')) || rect.width || 1;
+    const height = Number(source.getAttribute('height')) || rect.height || 1;
+    image.hidden = isContent;
+    content.hidden = !isContent;
+    dialog.dataset.kind = isContent ? 'content' : 'image';
+    if (isContent) {
+      const copy = source.cloneNode(true);
+      copy.removeAttribute('id');
+      copy.style.width = width + 'px';
+      copy.style.height = height + 'px';
+      content.replaceChildren(copy);
+    } else {
+      image.width = width;
+      image.height = height;
+      image.alt = source.alt;
+      image.src = link.href;
+    }
+    dialog.style.setProperty('--preview-ratio', width / height);
+    opener = isContent ? link.querySelector('button') : link;
+    dialog.setAttribute('aria-label', source.alt || opener.getAttribute('aria-label'));
+    previousOverflow = document.body.style.overflow;
     dialog.showModal();
+    fitContent();
     document.body.style.overflow = 'hidden';
-  });
+  }));
   dialog.querySelector('.close-dialog').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
     if (event.target === dialog) {
@@ -63,5 +100,10 @@ if (dialog && typeof dialog.showModal === 'function') {
       if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
     }
   });
-  dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+  dialog.addEventListener('close', () => {
+    document.body.style.overflow = previousOverflow;
+    image.removeAttribute('src');
+    content.replaceChildren();
+    opener?.focus({preventScroll:true});
+  });
 }

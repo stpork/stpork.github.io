@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-site-verification" content="8hoHZ7azFNVSv9x07AUhAS5xpXH3vrk-LlH07z-cgBc">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markdown Diagrams: Mermaid, PlantUML, C4 & More — MDVu</title><meta name="description" content="73 Markdown diagram examples with source and rendered SVG: Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 and ArchiMate. Browse the MDVu diagram gallery.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f7f9fc"><meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://stpork.github.io/mdvu/diagrams/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="MDVu"><meta property="og:title" content="Markdown Diagrams: Mermaid, PlantUML, C4 & More — MDVu"><meta property="og:description" content="73 Markdown diagram examples with source and rendered SVG: Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 and ArchiMate. Browse the MDVu diagram gallery."><meta property="og:url" content="https://stpork.github.io/mdvu/diagrams/"><meta property="og:image" content="https://stpork.github.io/mdvu/assets/social.jpg"><meta property="og:image:width" content="1120"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="MDVu — native Markdown viewer for Mac and Windows"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Markdown Diagrams: Mermaid, PlantUML, C4 & More — MDVu"><meta name="twitter:description" content="73 Markdown diagram examples with source and rendered SVG: Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 and ArchiMate. Browse the MDVu diagram gallery."><meta name="twitter:image" content="https://stpork.github.io/mdvu/assets/social.jpg"><meta name="twitter:image:alt" content="MDVu — native Markdown and MD file viewer">
+<link rel="icon" type="image/png" sizes="96x96" href="/mdvu/assets/favicon-96.png"><link rel="apple-touch-icon" href="/mdvu/assets/apple-touch-icon.png"><script src="/mdvu/assets/theme.js?v=55d25b530188"></script><link rel="stylesheet" href="/mdvu/assets/site.css?v=e17f787ff437"><script src="/mdvu/assets/site.js?v=224eff4b4383" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","@id":"https://stpork.github.io/mdvu/#app","name":"MDVu","url":"https://stpork.github.io/mdvu/","applicationCategory":"UtilitiesApplication","operatingSystem":["macOS 13+"],"softwareVersion":"0.4.1","description":"A supercompact MD file viewer for Mac and Windows. Read Markdown, diagrams and LaTeX offline. Native, free and open source, with Mermaid and PlantUML built in.","image":"https://stpork.github.io/mdvu/assets/mdvu.jpg","screenshot":"https://stpork.github.io/mdvu/assets/mdvu.jpg","downloadUrl":"https://github.com/stpork/mdvu/releases/download/v0.4.1/mdvu-0.4.1-macos.dmg","license":"https://opensource.org/license/mit","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Finn de Bear","url":"https://github.com/stpork"}},{"@type":"WebSite","@id":"https://stpork.github.io/mdvu/#website","name":"MDVu","url":"https://stpork.github.io/mdvu/","inLanguage":"en"},{"@type":"WebPage","@id":"https://stpork.github.io/mdvu/diagrams/#webpage","url":"https://stpork.github.io/mdvu/diagrams/","name":"Markdown Diagrams: Mermaid, PlantUML, C4 & More — MDVu","description":"73 Markdown diagram examples with source and rendered SVG: Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 and ArchiMate. Browse the MDVu diagram gallery.","inLanguage":"en","isPartOf":{"@id":"https://stpork.github.io/mdvu/#website"},"about":{"@id":"https://stpork.github.io/mdvu/#app"}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><div class="container nav-wrap"><a class="brand" href="/mdvu/" aria-label="MDVu — home"><img src="/mdvu/assets/icon.webp" width="36" height="36" alt=""><span>MDVu<span class="brand-dot">.</span></span></a><nav aria-label="Main navigation"><a href="/mdvu/#why">Overview</a><a href="/mdvu/#features">Features</a><a href="/mdvu/diagrams/">Diagrams</a></nav><div class="nav-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme" title="Switch theme"><svg class="sun-icon" width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="moon-icon" width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3a9 9 0 1 0 10.5 11Z"/></svg></button><a class="button button-small" href="/mdvu/#download">Get MDVu <span aria-hidden="true">↗</span></a></div></div></header>
+<main id="main"><section class="section gallery-page"><div class="page-heading"><h1 class="page-title">Diagrams</h1><p>73 examples. Source on the left, SVG rendered by MDVu on the right.</p></div><div class="diagram-gallery"><article class="diagram-card" id="D001"><header><span>Mermaid · D001</span><h2>Flowchart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+flowchart LR
+    Author[&quot;Author / Reviewer&quot;] --&gt; Repo[&quot;Content Repository&quot;]
+    Repo --&gt; CI[&quot;Validation &amp; Build&quot;]
+    CI --&gt; Publish[&quot;Publication Service&quot;]
+    Publish --&gt; Search[(&quot;Search Index&quot;)]
+    Publish --&gt; CDN[&quot;Artifact / CDN&quot;]
+    Reader[&quot;Reader&quot;] --&gt; Web[&quot;Web / Desktop Viewer&quot;]
+    Web --&gt; Search
+    Web --&gt; CDN
+    Admin[&quot;Platform Operator&quot;] --&gt; Observe[&quot;Observability&quot;]
+    CI --&gt; Observe
+    Publish --&gt; Observe
+    Web --&gt; Observe
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D001.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Flowchart"><img src="/mdvu/assets/diagrams/D001.svg" width="1016" height="337" loading="lazy" alt="Flowchart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D002"><header><span>Mermaid · D002</span><h2>C4 · Context</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+C4Context
+    title GKDP System Context
+    Person(author, &quot;Author&quot;, &quot;Creates and reviews technical content&quot;)
+    Person(reader, &quot;Reader&quot;, &quot;Browses and searches published knowledge&quot;)
+    Person(operator, &quot;Operator&quot;, &quot;Runs and monitors the platform&quot;)
+    System(gkdp, &quot;GKDP&quot;, &quot;Publishes and serves versioned technical knowledge&quot;)
+    System_Ext(idp, &quot;Identity Provider&quot;, &quot;Authentication and group membership&quot;)
+    System_Ext(git, &quot;Git Hosting&quot;, &quot;Source repository and pull requests&quot;)
+    System_Ext(obs, &quot;Observability Platform&quot;, &quot;Metrics, logs and traces&quot;)
+    Rel(author, git, &quot;Commits and reviews&quot;, &quot;Git/HTTPS&quot;)
+    Rel(git, gkdp, &quot;Triggers publication&quot;, &quot;Webhook/API&quot;)
+    Rel(reader, gkdp, &quot;Reads and searches&quot;, &quot;HTTPS&quot;)
+    Rel(gkdp, idp, &quot;Authenticates users&quot;, &quot;OIDC&quot;)
+    Rel(operator, obs, &quot;Investigates health&quot;)
+    Rel(gkdp, obs, &quot;Exports telemetry&quot;)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D002.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4 · Context"><img src="/mdvu/assets/diagrams/D002.svg" width="1464" height="723" loading="lazy" alt="C4 · Context"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D003"><header><span>Mermaid · D003</span><h2>Requirements</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+requirementDiagram
+    direction LR
+    functionalRequirement rendering {
+      id: &quot;FR-01&quot;
+      text: &quot;Render Markdown and Mermaid content&quot;
+      risk: high
+      verifymethod: test
+    }
+    functionalRequirement unicode {
+      id: &quot;FR-03&quot;
+      text: &quot;Preserve multilingual UTF-8 content&quot;
+      risk: high
+      verifymethod: test
+    }
+    performanceRequirement navigation {
+      id: &quot;NFR-01&quot;
+      text: &quot;Keep navigation responsive on large normal documents&quot;
+      risk: medium
+      verifymethod: demonstration
+    }
+    element viewer {
+      type: application
+      docref: &quot;mdvu-light-validation.md&quot;
+    }
+    viewer - satisfies -&gt; rendering
+    viewer - satisfies -&gt; unicode
+    viewer - satisfies -&gt; navigation
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D003.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Requirements"><img src="/mdvu/assets/diagrams/D003.svg" width="910" height="648" loading="lazy" alt="Requirements"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D004"><header><span>Mermaid · D004</span><h2>Quadrant chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+quadrantChart
+    title Delivery choices: value versus operational cost
+    x-axis Lower user value --&gt; Higher user value
+    y-axis Lower operating cost --&gt; Higher operating cost
+    quadrant-1 Strategic capabilities
+    quadrant-2 Expensive specialists
+    quadrant-3 Defer or simplify
+    quadrant-4 Efficient foundations
+    Search indexing: [0.88, 0.55]
+    Offline cache: [0.72, 0.45]
+    Rich custom themes: [0.45, 0.60]
+    Content validation: [0.84, 0.30]
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D004.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Quadrant chart"><img src="/mdvu/assets/diagrams/D004.svg" width="500" height="500" loading="lazy" alt="Quadrant chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D005"><header><span>Mermaid · D005</span><h2>C4 · Containers</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+C4Container
+    title GKDP Container View
+    Person(author, &quot;Author&quot;)
+    Person(reader, &quot;Reader&quot;)
+    System_Boundary(gkdp, &quot;GKDP&quot;) {
+      Container(pipeline, &quot;Publication Pipeline&quot;, &quot;CI&quot;, &quot;Validates and packages content&quot;)
+      Container(api, &quot;Knowledge API&quot;, &quot;HTTP service&quot;, &quot;Serves metadata, documents and search&quot;)
+      Container(indexer, &quot;Indexer&quot;, &quot;Worker&quot;, &quot;Builds search documents&quot;)
+      ContainerDb(store, &quot;Artifact Store&quot;, &quot;Object storage&quot;, &quot;Versioned Markdown and assets&quot;)
+      ContainerDb(search, &quot;Search Index&quot;, &quot;Search engine&quot;, &quot;Full-text index&quot;)
+      Container(viewer, &quot;Viewer&quot;, &quot;Desktop/Web&quot;, &quot;Renders Markdown and Mermaid&quot;)
+    }
+    Rel(author, pipeline, &quot;Publishes via repository&quot;)
+    Rel(pipeline, store, &quot;Writes immutable artifacts&quot;)
+    Rel(pipeline, indexer, &quot;Queues indexing&quot;)
+    Rel(indexer, search, &quot;Updates index&quot;)
+    Rel(reader, viewer, &quot;Reads&quot;)
+    Rel(viewer, api, &quot;Queries&quot;)
+    Rel(api, store, &quot;Reads documents&quot;)
+    Rel(api, search, &quot;Searches&quot;)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D005.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4 · Containers"><img src="/mdvu/assets/diagrams/D005.svg" width="1564" height="1095" loading="lazy" alt="C4 · Containers"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D006"><header><span>Mermaid · D006</span><h2>C4 · Components</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+C4Component
+    title Viewer Components
+    Container(viewer, &quot;Viewer&quot;, &quot;Desktop/Web&quot;, &quot;Displays knowledge&quot;)
+    ContainerDb(cache, &quot;Local Cache&quot;, &quot;SQLite/files&quot;, &quot;Stores metadata and rendered fragments&quot;)
+    Container_Boundary(core, &quot;Rendering Core&quot;) {
+      Component(loader, &quot;Document Loader&quot;, &quot;I/O&quot;, &quot;Loads UTF-8 content&quot;)
+      Component(parser, &quot;Markdown Parser&quot;, &quot;Parser&quot;, &quot;Creates block structure&quot;)
+      Component(mermaid, &quot;Mermaid Adapter&quot;, &quot;JavaScript&quot;, &quot;Creates diagram SVG&quot;)
+      Component(nav, &quot;Navigation Index&quot;, &quot;In-memory&quot;, &quot;Headings and anchors&quot;)
+      Component(search, &quot;Local Search&quot;, &quot;Index&quot;, &quot;Searches cached content&quot;)
+    }
+    Rel(viewer, loader, &quot;Open document&quot;)
+    Rel(loader, parser, &quot;Parse text&quot;)
+    Rel(parser, mermaid, &quot;Render diagram blocks&quot;)
+    Rel(parser, nav, &quot;Build heading map&quot;)
+    Rel(viewer, search, &quot;Search&quot;)
+    Rel(loader, cache, &quot;Read/write&quot;)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D006.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4 · Components"><img src="/mdvu/assets/diagrams/D006.svg" width="1564" height="997" loading="lazy" alt="C4 · Components"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D007"><header><span>Mermaid · D007</span><h2>Architecture</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+architecture-beta
+    group client(cloud)[Client]
+    group platform(cloud)[Knowledge Platform]
+    service user(internet)[Reader] in client
+    service viewer(server)[Viewer] in client
+    service api(server)[Knowledge API] in platform
+    service store(disk)[Artifact Store] in platform
+    service index(database)[Search Index] in platform
+    user:R --&gt; L:viewer
+    viewer:R --&gt; L:api
+    api:B --&gt; T:store
+    api:R --&gt; L:index
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D007.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Architecture"><img src="/mdvu/assets/diagrams/D007.svg" width="935" height="463" loading="lazy" alt="Architecture"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D008"><header><span>Mermaid · D008</span><h2>Entity relationships</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+erDiagram
+    COLLECTION ||--o{ DOCUMENT : contains
+    DOCUMENT ||--o{ RELEASE : publishes
+    RELEASE ||--o{ ASSET : references
+    RELEASE ||--|| MANIFEST : has
+    RELEASE ||--o{ SEARCH_RECORD : produces
+    COLLECTION {
+      string id PK
+      string name
+      string default_locale
+    }
+    DOCUMENT {
+      string id PK
+      string path
+      string title
+    }
+    RELEASE {
+      string id PK
+      string document_id FK
+      string git_sha
+      datetime published_at
+    }
+    ASSET {
+      string id PK
+      string media_type
+      string sha256
+    }
+    MANIFEST {
+      string release_id PK
+      string content_sha256
+      string renderer_version
+    }
+    SEARCH_RECORD {
+      string release_id FK
+      string locale
+      string text
+    }
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D008.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Entity relationships"><img src="/mdvu/assets/diagrams/D008.svg" width="776" height="1046" loading="lazy" alt="Entity relationships"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D009"><header><span>Mermaid · D009</span><h2>Sankey diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+sankey
+    Source Markdown,Validation,100
+    Validation,Published Artifact,82
+    Validation,Rejected Change,18
+    Published Artifact,Search Index,45
+    Published Artifact,Client Cache,37
+    Search Index,Reader Discovery,45
+    Client Cache,Reader Open,37
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D009.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Sankey diagram"><img src="/mdvu/assets/diagrams/D009.svg" width="600" height="400" loading="lazy" alt="Sankey diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D010"><header><span>Mermaid · D010</span><h2>Sequence diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+sequenceDiagram
+    autonumber
+    actor Reader
+    participant Viewer
+    participant API
+    participant Search
+    participant Store
+    Reader-&gt;&gt;Viewer: Search &quot;identity federation&quot;
+    Viewer-&gt;&gt;API: GET /search?q=identity+federation
+    API-&gt;&gt;Search: Query index
+    Search--&gt;&gt;API: Ranked results
+    API--&gt;&gt;Viewer: Result metadata
+    Reader-&gt;&gt;Viewer: Open result
+    Viewer-&gt;&gt;API: GET document release
+    API-&gt;&gt;Store: Read immutable artifact
+    Store--&gt;&gt;API: Markdown + manifest
+    API--&gt;&gt;Viewer: UTF-8 document
+    Viewer--&gt;&gt;Reader: Render text and diagrams
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D010.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Sequence diagram"><img src="/mdvu/assets/diagrams/D010.svg" width="1231" height="725" loading="lazy" alt="Sequence diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D011"><header><span>Mermaid · D011</span><h2>State diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; Review : pull request opened
+    Review --&gt; Rejected : policy failure
+    Rejected --&gt; Draft : author updates
+    Review --&gt; Approved : review + checks pass
+    Approved --&gt; Published : signed publication job
+    Published --&gt; Superseded : newer release
+    Superseded --&gt; Archived : retention transition
+    Archived --&gt; [*]
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D011.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: State diagram"><img src="/mdvu/assets/diagrams/D011.svg" width="390" height="884" loading="lazy" alt="State diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D012"><header><span>Mermaid · D012</span><h2>Ishikawa diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+ishikawa-beta
+    Rendering Incident
+      Content
+        Unsupported syntax
+        Unsafe HTML
+      Runtime
+        Mermaid version mismatch
+        Font fallback
+      Delivery
+        Partial artifact upload
+        Stale cache
+      Operations
+        Missing alert
+        Insufficient diagnostics
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D012.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Ishikawa diagram"><img src="/mdvu/assets/diagrams/D012.svg" width="466" height="580" loading="lazy" alt="Ishikawa diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D013"><header><span>Mermaid · D013</span><h2>C4 · Dynamic view</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+C4Dynamic
+    title Reader opens a document
+    Container(ui, &quot;Viewer&quot;, &quot;Desktop/Web&quot;, &quot;Displays the document&quot;)
+    Container_Boundary(core, &quot;Rendering Core&quot;) {
+      Component(parser, &quot;Markdown Parser&quot;, &quot;Parser&quot;, &quot;Builds block model&quot;)
+      Component(renderer, &quot;Mermaid Renderer&quot;, &quot;JavaScript&quot;, &quot;Builds SVG&quot;)
+    }
+    Rel(ui, parser, &quot;1. Parse Markdown&quot;)
+    Rel(parser, renderer, &quot;2. Render Mermaid blocks&quot;)
+    Rel(renderer, ui, &quot;3. Return SVG&quot;)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D013.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4 · Dynamic view"><img src="/mdvu/assets/diagrams/D013.svg" width="932" height="770" loading="lazy" alt="C4 · Dynamic view"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D014"><header><span>Mermaid · D014</span><h2>ZenUML sequence</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+zenuml
+    @Actor Reader
+    Reader-&gt;Viewer: open(document)
+    Viewer-&gt;Parser: parse(markdown)
+    if(hasDiagrams) {
+      Viewer-&gt;Mermaid: render(diagrams)
+      Mermaid-&gt;Viewer: svg
+    }
+    Viewer-&gt;Reader: display(document)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D014.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: ZenUML sequence"><img src="/mdvu/assets/diagrams/D014.svg" width="553" height="396" loading="lazy" alt="ZenUML sequence"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D015"><header><span>Mermaid · D015</span><h2>Swimlanes</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+swimlane-beta LR
+    subgraph Author[Author]
+      A[Edit Markdown]
+      D[Address review]
+    end
+    subgraph Platform[Platform]
+      B[Validate]
+      C[Publish]
+    end
+    subgraph Reader[Reader]
+      E[Open release]
+    end
+    A --&gt; B
+    B --&gt; D
+    D --&gt; B
+    B --&gt; C
+    C --&gt; E
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D015.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Swimlanes"><img src="/mdvu/assets/diagrams/D015.svg" width="719" height="640" loading="lazy" alt="Swimlanes"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D016"><header><span>Mermaid · D016</span><h2>C4 · Deployment</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+C4Deployment
+    title GKDP Deployment
+    Deployment_Node(cloud, &quot;Cloud Region&quot;, &quot;Managed platform&quot;) {
+      Deployment_Node(app, &quot;Application Cluster&quot;, &quot;Containers&quot;) {
+        Container(api, &quot;Knowledge API&quot;, &quot;Service&quot;, &quot;Metadata and content API&quot;)
+        Container(indexer, &quot;Indexer&quot;, &quot;Worker&quot;, &quot;Search indexing&quot;)
+      }
+      Deployment_Node(data, &quot;Data Services&quot;, &quot;Managed&quot;) {
+        ContainerDb(store, &quot;Artifact Store&quot;, &quot;Object storage&quot;, &quot;Published content&quot;)
+        ContainerDb(search, &quot;Search&quot;, &quot;Search engine&quot;, &quot;Indexes&quot;)
+      }
+    }
+    Deployment_Node(mac, &quot;Reader Device&quot;, &quot;macOS&quot;) {
+      Container(viewer, &quot;Viewer&quot;, &quot;Native app&quot;, &quot;Markdown + Mermaid rendering&quot;)
+    }
+    Rel(viewer, api, &quot;HTTPS&quot;)
+    Rel(api, store, &quot;Read&quot;)
+    Rel(api, search, &quot;Query&quot;)
+    Rel(indexer, search, &quot;Write&quot;)
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D016.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4 · Deployment"><img src="/mdvu/assets/diagrams/D016.svg" width="1448" height="883" loading="lazy" alt="C4 · Deployment"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D017"><header><span>Mermaid · D017</span><h2>Gantt chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+gantt
+    title Example release train
+    dateFormat YYYY-MM-DD
+    axisFormat %d %b
+    section Content
+    Draft documentation      :done, a1, 2026-09-01, 2d
+    Technical review         :done, after a1, 1d
+    Localization             :active, 2026-09-03, 2d
+    section Engineering
+    Renderer validation      :done, b1, 2026-09-02, 2d
+    Package release          :2026-09-04, 1d
+    section Release
+    Publish                  :milestone, 2026-09-05, 0d
+    Observe                  :2026-09-05, 2d
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D017.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Gantt chart"><img src="/mdvu/assets/diagrams/D017.svg" width="920" height="268" loading="lazy" alt="Gantt chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D018"><header><span>Mermaid · D018</span><h2>Git graph</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+gitGraph
+    commit id: &quot;baseline&quot;
+    branch feature/docs
+    checkout feature/docs
+    commit id: &quot;update handbook&quot;
+    commit id: &quot;add diagrams&quot;
+    checkout main
+    merge feature/docs
+    commit id: &quot;release metadata&quot; tag: &quot;v1.4.0&quot;
+    branch hotfix/link
+    checkout hotfix/link
+    commit id: &quot;fix link&quot;
+    checkout main
+    merge hotfix/link tag: &quot;v1.4.1&quot;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D018.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Git graph"><img src="/mdvu/assets/diagrams/D018.svg" width="512" height="269" loading="lazy" alt="Git graph"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D020"><header><span>Mermaid · D020</span><h2>XY chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+xychart
+    title &quot;Typical document-open latency&quot;
+    x-axis [&quot;1k lines&quot;, &quot;3k lines&quot;, &quot;6k lines&quot;, &quot;10k lines&quot;, &quot;15k lines&quot;]
+    y-axis &quot;milliseconds&quot; 0 --&gt; 800
+    bar &quot;cold&quot; [90, 170, 290, 460, 680]
+    line &quot;warm&quot; [55, 90, 145, 240, 360]
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D020.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: XY chart"><img src="/mdvu/assets/diagrams/D020.svg" width="700" height="500" loading="lazy" alt="XY chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D021"><header><span>Mermaid · D021</span><h2>Radar chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+radar-beta
+    title Viewer validation coverage
+    axis md[&quot;Markdown&quot;], mm[&quot;Mermaid&quot;], uc[&quot;Unicode&quot;], nav[&quot;Navigation&quot;], code[&quot;Code&quot;], rtl[&quot;RTL&quot;]
+    curve light[&quot;Light fixture&quot;]{90, 90, 85, 90, 85, 80}
+    curve smoke[&quot;Tiny smoke test&quot;]{55, 35, 30, 50, 35, 15}
+    min 0
+    max 100
+    ticks 5
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D021.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Radar chart"><img src="/mdvu/assets/diagrams/D021.svg" width="700" height="700" loading="lazy" alt="Radar chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D022"><header><span>Mermaid · D022</span><h2>Timeline</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+timeline
+    title GKDP capability roadmap
+    2026 Q3 : Stable Markdown viewer
+            : Mermaid baseline coverage
+    2026 Q4 : Offline collections
+            : Improved accessibility
+    2027 Q1 : Cross-document references
+            : Search ranking improvements
+    2027 Q2 : Policy-aware collections
+            : Localization workflow automation
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D022.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Timeline"><img src="/mdvu/assets/diagrams/D022.svg" width="1190" height="586" loading="lazy" alt="Timeline"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D023"><header><span>Mermaid · D023</span><h2>Kanban board</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+kanban
+  Backlog
+    task1[Cross-document backlinks]
+    task2[Additional locale QA]
+  In Progress
+    task3[Offline cache improvements]
+  Review
+    task4[Accessibility audit]
+  Done
+    task5[Immutable release manifest]
+    task6[Mermaid rendering bridge]
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D023.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Kanban board"><img src="/mdvu/assets/diagrams/D023.svg" width="835" height="196" loading="lazy" alt="Kanban board"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D024"><header><span>Mermaid · D024</span><h2>Mind map</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+mindmap
+  root((Knowledge Platform))
+    Authoring
+      Markdown
+      Mermaid
+      Reviews
+    Publication
+      Validation
+      Versioning
+      Indexing
+    Consumption
+      Navigation
+      Search
+      Offline cache
+    Operations
+      Metrics
+      Logs
+      Recovery
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D024.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Mind map"><img src="/mdvu/assets/diagrams/D024.svg" width="765" height="475" loading="lazy" alt="Mind map"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D025"><header><span>Mermaid · D025</span><h2>Treemap</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+treemap-beta
+    &quot;Knowledge Platform&quot;
+      &quot;Authoring&quot;
+        &quot;Markdown&quot;: 25
+        &quot;Review&quot;: 10
+      &quot;Publication&quot;
+        &quot;Validation&quot;: 20
+        &quot;Indexing&quot;: 15
+      &quot;Consumption&quot;
+        &quot;Viewer&quot;: 20
+        &quot;Search&quot;: 10
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D025.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Treemap"><img src="/mdvu/assets/diagrams/D025.svg" width="996" height="371" loading="lazy" alt="Treemap"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D027"><header><span>Mermaid · D027</span><h2>Class diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+classDiagram
+    class Document {
+      +String id
+      +String title
+      +String locale
+      +List~Block~ blocks
+      +render()
+    }
+    class Block {
+      &lt;&lt;interface&gt;&gt;
+      +render()
+    }
+    class MarkdownBlock
+    class MermaidBlock {
+      +String source
+      +renderSvg()
+    }
+    Document &quot;1&quot; *-- &quot;1..*&quot; Block
+    Block &lt;|.. MarkdownBlock
+    Block &lt;|.. MermaidBlock
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D027.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Class diagram"><img src="/mdvu/assets/diagrams/D027.svg" width="374" height="659" loading="lazy" alt="Class diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D028"><header><span>Mermaid · D028</span><h2>User journey</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+journey
+    title Reader opens a newly published handbook
+    section Discover
+      Search topic: 4: Reader
+      Review result list: 4: Reader
+    section Read
+      Open document: 5: Reader
+      Navigate headings: 5: Reader
+      Inspect diagram: 4: Reader
+    section Reuse
+      Copy link: 5: Reader
+      Save offline: 4: Reader
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D028.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: User journey"><img src="/mdvu/assets/diagrams/D028.svg" width="1700" height="540" loading="lazy" alt="User journey"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D029"><header><span>Mermaid · D029</span><h2>Pie chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+pie showData title Example document block mix
+    &quot;Prose&quot; : 55
+    &quot;Tables and lists&quot; : 15
+    &quot;Code&quot; : 12
+    &quot;Mermaid&quot; : 18
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D029.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Pie chart"><img src="/mdvu/assets/diagrams/D029.svg" width="665" height="450" loading="lazy" alt="Pie chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D030"><header><span>Mermaid · D030</span><h2>Block diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+block-beta
+    columns 4
+    A[&quot;Source&quot;] B(&quot;Parser&quot;) C((&quot;Renderer&quot;)) D[(&quot;Cache&quot;)]
+    A --&gt; B
+    B --&gt; C
+    C --&gt; D
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D030.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Block diagram"><img src="/mdvu/assets/diagrams/D030.svg" width="354" height="87" loading="lazy" alt="Block diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D031"><header><span>Mermaid · D031</span><h2>Packet layout</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+packet
+    title Simplified content envelope
+    0-7: &quot;Version&quot;
+    8-15: &quot;Flags&quot;
+    16-31: &quot;Header length&quot;
+    32-63: &quot;Document ID hash&quot;
+    64-95: &quot;Content length&quot;
+    96-127: &quot;Checksum&quot;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D031.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Packet layout"><img src="/mdvu/assets/diagrams/D031.svg" width="1026" height="235" loading="lazy" alt="Packet layout"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D032"><header><span>Mermaid · D032</span><h2>Event modeling</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+eventmodeling
+    tf 01 ui Editor
+    tf 02 cmd PublishDocument
+    tf 03 evt DocumentPublished
+    tf 04 rmo PublishedDocument
+    tf 05 ui Viewer
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D032.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Event modeling"><img src="/mdvu/assets/diagrams/D032.svg" width="1092" height="470" loading="lazy" alt="Event modeling"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D033"><header><span>Mermaid · D033</span><h2>Tree view</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+treeView-beta
+    ├── docs/
+    │   ├── architecture.md
+    │   ├── security.md
+    │   └── operations.md
+    ├── diagrams/
+    │   └── platform.mmd
+    ├── assets/
+    │   └── logo.svg
+    └── README.md
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D033.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Tree view"><img src="/mdvu/assets/diagrams/D033.svg" width="157" height="286" loading="lazy" alt="Tree view"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D034"><header><span>Mermaid · D034</span><h2>Venn diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+venn-beta
+    title &quot;Viewer compatibility&quot;
+    set Markdown[&quot;Markdown&quot;]:80
+    set Mermaid[&quot;Mermaid&quot;]:70
+    set Unicode[&quot;Unicode&quot;]:90
+    union Markdown,Mermaid[&quot;Fenced diagrams&quot;]:25
+    union Mermaid,Unicode[&quot;Unicode labels&quot;]:20
+    union Markdown,Unicode[&quot;Multilingual prose&quot;]:35
+    union Markdown,Mermaid,Unicode[&quot;Production document&quot;]:15
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D034.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Venn diagram"><img src="/mdvu/assets/diagrams/D034.svg" width="800" height="450" loading="lazy" alt="Venn diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D035"><header><span>Mermaid · D035</span><h2>Wardley map</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+wardley-beta
+    title Knowledge Delivery Stack
+    size [900, 520]
+    evolution Genesis@0.25 -&gt; Custom@0.5 -&gt; Product@0.75 -&gt; Commodity@1.0
+    anchor Reader [0.95, 0.90]
+    component &quot;Viewer&quot; [0.80, 0.65] (build)
+    component &quot;Markdown parser&quot; [0.62, 0.85] (buy)
+    component &quot;Mermaid renderer&quot; [0.55, 0.76] (buy)
+    component &quot;Unicode fonts&quot; [0.35, 0.95] (market)
+    Reader -&gt; &quot;Viewer&quot;
+    &quot;Viewer&quot; -&gt; &quot;Markdown parser&quot;
+    &quot;Viewer&quot; -&gt; &quot;Mermaid renderer&quot;
+    &quot;Mermaid renderer&quot; -&gt; &quot;Unicode fonts&quot;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D035.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Wardley map"><img src="/mdvu/assets/diagrams/D035.svg" width="900" height="520" loading="lazy" alt="Wardley map"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D036"><header><span>Mermaid · D036</span><h2>Cynefin framework</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+cynefin-beta
+    title Documentation Platform Problems
+    complex
+      &quot;Mixed bidi rendering&quot;
+      &quot;Unexpected content interaction&quot;
+    complicated
+      &quot;SVG performance profiling&quot;
+      &quot;Search ranking tuning&quot;
+    clear
+      &quot;Broken relative link&quot;
+      &quot;Missing asset&quot;
+    chaotic
+      &quot;Renderer process crash&quot;
+    confusion
+      &quot;Unclassified failure&quot;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D036.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Cynefin framework"><img src="/mdvu/assets/diagrams/D036.svg" width="880" height="680" loading="lazy" alt="Cynefin framework"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D038"><header><span>PlantUML · D038</span><h2>Sequence diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+title Publication sequence — Русский / 中文 / العربية 🚀
+autonumber
+actor Reader
+participant Viewer
+participant &quot;Knowledge API&quot; as API
+database Cache
+Reader -&gt; Viewer : Open document
+activate Viewer
+Viewer -&gt; API : GET /document
+activate API
+alt cached
+  API -&gt; Cache : lookup(id)
+  Cache --&gt; API : Markdown
+else not cached
+  API -&gt; API : load immutable release
+end
+API --&gt; Viewer : UTF-8 Markdown
+Viewer --&gt; Reader : Rendered document ✅
+deactivate API
+deactivate Viewer
+note over Viewer,API
+  Unicode: ÅÄÖ · Русский · 中文 · العربية · 日本語
+end note
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D038.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Sequence diagram"><img src="/mdvu/assets/diagrams/D038.svg" width="550" height="532" loading="lazy" alt="Sequence diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D039"><header><span>PlantUML · D039</span><h2>Use cases</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+left to right direction
+actor Reader
+actor Author
+rectangle &quot;mdvu&quot; {
+  usecase &quot;Open Markdown&quot; as UC1
+  usecase &quot;Navigate headings&quot; as UC2
+  usecase &quot;Render diagrams&quot; as UC3
+  usecase &quot;Search document&quot; as UC4
+}
+Reader --&gt; UC1
+Reader --&gt; UC2
+Reader --&gt; UC4
+Author --&gt; UC1
+UC1 .&gt; UC3 : &lt;&lt;include&gt;&gt;
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D039.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Use cases"><img src="/mdvu/assets/diagrams/D039.svg" width="342" height="350" loading="lazy" alt="Use cases"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D040"><header><span>PlantUML · D040</span><h2>Class diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+interface Renderer&lt;T&gt; {
+  +render(source: T): String
+}
+abstract class Block {
+  +language: String
+}
+class MermaidBlock
+class PlantUMLBlock
+class Document {
+  +id: String
+  +title: String
+}
+Renderer &lt;|.. MermaidBlock
+Renderer &lt;|.. PlantUMLBlock
+Block &lt;|-- MermaidBlock
+Block &lt;|-- PlantUMLBlock
+Document &quot;1&quot; *-- &quot;1..*&quot; Block
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D040.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Class diagram"><img src="/mdvu/assets/diagrams/D040.svg" width="358" height="329" loading="lazy" alt="Class diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D041"><header><span>PlantUML · D041</span><h2>Object diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+object document {
+  id = &quot;architecture/overview&quot;
+  locale = &quot;fi-FI&quot;
+  title = &quot;Arkkitehtuuri&quot;
+}
+object release {
+  version = &quot;2026.09&quot;
+  immutable = true
+}
+object manifest {
+  encoding = &quot;UTF-8&quot;
+  diagrams = &quot;Mermaid + PlantUML&quot;
+}
+document --&gt; release
+release --&gt; manifest
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D041.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Object diagram"><img src="/mdvu/assets/diagrams/D041.svg" width="244" height="333" loading="lazy" alt="Object diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D042"><header><span>PlantUML · D042</span><h2>Activity · current syntax</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+start
+:Open Markdown file;
+if (front matter present?) then (yes)
+  :Parse metadata;
+endif
+:Parse Markdown blocks;
+if (diagram block?) then (yes)
+  :Dispatch to diagram renderer;
+else (no)
+  :Render native Markdown;
+endif
+:Build navigation index;
+stop
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D042.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Activity · current syntax"><img src="/mdvu/assets/diagrams/D042.svg" width="364" height="503" loading="lazy" alt="Activity · current syntax"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D043"><header><span>PlantUML · D043</span><h2>Activity · legacy syntax</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```puml
+@startuml
+(*) --&gt; &quot;Open document&quot;
+--&gt; &quot;Parse Markdown&quot;
+if &quot;Has diagrams?&quot; then
+  --&gt;[yes] &quot;Render diagrams&quot;
+  --&gt; &quot;Display&quot;
+else
+  -&gt;[no] &quot;Display&quot;
+endif
+--&gt; (*)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D043.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Activity · legacy syntax"><img src="/mdvu/assets/diagrams/D043.svg" width="231" height="476" loading="lazy" alt="Activity · legacy syntax"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D044"><header><span>PlantUML · D044</span><h2>Component diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+package &quot;Viewer&quot; {
+  [Document Loader] as Loader
+  [Markdown Parser] as Parser
+  [Navigation Index] as Nav
+  [Diagram Router] as Router
+}
+component &quot;Mermaid 11.17.2&quot; as Mermaid
+component &quot;PlantUML 1.2026.7&quot; as PUML
+Loader --&gt; Parser
+Parser --&gt; Nav
+Parser --&gt; Router
+Router --&gt; Mermaid
+Router --&gt; PUML
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D044.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Component diagram"><img src="/mdvu/assets/diagrams/D044.svg" width="452" height="414" loading="lazy" alt="Component diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D045"><header><span>PlantUML · D045</span><h2>Deployment diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+node &quot;Desktop&quot; as desktop {
+  artifact &quot;test-complete.md&quot; as doc
+  component &quot;mdvu&quot; as viewer
+}
+node &quot;Diagram Runtime&quot; as runtime {
+  component &quot;Mermaid&quot; as mermaid
+  component &quot;PlantUML&quot; as plantuml
+}
+database &quot;Local cache&quot; as cache
+doc --&gt; viewer
+viewer --&gt; mermaid
+viewer --&gt; plantuml
+viewer --&gt; cache
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D045.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Deployment diagram"><img src="/mdvu/assets/diagrams/D045.svg" width="403" height="353" loading="lazy" alt="Deployment diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D046"><header><span>PlantUML · D046</span><h2>State diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+[*] --&gt; Loading
+Loading --&gt; Ready : parsed
+Loading --&gt; Error : invalid input
+Ready --&gt; Rendering : diagram pending
+Rendering --&gt; Ready : diagram complete
+Rendering --&gt; Error : renderer failure
+Error --&gt; Ready : recoverable block skipped
+Ready --&gt; Closed
+Closed --&gt; [*]
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D046.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: State diagram"><img src="/mdvu/assets/diagrams/D046.svg" width="622" height="526" loading="lazy" alt="State diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D047"><header><span>PlantUML · D047</span><h2>Timing diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+robust &quot;Viewer&quot; as V
+concise &quot;Reader&quot; as R
+@0
+R is Idle
+V is Loading
+@100
+R is Waiting
+V is Parsing
+@220
+V is Rendering
+@420
+V is Ready
+R is Reading
+@700
+R is Idle
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D047.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Timing diagram"><img src="/mdvu/assets/diagrams/D047.svg" width="1886" height="194" loading="lazy" alt="Timing diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D048"><header><span>PlantUML · D048</span><h2>JSON data</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startjson
+{
+  &quot;document&quot;: {
+    &quot;id&quot;: &quot;unicode-demo&quot;,
+    &quot;title&quot;: &quot;Русский / 中文 / العربية 🚀&quot;,
+    &quot;locales&quot;: [&quot;en&quot;, &quot;fi&quot;, &quot;ru&quot;, &quot;zh-CN&quot;, &quot;ar&quot;],
+    &quot;valid&quot;: true
+  }
+}
+@endjson
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D048.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: JSON data"><img src="/mdvu/assets/diagrams/D048.svg" width="452" height="102" loading="lazy" alt="JSON data"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D049"><header><span>PlantUML · D049</span><h2>YAML data</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startyaml
+document:
+  id: unicode-demo
+  title: &quot;Åä Русский 中文 العربية 🚀&quot;
+  locales:
+    - en
+    - fi
+    - ru
+    - zh-CN
+    - ar
+  valid: true
+@endyaml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D049.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: YAML data"><img src="/mdvu/assets/diagrams/D049.svg" width="457" height="102" loading="lazy" alt="YAML data"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D050"><header><span>PlantUML · D050</span><h2>EBNF grammar</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startebnf
+title Compact Markdown heading grammar
+heading = atx_heading | setext_heading;
+atx_heading = &quot;#&quot;, {&quot;#&quot;}, &quot; &quot;, text;
+setext_heading = text, (&quot;=&quot; | &quot;-&quot;);
+text = ? Unicode text ?;
+@endebnf
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D050.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: EBNF grammar"><img src="/mdvu/assets/diagrams/D050.svg" width="281" height="413" loading="lazy" alt="EBNF grammar"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D051"><header><span>PlantUML · D051</span><h2>Regular expression</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startregex
+!option language en
+!option useDescriptiveNames true
+^(?&lt;scheme&gt;https?)://(?&lt;host&gt;[\w.-]+)(?&lt;path&gt;/[^\s]*)?$
+@endregex
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D051.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Regular expression"><img src="/mdvu/assets/diagrams/D051.svg" width="596" height="138" loading="lazy" alt="Regular expression"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D052"><header><span>PlantUML · D052</span><h2>Network · nwdiag</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startnwdiag
+network dmz {
+  address = &quot;203.0.113.0/24&quot;
+  gateway [address = &quot;203.0.113.1&quot;];
+  viewer [address = &quot;203.0.113.20&quot;];
+}
+network internal {
+  address = &quot;10.0.0.0/24&quot;
+  viewer [address = &quot;10.0.0.20&quot;];
+  cache [address = &quot;10.0.0.30&quot;, shape = database];
+}
+@endnwdiag
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D052.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Network · nwdiag"><img src="/mdvu/assets/diagrams/D052.svg" width="275" height="278" loading="lazy" alt="Network · nwdiag"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D053"><header><span>PlantUML · D053</span><h2>Salt wireframe</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startsalt
+{
+  {+ mdvu Viewer
+    File | &quot;test-complete.md&quot;
+    Search | &quot;Unicode Mermaid PlantUML&quot;
+    [Open] | [Reload]
+    [X] Table of contents
+    [X] Diagram rendering
+    Locale | ^English^Русский^中文^العربية^
+  }
+}
+@endsalt
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D053.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Salt wireframe"><img src="/mdvu/assets/diagrams/D053.svg" width="324" height="169" loading="lazy" alt="Salt wireframe"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D054"><header><span>PlantUML · D054</span><h2>ArchiMate shapes</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+archimate #Business &quot;Reader&quot; as reader &lt;&lt;business-actor&gt;&gt;
+archimate #Application &quot;mdvu&quot; as app &lt;&lt;application-component&gt;&gt;
+archimate #Technology &quot;Diagram Runtime&quot; as runtime &lt;&lt;technology-device&gt;&gt;
+reader --&gt; app : reads
+app --&gt; runtime : renders
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D054.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: ArchiMate shapes"><img src="/mdvu/assets/diagrams/D054.svg" width="194" height="326" loading="lazy" alt="ArchiMate shapes"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D055"><header><span>PlantUML · D055</span><h2>SDL shapes</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+start
+:Receive Markdown; &lt;&lt;input&gt;&gt;
+:Parse document; &lt;&lt;procedure&gt;&gt;
+:Load renderer; &lt;&lt;load&gt;&gt;
+:Render output; &lt;&lt;task&gt;&gt;
+:Store cache; &lt;&lt;save&gt;&gt;
+:Display document; &lt;&lt;output&gt;&gt;
+stop
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D055.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: SDL shapes"><img src="/mdvu/assets/diagrams/D055.svg" width="168" height="401" loading="lazy" alt="SDL shapes"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D057"><header><span>PlantUML · D057</span><h2>Gantt chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startgantt
+Project starts the 2026-09-01
+[Fixture draft] lasts 2 days
+[Review] starts at [Fixture draft]&#x27;s end and lasts 2 days
+[Renderer validation] starts at [Review]&#x27;s end and lasts 2 days
+[Release] happens at [Renderer validation]&#x27;s end
+@endgantt
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D057.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Gantt chart"><img src="/mdvu/assets/diagrams/D057.svg" width="334" height="146" loading="lazy" alt="Gantt chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D059"><header><span>PlantUML · D059</span><h2>Mind map</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startmindmap
+* mdvu
+** Markdown
+*** Navigation
+*** Tables
+*** Unicode
+** Mermaid
+*** 11.17.2
+** PlantUML
+*** 1.2026.7
+** Languages
+*** Русский
+*** 中文
+*** العربية
+@endmindmap
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D059.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Mind map"><img src="/mdvu/assets/diagrams/D059.svg" width="335" height="449" loading="lazy" alt="Mind map"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D060"><header><span>PlantUML · D060</span><h2>Work breakdown structure</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startwbs
+* Complete functional validation
+** Markdown
+*** Blocks
+*** Inline syntax
+*** Navigation
+** Diagrams
+*** Mermaid
+*** ZenUML
+*** PlantUML
+** Unicode
+*** LTR
+*** RTL
+*** CJK
+@endwbs
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D060.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Work breakdown structure"><img src="/mdvu/assets/diagrams/D060.svg" width="398" height="276" loading="lazy" alt="Work breakdown structure"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D063"><header><span>PlantUML · D063</span><h2>Information engineering</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+entity DOCUMENT {
+  * id : UUID
+  --
+  * title : TEXT
+  locale : TEXT
+}
+entity RELEASE {
+  * id : UUID
+  --
+  * version : TEXT
+}
+DOCUMENT ||--o{ RELEASE : publishes
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D063.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Information engineering"><img src="/mdvu/assets/diagrams/D063.svg" width="135" height="270" loading="lazy" alt="Information engineering"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D065"><header><span>PlantUML · D065</span><h2>Chart</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startchart
+h-axis [Markdown, Mermaid, PlantUML, Unicode]
+v-axis &quot;Coverage&quot; 0 --&gt; 100
+bar &quot;Functional fixture&quot; [95, 100, 100, 95]
+line &quot;Smoke fixture&quot; [60, 35, 20, 45]
+legend right
+@endchart
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D065.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Chart"><img src="/mdvu/assets/diagrams/D065.svg" width="634" height="410" loading="lazy" alt="Chart"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D075"><header><span>Mermaid · D075</span><h2>Use cases</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+usecase-beta
+direction LR
+actor Customer(&quot;Customer&quot;)
+systemBoundary &quot;Order system&quot;
+  Checkout(&quot;Place order&quot;)
+end
+Customer --&gt; Checkout
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D075.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Use cases"><img src="/mdvu/assets/diagrams/D075.svg" width="379" height="180" loading="lazy" alt="Use cases"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D076"><header><span>Mermaid · D076</span><h2>Agent flow</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+agentflow-beta TB
+  flow reviewer[&quot;Review Agent&quot;]
+    changes[&quot;Gather changes&quot;]@{ shape: input }
+    analyse[&quot;Analyse diff&quot;]@{ shape: task }
+    lint[&quot;run_linter&quot;]@{ shape: tool }
+    ok[&quot;Clean?&quot;]@{ shape: decision }
+
+    changes --&gt; analyse --&gt; lint --&gt; ok
+  end
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D076.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Agent flow"><img src="/mdvu/assets/diagrams/D076.svg" width="253" height="466" loading="lazy" alt="Agent flow"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D077"><header><span>Mermaid · D077</span><h2>Railroad diagram</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+railroad-beta
+title Expression Grammar
+
+expression = sequence(
+    nonterminal(&quot;term&quot;),
+    zeroOrMore(sequence(
+        choice(terminal(&quot;+&quot;), terminal(&quot;-&quot;)),
+        nonterminal(&quot;term&quot;)
+    ))
+) ;
+term = sequence(
+    nonterminal(&quot;factor&quot;),
+    zeroOrMore(sequence(
+        choice(terminal(&quot;*&quot;), terminal(&quot;/&quot;)),
+        nonterminal(&quot;factor&quot;)
+    ))
+) ;
+factor = choice(
+    nonterminal(&quot;number&quot;),
+    sequence(terminal(&quot;(&quot;), nonterminal(&quot;expression&quot;), terminal(&quot;)&quot;))
+) ;
+number = oneOrMore(nonterminal(&quot;digit&quot;)) ;
+digit = choice(terminal(&quot;0&quot;), terminal(&quot;1&quot;), terminal(&quot;2&quot;), terminal(&quot;3&quot;), terminal(&quot;4&quot;), terminal(&quot;5&quot;), terminal(&quot;6&quot;), terminal(&quot;7&quot;), terminal(&quot;8&quot;), terminal(&quot;9&quot;)) ;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D077.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Railroad diagram"><img src="/mdvu/assets/diagrams/D077.svg" width="401" height="1013" loading="lazy" alt="Railroad diagram"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D078"><header><span>Mermaid · D078</span><h2>Railroad · EBNF</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+railroad-ebnf-beta
+title &quot;Digit Definition&quot;
+
+digit = &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;3&quot; | &quot;4&quot; | &quot;5&quot; | &quot;6&quot; | &quot;7&quot; | &quot;8&quot; | &quot;9&quot; ;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D078.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Railroad · EBNF"><img src="/mdvu/assets/diagrams/D078.svg" width="189" height="506" loading="lazy" alt="Railroad · EBNF"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D079"><header><span>Mermaid · D079</span><h2>Railroad · ABNF</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+railroad-abnf-beta
+title &quot;Email Address&quot;
+
+address = local-part &quot;@&quot; domain ;
+local-part = 1*( ALPHA / DIGIT / &quot;.&quot; / &quot;-&quot; ) ;
+domain = label *( &quot;.&quot; label ) ;
+label = 1*( ALPHA / DIGIT / &quot;-&quot; ) ;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D079.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Railroad · ABNF"><img src="/mdvu/assets/diagrams/D079.svg" width="357" height="600" loading="lazy" alt="Railroad · ABNF"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D080"><header><span>Mermaid · D080</span><h2>Railroad · PEG</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```mermaid
+railroad-peg-beta
+title &quot;Calculator Grammar&quot;
+
+Expression &lt;- Term ((&quot;+&quot; / &quot;-&quot;) Term)* ;
+Term &lt;- Factor ((&quot;*&quot; / &quot;/&quot;) Factor)* ;
+Factor &lt;- Number / &quot;(&quot; Expression &quot;)&quot; ;
+Number &lt;- Digit+ ;
+Digit &lt;- &quot;0&quot; / &quot;1&quot; / &quot;2&quot; / &quot;3&quot; / &quot;4&quot; / &quot;5&quot; / &quot;6&quot; / &quot;7&quot; / &quot;8&quot; / &quot;9&quot; ;
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D080.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Railroad · PEG"><img src="/mdvu/assets/diagrams/D080.svg" width="407" height="1013" loading="lazy" alt="Railroad · PEG"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D090"><header><span>PlantUML · D090</span><h2>Graphviz · DOT</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startdot
+digraph G {
+ Reader -&gt; Parser -&gt; Renderer;
+}
+@enddot
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D090.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Graphviz · DOT"><img src="/mdvu/assets/diagrams/D090.svg" width="101" height="188" loading="lazy" alt="Graphviz · DOT"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card diagram-wide" id="D091"><header><span>PlantUML · D091</span><h2>Packet layout</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startpacketdiag
+packetdiag {
+0-7: Source Port
+8-15: Destination Port
+16-31: Sequence Number
+}
+@endpacketdiag
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D091.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: Packet layout"><img src="/mdvu/assets/diagrams/D091.svg" width="714" height="121" loading="lazy" alt="Packet layout"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D100"><header><span>PlantUML · D100</span><h2>C4-PlantUML · Context</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Context&gt;
+Person(user, &quot;Reader&quot;)
+System(viewer, &quot;Viewer&quot;)
+Rel(user, viewer, &quot;Reads&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D100.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Context"><img src="/mdvu/assets/diagrams/D100.svg" width="92" height="248" loading="lazy" alt="C4-PlantUML · Context"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D101"><header><span>PlantUML · D101</span><h2>C4-PlantUML · Landscape</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Context&gt;
+System(a, &quot;Viewer&quot;)
+System_Ext(b, &quot;Repository&quot;)
+Rel(a, b, &quot;Reads&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D101.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Landscape"><img src="/mdvu/assets/diagrams/D101.svg" width="138" height="197" loading="lazy" alt="C4-PlantUML · Landscape"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D102"><header><span>PlantUML · D102</span><h2>C4-PlantUML · Container</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Container&gt;
+Container(a, &quot;App&quot;, &quot;Native&quot;)
+ContainerDb(b, &quot;Cache&quot;, &quot;Files&quot;)
+Rel(a, b, &quot;Reads&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D102.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Container"><img src="/mdvu/assets/diagrams/D102.svg" width="111" height="245" loading="lazy" alt="C4-PlantUML · Container"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D103"><header><span>PlantUML · D103</span><h2>C4-PlantUML · Component</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Component&gt;
+Component(a, &quot;Parser&quot;, &quot;Rust&quot;)
+Component(b, &quot;Renderer&quot;, &quot;WebKit&quot;)
+Rel(a, b, &quot;HTML&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D103.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Component"><img src="/mdvu/assets/diagrams/D103.svg" width="110" height="225" loading="lazy" alt="C4-PlantUML · Component"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D104"><header><span>PlantUML · D104</span><h2>C4-PlantUML · Dynamic</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Dynamic&gt;
+Person(a, &quot;Reader&quot;)
+System(b, &quot;Viewer&quot;)
+Rel(a, b, &quot;Open&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D104.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Dynamic"><img src="/mdvu/assets/diagrams/D104.svg" width="100" height="248" loading="lazy" alt="C4-PlantUML · Dynamic"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D105"><header><span>PlantUML · D105</span><h2>C4-PlantUML · Deployment</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Deployment&gt;
+Deployment_Node(mac, &quot;Mac&quot;, &quot;macOS&quot;) {
+Container(app, &quot;Viewer&quot;, &quot;Native&quot;)
+}
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D105.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Deployment"><img src="/mdvu/assets/diagrams/D105.svg" width="131" height="163" loading="lazy" alt="C4-PlantUML · Deployment"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D106"><header><span>PlantUML · D106</span><h2>C4-PlantUML · Sequence</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;C4/C4_Sequence&gt;
+Person(a, &quot;Reader&quot;)
+System(b, &quot;Viewer&quot;)
+Rel(a, b, &quot;Open&quot;)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D106.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: C4-PlantUML · Sequence"><img src="/mdvu/assets/diagrams/D106.svg" width="154" height="156" loading="lazy" alt="C4-PlantUML · Sequence"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article><article class="diagram-card" id="D110"><header><span>PlantUML · D110</span><h2>ArchiMate · three layers</h2></header><div class="diagram-example"><pre tabindex="0" aria-label="Source code"><code>```plantuml
+@startuml
+!include &lt;archimate/Archimate&gt;
+left to right direction
+Business_Actor(reader, &quot;Reader&quot;)
+Business_Process(reading, &quot;Read document&quot;)
+Application_Component(app, &quot;MDVu&quot;)
+Application_Service(render, &quot;Render Markdown&quot;)
+Technology_Node(device, &quot;Mac / Windows&quot;)
+Technology_Service(runtime, &quot;WebKit / WebView2&quot;)
+Rel_Assignment(reader, reading)
+Rel_Serving_Up(render, reading, &quot;supports&quot;)
+Rel_Assignment(app, render)
+Rel_Serving_Up(runtime, app, &quot;renders&quot;)
+Rel_Assignment(device, runtime)
+@enduml
+```</code></pre><figure><a class="diagram-preview" href="/mdvu/assets/diagrams/D110.svg" data-preview aria-haspopup="dialog" aria-label="Enlarge: ArchiMate · three layers"><img src="/mdvu/assets/diagrams/D110.svg" width="661" height="235" loading="lazy" alt="ArchiMate · three layers"><span class="preview-zoom" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span></a></figure></div></article></div></section></main>
+<footer class="container footer"><a class="brand" href="/mdvu/"><img src="/mdvu/assets/icon.webp" width="28" height="28" loading="lazy" alt=""><span>MDVu<span class="brand-dot">.</span></span></a><p>Markdown · Mermaid · PlantUML · ZenUML</p><nav aria-label="Footer navigation"><a href="https://github.com/stpork/mdvu/blob/develop/LICENSE">MIT License</a><a href="https://github.com/stpork/mdvu/releases">Changelog</a><a href="https://github.com/stpork/mdvu/issues">Feedback ↗</a></nav><small><a href="mailto:finndebear@gmail.com">© 2026 Finn de Bear</a></small></footer>
+<dialog class="image-dialog" aria-label="Image preview"><button type="button" class="close-dialog" aria-label="Close preview">✕</button><div class="preview-content" hidden></div><img src="/mdvu/assets/mdvu.webp" width="1228" height="1317" loading="lazy" alt="Full MDVu application screenshot"></dialog><div class="toast" role="status" aria-live="polite"></div>
+</body></html>

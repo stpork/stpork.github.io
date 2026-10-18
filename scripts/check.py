@@ -4,6 +4,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import json
+import re
 from datetime import date
 from urllib.robotparser import RobotFileParser
 import xml.etree.ElementTree as ET
@@ -26,8 +27,19 @@ class Page(HTMLParser):
             assert 'alt' in a and 'width' in a and 'height' in a
         if 'srcset' in a: self.links += [item.strip().split()[0] for item in a['srcset'].split(',')]
 
-for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
+seo_titles = set()
+seo_descriptions = set()
+linked_page_ids = {}
+for lang in ('en','ru'):
+ for section in ('','performance/','diagrams/'):
+    rel = 'mdvu/' + ('ru/' if lang=='ru' else '') + section + 'index.html'
     source = (ROOT/rel).read_text(); page = Page(source)
+    title = re.search(r'<title>(.*?)</title>', source).group(1)
+    assert title not in seo_titles and page.meta['description'] not in seo_descriptions, 'Duplicate page search text'
+    seo_titles.add(title); seo_descriptions.add(page.meta['description'])
+    assert 15 <= len(title) <= 90 and 'MDVu' in title
+    assert page.meta['og:title'] == page.meta['twitter:title'] == title.replace('&amp;', '&')
+    assert page.meta['og:description'] == page.meta['twitter:description'] == page.meta['description']
     assert source.startswith('<!doctype html>')
     assert f'<html lang="{lang}">' in source
     assert sum(tag=='h1' for tag,_ in page.tags)==1
@@ -40,7 +52,7 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
     assert sum(tag=='button' and 'data-theme-toggle' in attrs for tag,attrs in page.tags)==1
     assert 'class="language"' not in source if lang=='en' else 'hreflang="en">EN</a>' in source
     assert not any(tag=='link' and a.get('rel')=='alternate' for tag,a in page.tags)
-    assert ('noindex' in page.meta['robots']) == (lang == 'ru')
+    assert 'noindex' not in page.meta['robots'] and 'index' in page.meta['robots']
     if lang == 'en':
         assert '/mdvu/ru/' not in source
     structured = source.split('<script type="application/ld+json">')[1].split('</script>')[0]
@@ -48,7 +60,7 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
     assert data['@graph'][0]['offers']['price']=='0'
     assert data['@graph'][2]['@type']=='WebPage'
     assert data['@graph'][2]['inLanguage']==lang
-    canonical_url = 'https://stpork.github.io/mdvu/' + ('ru/' if lang=='ru' else '')
+    canonical_url = 'https://stpork.github.io/mdvu/' + ('ru/' if lang=='ru' else '') + section
     assert page.meta['og:url']==canonical_url
     assert data['@graph'][0]['url']=='https://stpork.github.io/mdvu/'
     assert data['@graph'][2]['url']==canonical_url
@@ -56,8 +68,9 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
         parsed_image = urlsplit(image_url)
         assert parsed_image.netloc=='stpork.github.io' and parsed_image.path.startswith('/mdvu/assets/')
         assert (ROOT / parsed_image.path.lstrip('/')).is_file(), 'Missing SEO image: '+image_url
-    assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
-    assert sum(tag=='details' for tag,_ in page.tags)>=6
+    if not section:
+        assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
+        assert sum(tag=='details' for tag,_ in page.tags)>=6
     for link in page.links:
         parsed=urlsplit(link)
         if parsed.scheme or parsed.netloc: continue
@@ -65,24 +78,46 @@ for rel,lang in [('mdvu/index.html','en'),('mdvu/ru/index.html','ru')]:
             target = ROOT / unquote(parsed.path).lstrip('/') if parsed.path.startswith('/') else (ROOT/rel).parent / parsed.path
             if parsed.path.endswith('/'): target /= 'index.html'
             assert target.is_file(), f'{rel}: missing {link}'
+            if parsed.fragment and target.suffix == '.html':
+                if target not in linked_page_ids: linked_page_ids[target] = Page(target.read_text()).ids
+                assert parsed.fragment in linked_page_ids[target], f'{rel}: missing target anchor {link}'
         elif parsed.fragment:
             assert parsed.fragment in page.ids, f'{rel}: missing anchor {link}'
     release = json.loads((ROOT/'mdvu/data/release.json').read_text())
     comparison = json.loads((ROOT/'mdvu/data/comparison.json').read_text())
-    assert source.count('macOS · DMG ↓') == 1 and source.count('Windows · MSI ↗') == 1
-    assert 'GitHub Releases ↗' in source and '>Performance</h2>' in source
-    assert release['packages']['macos.dmg']['url'] in page.links
-    assert all(p['name'] in source for p in comparison['products'])
+    if not section:
+        assert source.count('macOS · DMG ↓') == 2 and source.count('Windows · MSI ↗') == 2
+        assert 'Other versions · portable ZIPs' in source
+        assert release['packages']['macos.dmg']['url'] in page.links
+        assert 'id="comparison"' in source and 'class="landing-table"' in source
+        assert source.index('id="comparison"') < source.index('id="why"')
+        assert all(p['name'] in source for p in comparison['products'])
+        assert ('/mdvu/' + ('ru/' if lang=='ru' else '') + 'performance/') not in page.links
+        assert 'Cold &amp; warm starts' not in source and 'comparison-details' not in source
+        assert 'N/A' in source
+        assert ('>Render · Page</span>' if lang == 'en' else '>Рендер · Страница</span>') in source
+        assert ('Formats ↗</a>' if lang == 'en' else 'Форматы ↗</a>') in source
+        assert source.index('class="hero-visual"') < source.index('id="comparison"')
+    elif section=='performance/':
+        assert all(p['name'] in source for p in comparison['products'])
+        assert ('Быстродействие' if lang=='ru' else 'Performance') in source
+    else:
+        cards=[a for tag,a in page.tags if tag=='article' and 'diagram-card' in a.get('class','')]
+        assert len(cards)==73
+        assert len([a for tag,a in page.tags if tag=='img' and '/diagrams/' in a.get('src','')])==73
+        assert 'Source on GitHub' not in source
+        assert sum(tag=='a' and 'data-preview' in a for tag,a in page.tags)==73
+        assert 'class="image-dialog"' in source
     assert '/mdvu/data/measurements.json' not in page.links
     assert all(removed not in source for removed in ['class="release"', 'class="enlarge"', 'proof-strip', 'size-section', 'measurement-cards', '37 × 2', 'warm scroll', 'тёплый скролл', 'Замеры', 'Less app.', 'Меньше лишнего.'])
-    assert (ROOT/rel).stat().st_size < 50000
+    assert (ROOT/rel).stat().st_size < (170000 if section=='diagrams/' else 65000)
     print(f'PASS {rel}: metadata, verification, language links, structured data, internal links, image dimensions')
 # Validate the actual search-engine signals together, not just XML syntax.
 ORIGIN = 'https://stpork.github.io'
 BASE = ORIGIN + '/mdvu'
 NS = {'sm':'http://www.sitemaps.org/schemas/sitemap/0.9', 'xhtml':'http://www.w3.org/1999/xhtml'}
 variants = {}
-expected_pages = {BASE+'/':ROOT/'mdvu/index.html'}
+expected_pages = {BASE+'/'+s:ROOT/('mdvu/'+s+'index.html') for s in ('','performance/','diagrams/','ru/','ru/performance/','ru/diagrams/')}
 robots = RobotFileParser()
 robots.parse((ROOT/'robots.txt').read_text().splitlines())
 assert ORIGIN+'/sitemap.xml' in (robots.site_maps() or [])
@@ -116,7 +151,7 @@ for entry in entries:
     assert robots.can_fetch('Googlebot', loc)
     for directive in ('robots','googlebot'):
         assert 'noindex' not in page.meta.get(directive,'').lower()
-print('PASS sitemap: only English is listed; Russian is direct-URL and noindex')
+print('PASS sitemap: six indexable canonical pages; RU and Performance stay out of the main navigation')
 # Old entry points must lead directly to the canonical route, without loops.
 for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     source = (ROOT/rel).read_text()
@@ -138,3 +173,61 @@ assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5000
 assert (ROOT/'mdvu/assets/theme.js').stat().st_size < 4000
 assert (ROOT/'mdvu/assets/mdvu.webp').stat().st_size < 150000
 print('PASS sitemap and asset budgets')
+for doc in ['COMPARISON.md','BENCHMARK-PROTOCOL.md','comparison-history-2026-10-17.md']:
+    file = ROOT/'mdvu/data'/doc
+    for ref in re.findall(r'\]\(([^)\n]+)\)', file.read_text()):
+        parsed = urlsplit(ref)
+        if not parsed.scheme and parsed.path:
+            assert (file.parent/unquote(parsed.path)).is_file(), f'{doc}: missing document/evidence {ref}'
+print('PASS downloadable documentation/evidence links and distinct SEO text')
+
+# A source/error panel or blocked trial must never become a numeric paint result.
+performance = json.loads((ROOT/'mdvu/data/performance.json').read_text())
+records = performance['measurements']
+assert len(records) == 90 and len({x['label'] for x in records}) == 90
+assert len(performance['apps']) == 7 and all('Marked' not in a['name'] for a in performance['apps'])
+for app in performance['apps']:
+    own = [x for x in records if x['app'] == app['name']]
+    assert sum(x['group']=='common' for x in own) == 5
+    assert sum(x['group']=='original' for x in own) == 5
+    assert sum(x['group']=='launch' for x in own) == 1
+for row in records:
+    assert row['writerDroppedFrames'] == 0
+    assert row['memorySamplesAt8s'] >= 3 and row['peakMemoryMiBFirst8s'] >= row['memoryMiBAt8s'] > 0
+    assert len(row['sourceSha256']) == 64
+    if row['status'] == 'observed':
+        lo,hi = row['firstPaintFrameBracketMs']
+        # MP4 timebase quantization can shift decoded PTS slightly from the captured timestamp.
+        assert 0 <= lo and lo-3 <= row['dispatchToContentMs'] <= hi+3
+    else:
+        assert row['dispatchToContentMs'] is None and row['launchToContentMs'] is None
+assert not list((ROOT/'mdvu').rglob('*.mp4')), 'Test-window recordings must stay local, outside website assets'
+print('PASS performance: 90 selections, identical workload counts, frame bounds, memory windows, explicit exclusions')
+
+# Current single-document, cache-cold/warm study: never silently promote pilots.
+full = json.loads((ROOT/'mdvu/data/full-pass-performance.json').read_text())
+assert len(full['apps']) == 8 and full['plannedAppFixturePhaseCells'] == 192
+valid = [m for m in full['measurements'] if m.get('selectedForComparison')]
+cells = {(m['app'],m['fixture'],m['cacheState']) for m in valid}
+assert len(cells) == len(valid) == full['selectedMeasurementCells']
+assert sum(m['eofVerified'] for m in valid)==full['verifiedCanonicalCells']
+assert all(m['profileEligible'] and m['singleDocument'] and m['canonicalSeries'] and (m['eofVerified'] or m.get('startupOnlyReview')) and not m['measurementExcluded'] for m in valid)
+for m in valid:
+    assert m['actualInputSha256'] == m['sourceSha256']
+    ram=m['memory']
+    assert 0 < ram['medianMiBAt8s'] <= ram['peakMiBFirst8s'] <= ram['peakMiBFullPass']
+    timing=m['timing']
+    if 'launchToContentMs' in timing:
+        assert timing['analysisSchema'] == 7 and timing['launchToContentMs'] > 0
+        lo,hi=timing['firstPaintFrameBracketMs']
+        assert lo <= timing['dispatchToContentMs'] <= hi+0.001
+    if m['cacheState'] == 'warm':assert (m['app'],m['fixture'],'cold') in cells
+handled=len(cells)+2*len(full.get('terminalOutcomes',[]))
+assert handled==full.get('handledAppFixturePhaseCells',len(cells))
+assert full['status'] != 'complete' or handled==192
+matrix=json.loads((ROOT/'mdvu/data/diagram-compatibility.json').read_text())
+assert matrix['schema']==4 and len(matrix['cases'])==73 and len(matrix['applications'])==8
+for app in matrix['applications'].values():
+    assert len(app['results'])==73 and sum(app['summary'].values())==73
+    assert all(set(c['evidence'])=={'cold','warm'} for c in app['results'].values())
+print(f'PASS current study: {len(cells)}/192 verified single-document cells; 584 paired format outcomes')

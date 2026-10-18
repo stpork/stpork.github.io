@@ -1,0 +1,1174 @@
+{
+  "binarySha256": "452dcb1886942556a8df2f6c022ccbf99e898bb8516eb37dcf5c28804d48c4b1",
+  "coreSha256": "341dff90bbbef516716f2a88d43096a52a7e84c9c7e7f8588519b1adee6c9946",
+  "cases": [
+    {
+      "id": "D001",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Flowchart",
+        "ru": "Блок-схема"
+      },
+      "source": "flowchart LR\n    Author[\"Author / Reviewer\"] --> Repo[\"Content Repository\"]\n    Repo --> CI[\"Validation & Build\"]\n    CI --> Publish[\"Publication Service\"]\n    Publish --> Search[(\"Search Index\")]\n    Publish --> CDN[\"Artifact / CDN\"]\n    Reader[\"Reader\"] --> Web[\"Web / Desktop Viewer\"]\n    Web --> Search\n    Web --> CDN\n    Admin[\"Platform Operator\"] --> Observe[\"Observability\"]\n    CI --> Observe\n    Publish --> Observe\n    Web --> Observe",
+      "language": "mermaid",
+      "width": 1016.0,
+      "height": 337.33245849609375,
+      "svg": "/mdvu/assets/diagrams/D001.svg",
+      "sourceSha256": "21f2229633057a6e192f8e02603d785e41ee753f7981840ff4f186d5269c1dcf",
+      "nativeSvgSha256": "54bde317a911ddcf425c11fbadc275b8b3a0879a0cb398495c4158f0cdbd5016",
+      "svgSha256": "54bde317a911ddcf425c11fbadc275b8b3a0879a0cb398495c4158f0cdbd5016"
+    },
+    {
+      "id": "D002",
+      "engine": "Mermaid",
+      "title": {
+        "en": "C4 · Context",
+        "ru": "C4 · Контекст"
+      },
+      "source": "C4Context\n    title GKDP System Context\n    Person(author, \"Author\", \"Creates and reviews technical content\")\n    Person(reader, \"Reader\", \"Browses and searches published knowledge\")\n    Person(operator, \"Operator\", \"Runs and monitors the platform\")\n    System(gkdp, \"GKDP\", \"Publishes and serves versioned technical knowledge\")\n    System_Ext(idp, \"Identity Provider\", \"Authentication and group membership\")\n    System_Ext(git, \"Git Hosting\", \"Source repository and pull requests\")\n    System_Ext(obs, \"Observability Platform\", \"Metrics, logs and traces\")\n    Rel(author, git, \"Commits and reviews\", \"Git/HTTPS\")\n    Rel(git, gkdp, \"Triggers publication\", \"Webhook/API\")\n    Rel(reader, gkdp, \"Reads and searches\", \"HTTPS\")\n    Rel(gkdp, idp, \"Authenticates users\", \"OIDC\")\n    Rel(operator, obs, \"Investigates health\")\n    Rel(gkdp, obs, \"Exports telemetry\")",
+      "language": "mermaid",
+      "width": 1464.0,
+      "height": 723.2589111328125,
+      "svg": "/mdvu/assets/diagrams/D002.svg",
+      "sourceSha256": "6ee41f8303a3cf26367b41e875a3a5c9a230bd331841c8ccd0e1bee63b436376",
+      "nativeSvgSha256": "8bb507767860c69c92a17c21b4c1416394f3c79323260de80ea62364b7af85e9",
+      "svgSha256": "8bb507767860c69c92a17c21b4c1416394f3c79323260de80ea62364b7af85e9"
+    },
+    {
+      "id": "D003",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Requirements",
+        "ru": "Требования"
+      },
+      "source": "requirementDiagram\n    direction LR\n    functionalRequirement rendering {\n      id: \"FR-01\"\n      text: \"Render Markdown and Mermaid content\"\n      risk: high\n      verifymethod: test\n    }\n    functionalRequirement unicode {\n      id: \"FR-03\"\n      text: \"Preserve multilingual UTF-8 content\"\n      risk: high\n      verifymethod: test\n    }\n    performanceRequirement navigation {\n      id: \"NFR-01\"\n      text: \"Keep navigation responsive on large normal documents\"\n      risk: medium\n      verifymethod: demonstration\n    }\n    element viewer {\n      type: application\n      docref: \"mdvu-light-validation.md\"\n    }\n    viewer - satisfies -> rendering\n    viewer - satisfies -> unicode\n    viewer - satisfies -> navigation",
+      "language": "mermaid",
+      "width": 910.421875,
+      "height": 648.0,
+      "svg": "/mdvu/assets/diagrams/D003.svg",
+      "sourceSha256": "7d5914646a78e25a048d444cd619186196de3c93b9684bf151a7bcdc41f62d45",
+      "nativeSvgSha256": "6cc059d0760658138a66765dd43a85de584243882cb6f7403d32c82b0d3dc240",
+      "svgSha256": "6cc059d0760658138a66765dd43a85de584243882cb6f7403d32c82b0d3dc240"
+    },
+    {
+      "id": "D004",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Quadrant chart",
+        "ru": "Квадрантная диаграмма"
+      },
+      "source": "quadrantChart\n    title Delivery choices: value versus operational cost\n    x-axis Lower user value --> Higher user value\n    y-axis Lower operating cost --> Higher operating cost\n    quadrant-1 Strategic capabilities\n    quadrant-2 Expensive specialists\n    quadrant-3 Defer or simplify\n    quadrant-4 Efficient foundations\n    Search indexing: [0.88, 0.55]\n    Offline cache: [0.72, 0.45]\n    Rich custom themes: [0.45, 0.60]\n    Content validation: [0.84, 0.30]",
+      "language": "mermaid",
+      "width": 500.0,
+      "height": 500.0,
+      "svg": "/mdvu/assets/diagrams/D004.svg",
+      "sourceSha256": "d8ba49ab8cee03af6d5bc067cd79f124617e29a9d44c8b7bf641730f7e296a2e",
+      "nativeSvgSha256": "df7cbb2ca5a8ff65cbb1b522a532a4a41f7752462a9ee0f18d4f60aebbeec65c",
+      "svgSha256": "df7cbb2ca5a8ff65cbb1b522a532a4a41f7752462a9ee0f18d4f60aebbeec65c"
+    },
+    {
+      "id": "D005",
+      "engine": "Mermaid",
+      "title": {
+        "en": "C4 · Containers",
+        "ru": "C4 · Контейнеры"
+      },
+      "source": "C4Container\n    title GKDP Container View\n    Person(author, \"Author\")\n    Person(reader, \"Reader\")\n    System_Boundary(gkdp, \"GKDP\") {\n      Container(pipeline, \"Publication Pipeline\", \"CI\", \"Validates and packages content\")\n      Container(api, \"Knowledge API\", \"HTTP service\", \"Serves metadata, documents and search\")\n      Container(indexer, \"Indexer\", \"Worker\", \"Builds search documents\")\n      ContainerDb(store, \"Artifact Store\", \"Object storage\", \"Versioned Markdown and assets\")\n      ContainerDb(search, \"Search Index\", \"Search engine\", \"Full-text index\")\n      Container(viewer, \"Viewer\", \"Desktop/Web\", \"Renders Markdown and Mermaid\")\n    }\n    Rel(author, pipeline, \"Publishes via repository\")\n    Rel(pipeline, store, \"Writes immutable artifacts\")\n    Rel(pipeline, indexer, \"Queues indexing\")\n    Rel(indexer, search, \"Updates index\")\n    Rel(reader, viewer, \"Reads\")\n    Rel(viewer, api, \"Queries\")\n    Rel(api, store, \"Reads documents\")\n    Rel(api, search, \"Searches\")",
+      "language": "mermaid",
+      "width": 1564.0,
+      "height": 1094.6798095703125,
+      "svg": "/mdvu/assets/diagrams/D005.svg",
+      "sourceSha256": "c2ce335aa7a7f4a512348be51db4dc59423818cef0ad8b97ffb5f95dc9766d95",
+      "nativeSvgSha256": "31d38c1ddf5e43bfea40fac1f0f796b9383b8e8ad6c249575020023f27d58a39",
+      "svgSha256": "31d38c1ddf5e43bfea40fac1f0f796b9383b8e8ad6c249575020023f27d58a39"
+    },
+    {
+      "id": "D006",
+      "engine": "Mermaid",
+      "title": {
+        "en": "C4 · Components",
+        "ru": "C4 · Компоненты"
+      },
+      "source": "C4Component\n    title Viewer Components\n    Container(viewer, \"Viewer\", \"Desktop/Web\", \"Displays knowledge\")\n    ContainerDb(cache, \"Local Cache\", \"SQLite/files\", \"Stores metadata and rendered fragments\")\n    Container_Boundary(core, \"Rendering Core\") {\n      Component(loader, \"Document Loader\", \"I/O\", \"Loads UTF-8 content\")\n      Component(parser, \"Markdown Parser\", \"Parser\", \"Creates block structure\")\n      Component(mermaid, \"Mermaid Adapter\", \"JavaScript\", \"Creates diagram SVG\")\n      Component(nav, \"Navigation Index\", \"In-memory\", \"Headings and anchors\")\n      Component(search, \"Local Search\", \"Index\", \"Searches cached content\")\n    }\n    Rel(viewer, loader, \"Open document\")\n    Rel(loader, parser, \"Parse text\")\n    Rel(parser, mermaid, \"Render diagram blocks\")\n    Rel(parser, nav, \"Build heading map\")\n    Rel(viewer, search, \"Search\")\n    Rel(loader, cache, \"Read/write\")",
+      "language": "mermaid",
+      "width": 1564.0,
+      "height": 997.2260818481445,
+      "svg": "/mdvu/assets/diagrams/D006.svg",
+      "sourceSha256": "dea32b114276ca9b9f9d2190a30983565631244a94ede42e98399a7145239d95",
+      "nativeSvgSha256": "79722bdf2e174d6edfcd5620fac7b4446ccbde8c18fd73a05839de8ef1eb7ceb",
+      "svgSha256": "79722bdf2e174d6edfcd5620fac7b4446ccbde8c18fd73a05839de8ef1eb7ceb"
+    },
+    {
+      "id": "D007",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Architecture",
+        "ru": "Архитектура"
+      },
+      "source": "architecture-beta\n    group client(cloud)[Client]\n    group platform(cloud)[Knowledge Platform]\n    service user(internet)[Reader] in client\n    service viewer(server)[Viewer] in client\n    service api(server)[Knowledge API] in platform\n    service store(disk)[Artifact Store] in platform\n    service index(database)[Search Index] in platform\n    user:R --> L:viewer\n    viewer:R --> L:api\n    api:B --> T:store\n    api:R --> L:index",
+      "language": "mermaid",
+      "width": 935.3809814453125,
+      "height": 463.20465087890625,
+      "svg": "/mdvu/assets/diagrams/D007.svg",
+      "sourceSha256": "dea24340e1a5fdc2b823ee08907ea412017bd72edfc10feb4b9ac197a667f87d",
+      "nativeSvgSha256": "be332ec420152f089bbf2146f16d6084b6c495292da45a926940d924c383ae31",
+      "svgSha256": "be332ec420152f089bbf2146f16d6084b6c495292da45a926940d924c383ae31"
+    },
+    {
+      "id": "D008",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Entity relationships",
+        "ru": "Связи сущностей"
+      },
+      "source": "erDiagram\n    COLLECTION ||--o{ DOCUMENT : contains\n    DOCUMENT ||--o{ RELEASE : publishes\n    RELEASE ||--o{ ASSET : references\n    RELEASE ||--|| MANIFEST : has\n    RELEASE ||--o{ SEARCH_RECORD : produces\n    COLLECTION {\n      string id PK\n      string name\n      string default_locale\n    }\n    DOCUMENT {\n      string id PK\n      string path\n      string title\n    }\n    RELEASE {\n      string id PK\n      string document_id FK\n      string git_sha\n      datetime published_at\n    }\n    ASSET {\n      string id PK\n      string media_type\n      string sha256\n    }\n    MANIFEST {\n      string release_id PK\n      string content_sha256\n      string renderer_version\n    }\n    SEARCH_RECORD {\n      string release_id FK\n      string locale\n      string text\n    }",
+      "language": "mermaid",
+      "width": 776.078125,
+      "height": 1045.75,
+      "svg": "/mdvu/assets/diagrams/D008.svg",
+      "sourceSha256": "a3be40a4f7293548889edb2b3b0a90ad29acbd2ee947c5144b5b1b56a030ba46",
+      "nativeSvgSha256": "5eff3825bc91c4b3c0f810446ce1b7d53a2bcbec06eb19bab0b5b687dfa7b830",
+      "svgSha256": "5eff3825bc91c4b3c0f810446ce1b7d53a2bcbec06eb19bab0b5b687dfa7b830"
+    },
+    {
+      "id": "D009",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Sankey diagram",
+        "ru": "Диаграмма Санкея"
+      },
+      "source": "sankey\n    Source Markdown,Validation,100\n    Validation,Published Artifact,82\n    Validation,Rejected Change,18\n    Published Artifact,Search Index,45\n    Published Artifact,Client Cache,37\n    Search Index,Reader Discovery,45\n    Client Cache,Reader Open,37",
+      "language": "mermaid",
+      "width": 600.0,
+      "height": 400.0,
+      "svg": "/mdvu/assets/diagrams/D009.svg",
+      "sourceSha256": "f42ed8fd21c535a423fe4dbe0c7683b45d6dd643cfad7a0d9d69235b4989794d",
+      "nativeSvgSha256": "d46605d5a0f11f6c16cbb83d0fc4e2fd25f13fbbfa3c5c4a0a266e27d0a4867b",
+      "svgSha256": "d46605d5a0f11f6c16cbb83d0fc4e2fd25f13fbbfa3c5c4a0a266e27d0a4867b"
+    },
+    {
+      "id": "D010",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Sequence diagram",
+        "ru": "Диаграмма последовательности"
+      },
+      "source": "sequenceDiagram\n    autonumber\n    actor Reader\n    participant Viewer\n    participant API\n    participant Search\n    participant Store\n    Reader->>Viewer: Search \"identity federation\"\n    Viewer->>API: GET /search?q=identity+federation\n    API->>Search: Query index\n    Search-->>API: Ranked results\n    API-->>Viewer: Result metadata\n    Reader->>Viewer: Open result\n    Viewer->>API: GET document release\n    API->>Store: Read immutable artifact\n    Store-->>API: Markdown + manifest\n    API-->>Viewer: UTF-8 document\n    Viewer-->>Reader: Render text and diagrams",
+      "language": "mermaid",
+      "width": 1231.0,
+      "height": 725.0,
+      "svg": "/mdvu/assets/diagrams/D010.svg",
+      "sourceSha256": "8e4212f1f7411cac2c8247da0fa737100f5a231a0fdfa139022b50945dab4dff",
+      "nativeSvgSha256": "90a7e6c275ddfeb69dc1e29e53b55ce793f9abae4ee40d13e9128727b6aae73c",
+      "svgSha256": "90a7e6c275ddfeb69dc1e29e53b55ce793f9abae4ee40d13e9128727b6aae73c"
+    },
+    {
+      "id": "D011",
+      "engine": "Mermaid",
+      "title": {
+        "en": "State diagram",
+        "ru": "Диаграмма состояний"
+      },
+      "source": "stateDiagram-v2\n    [*] --> Draft\n    Draft --> Review : pull request opened\n    Review --> Rejected : policy failure\n    Rejected --> Draft : author updates\n    Review --> Approved : review + checks pass\n    Approved --> Published : signed publication job\n    Published --> Superseded : newer release\n    Superseded --> Archived : retention transition\n    Archived --> [*]",
+      "language": "mermaid",
+      "width": 389.9296875,
+      "height": 884.0,
+      "svg": "/mdvu/assets/diagrams/D011.svg",
+      "sourceSha256": "31f40d643706f7e1fdb766653c624509af1a0cc89cdbb6faee6ad0132639fec3",
+      "nativeSvgSha256": "9e127bac5b9b777ac6c697c20661feadf608fb0caeb62ff007b096df4e3b0152",
+      "svgSha256": "9e127bac5b9b777ac6c697c20661feadf608fb0caeb62ff007b096df4e3b0152"
+    },
+    {
+      "id": "D012",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Ishikawa diagram",
+        "ru": "Диаграмма Исикавы"
+      },
+      "source": "ishikawa-beta\n    Rendering Incident\n      Content\n        Unsupported syntax\n        Unsafe HTML\n      Runtime\n        Mermaid version mismatch\n        Font fallback\n      Delivery\n        Partial artifact upload\n        Stale cache\n      Operations\n        Missing alert\n        Insufficient diagnostics",
+      "language": "mermaid",
+      "width": 466.453125,
+      "height": 579.71875,
+      "svg": "/mdvu/assets/diagrams/D012.svg",
+      "sourceSha256": "e3aff85948d8668ed26b0aaaed9132f74990c2e811570ef711ab41e9b8f165bb",
+      "nativeSvgSha256": "c2ee811748c0f646929eb5dc3c1e8cee1c4b16c635d1d6483b1d1d0cc4feaefd",
+      "svgSha256": "c2ee811748c0f646929eb5dc3c1e8cee1c4b16c635d1d6483b1d1d0cc4feaefd"
+    },
+    {
+      "id": "D013",
+      "engine": "Mermaid",
+      "title": {
+        "en": "C4 · Dynamic view",
+        "ru": "C4 · Динамика"
+      },
+      "source": "C4Dynamic\n    title Reader opens a document\n    Container(ui, \"Viewer\", \"Desktop/Web\", \"Displays the document\")\n    Container_Boundary(core, \"Rendering Core\") {\n      Component(parser, \"Markdown Parser\", \"Parser\", \"Builds block model\")\n      Component(renderer, \"Mermaid Renderer\", \"JavaScript\", \"Builds SVG\")\n    }\n    Rel(ui, parser, \"1. Parse Markdown\")\n    Rel(parser, renderer, \"2. Render Mermaid blocks\")\n    Rel(renderer, ui, \"3. Return SVG\")",
+      "language": "mermaid",
+      "width": 932.0,
+      "height": 770.0625,
+      "svg": "/mdvu/assets/diagrams/D013.svg",
+      "sourceSha256": "eaff669c52afcee3e611e71d5b2b81036e59e08eac6ab1c5578280d755f249bf",
+      "nativeSvgSha256": "16d660f34d91fa83023b12cb59767db0c880019b68abfb75c1872f7608921c34",
+      "svgSha256": "16d660f34d91fa83023b12cb59767db0c880019b68abfb75c1872f7608921c34"
+    },
+    {
+      "id": "D014",
+      "engine": "Mermaid",
+      "title": {
+        "en": "ZenUML sequence",
+        "ru": "Последовательность ZenUML"
+      },
+      "source": "zenuml\n    @Actor Reader\n    Reader->Viewer: open(document)\n    Viewer->Parser: parse(markdown)\n    if(hasDiagrams) {\n      Viewer->Mermaid: render(diagrams)\n      Mermaid->Viewer: svg\n    }\n    Viewer->Reader: display(document)",
+      "language": "mermaid",
+      "width": 553.0,
+      "height": 396.0,
+      "svg": "/mdvu/assets/diagrams/D014.svg",
+      "sourceSha256": "fa00a92dc4cfb8c0de9fd67167abcc3bde8add617fe5e6e23efd650995a6150e",
+      "nativeSvgSha256": "af381bead496792b8de4783f9f6e93501c3907dce89e2e18b55c5b86a8cf2312",
+      "svgSha256": "af381bead496792b8de4783f9f6e93501c3907dce89e2e18b55c5b86a8cf2312"
+    },
+    {
+      "id": "D015",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Swimlanes",
+        "ru": "Дорожки процесса"
+      },
+      "source": "swimlane-beta LR\n    subgraph Author[Author]\n      A[Edit Markdown]\n      D[Address review]\n    end\n    subgraph Platform[Platform]\n      B[Validate]\n      C[Publish]\n    end\n    subgraph Reader[Reader]\n      E[Open release]\n    end\n    A --> B\n    B --> D\n    D --> B\n    B --> C\n    C --> E",
+      "language": "mermaid",
+      "width": 719.3333129882812,
+      "height": 640.0,
+      "svg": "/mdvu/assets/diagrams/D015.svg",
+      "sourceSha256": "621f2b19a65b3568144249f4fc3f93e94064c54068dee4ba42b10de44d0872e5",
+      "nativeSvgSha256": "b3fa6309d87050c103c8734186212eb08a8315574f5ea9782b9910e09bae6c01",
+      "svgSha256": "b3fa6309d87050c103c8734186212eb08a8315574f5ea9782b9910e09bae6c01"
+    },
+    {
+      "id": "D016",
+      "engine": "Mermaid",
+      "title": {
+        "en": "C4 · Deployment",
+        "ru": "C4 · Развёртывание"
+      },
+      "source": "C4Deployment\n    title GKDP Deployment\n    Deployment_Node(cloud, \"Cloud Region\", \"Managed platform\") {\n      Deployment_Node(app, \"Application Cluster\", \"Containers\") {\n        Container(api, \"Knowledge API\", \"Service\", \"Metadata and content API\")\n        Container(indexer, \"Indexer\", \"Worker\", \"Search indexing\")\n      }\n      Deployment_Node(data, \"Data Services\", \"Managed\") {\n        ContainerDb(store, \"Artifact Store\", \"Object storage\", \"Published content\")\n        ContainerDb(search, \"Search\", \"Search engine\", \"Indexes\")\n      }\n    }\n    Deployment_Node(mac, \"Reader Device\", \"macOS\") {\n      Container(viewer, \"Viewer\", \"Native app\", \"Markdown + Mermaid rendering\")\n    }\n    Rel(viewer, api, \"HTTPS\")\n    Rel(api, store, \"Read\")\n    Rel(api, search, \"Query\")\n    Rel(indexer, search, \"Write\")",
+      "language": "mermaid",
+      "width": 1448.0,
+      "height": 883.0771636962891,
+      "svg": "/mdvu/assets/diagrams/D016.svg",
+      "sourceSha256": "304cb94d8163169e8c0812394e8ffeef0d9ace24c576dc8f62a1203a226ea073",
+      "nativeSvgSha256": "c1ee7f1a78465ba43df7237424300c25dc2b9b16b11247d9301f81ea9328f92f",
+      "svgSha256": "c1ee7f1a78465ba43df7237424300c25dc2b9b16b11247d9301f81ea9328f92f"
+    },
+    {
+      "id": "D017",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Gantt chart",
+        "ru": "Диаграмма Ганта"
+      },
+      "source": "gantt\n    title Example release train\n    dateFormat YYYY-MM-DD\n    axisFormat %d %b\n    section Content\n    Draft documentation      :done, a1, 2026-09-01, 2d\n    Technical review         :done, after a1, 1d\n    Localization             :active, 2026-09-03, 2d\n    section Engineering\n    Renderer validation      :done, b1, 2026-09-02, 2d\n    Package release          :2026-09-04, 1d\n    section Release\n    Publish                  :milestone, 2026-09-05, 0d\n    Observe                  :2026-09-05, 2d",
+      "language": "mermaid",
+      "width": 920.0,
+      "height": 268.0,
+      "svg": "/mdvu/assets/diagrams/D017.svg",
+      "sourceSha256": "9d6bd6d077a195b3cf4fe027b1f386db6855fbbbde053aa8cb7500f73e48f173",
+      "nativeSvgSha256": "3789dadcd5514dc7a93f96b18039d567e55e7bdeb2d4080a27bac98cbeea2603",
+      "svgSha256": "3789dadcd5514dc7a93f96b18039d567e55e7bdeb2d4080a27bac98cbeea2603"
+    },
+    {
+      "id": "D018",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Git graph",
+        "ru": "Граф Git"
+      },
+      "source": "gitGraph\n    commit id: \"baseline\"\n    branch feature/docs\n    checkout feature/docs\n    commit id: \"update handbook\"\n    commit id: \"add diagrams\"\n    checkout main\n    merge feature/docs\n    commit id: \"release metadata\" tag: \"v1.4.0\"\n    branch hotfix/link\n    checkout hotfix/link\n    commit id: \"fix link\"\n    checkout main\n    merge hotfix/link tag: \"v1.4.1\"",
+      "language": "mermaid",
+      "width": 512.375,
+      "height": 269.3744201660156,
+      "svg": "/mdvu/assets/diagrams/D018.svg",
+      "sourceSha256": "0a77ca6d8a1ebf25b5edb346882174f50f62569be984c01901c4b07a3f789b41",
+      "nativeSvgSha256": "a3ec0fff8a0aeb3d683ea583bea1bb2df74cb245d3ec90efbc16a563a341a4b8",
+      "svgSha256": "a3ec0fff8a0aeb3d683ea583bea1bb2df74cb245d3ec90efbc16a563a341a4b8"
+    },
+    {
+      "id": "D020",
+      "engine": "Mermaid",
+      "title": {
+        "en": "XY chart",
+        "ru": "График XY"
+      },
+      "source": "xychart\n    title \"Typical document-open latency\"\n    x-axis [\"1k lines\", \"3k lines\", \"6k lines\", \"10k lines\", \"15k lines\"]\n    y-axis \"milliseconds\" 0 --> 800\n    bar \"cold\" [90, 170, 290, 460, 680]\n    line \"warm\" [55, 90, 145, 240, 360]",
+      "language": "mermaid",
+      "width": 700.0,
+      "height": 500.0,
+      "svg": "/mdvu/assets/diagrams/D020.svg",
+      "sourceSha256": "8706b1c2610e8e75ac7b9b1c24344949a65db0f0cab08241ff3e81a471a389d0",
+      "nativeSvgSha256": "b7ef26f2cbad45f20064454b13ec4c0a1b25ee15ba24d3f53dad4e2486473d73",
+      "svgSha256": "b7ef26f2cbad45f20064454b13ec4c0a1b25ee15ba24d3f53dad4e2486473d73"
+    },
+    {
+      "id": "D021",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Radar chart",
+        "ru": "Лепестковая диаграмма"
+      },
+      "source": "radar-beta\n    title Viewer validation coverage\n    axis md[\"Markdown\"], mm[\"Mermaid\"], uc[\"Unicode\"], nav[\"Navigation\"], code[\"Code\"], rtl[\"RTL\"]\n    curve light[\"Light fixture\"]{90, 90, 85, 90, 85, 80}\n    curve smoke[\"Tiny smoke test\"]{55, 35, 30, 50, 35, 15}\n    min 0\n    max 100\n    ticks 5",
+      "language": "mermaid",
+      "width": 700.0,
+      "height": 700.0,
+      "svg": "/mdvu/assets/diagrams/D021.svg",
+      "sourceSha256": "d0778cc86aa5fc1b073d0b7f3baaf2a281ba01742717597f118b3bfebae95986",
+      "nativeSvgSha256": "ba65b6374bfec0f1201fde3e52efa16b2ad0a50e91af8530be3b43375c4a40b1",
+      "svgSha256": "ba65b6374bfec0f1201fde3e52efa16b2ad0a50e91af8530be3b43375c4a40b1"
+    },
+    {
+      "id": "D022",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Timeline",
+        "ru": "Временная шкала"
+      },
+      "source": "timeline\n    title GKDP capability roadmap\n    2026 Q3 : Stable Markdown viewer\n            : Mermaid baseline coverage\n    2026 Q4 : Offline collections\n            : Improved accessibility\n    2027 Q1 : Cross-document references\n            : Search ranking improvements\n    2027 Q2 : Policy-aware collections\n            : Localization workflow automation",
+      "language": "mermaid",
+      "width": 1190.0,
+      "height": 586.4155883789062,
+      "svg": "/mdvu/assets/diagrams/D022.svg",
+      "sourceSha256": "c7de51c9f762ad41748c50949cd2a0a3e83c0f483ce2fda34e2f034e0a13582c",
+      "nativeSvgSha256": "e34dc2973c768dc185124a6e6efcb513ad459805342b059d67f5c6400a932821",
+      "svgSha256": "e34dc2973c768dc185124a6e6efcb513ad459805342b059d67f5c6400a932821"
+    },
+    {
+      "id": "D023",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Kanban board",
+        "ru": "Канбан-доска"
+      },
+      "source": "kanban\n  Backlog\n    task1[Cross-document backlinks]\n    task2[Additional locale QA]\n  In Progress\n    task3[Offline cache improvements]\n  Review\n    task4[Accessibility audit]\n  Done\n    task5[Immutable release manifest]\n    task6[Mermaid rendering bridge]",
+      "language": "mermaid",
+      "width": 835.0,
+      "height": 196.0,
+      "svg": "/mdvu/assets/diagrams/D023.svg",
+      "sourceSha256": "772fa18689d8de5e447726b91fb1f6f9196a38d5dfc064caca7eeafd22616b0c",
+      "nativeSvgSha256": "ae6080645d53e94de424f8146473796f87a211e0ffde63ec93e69dcdedd798a9",
+      "svgSha256": "ae6080645d53e94de424f8146473796f87a211e0ffde63ec93e69dcdedd798a9"
+    },
+    {
+      "id": "D024",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Mind map",
+        "ru": "Карта мыслей"
+      },
+      "source": "mindmap\n  root((Knowledge Platform))\n    Authoring\n      Markdown\n      Mermaid\n      Reviews\n    Publication\n      Validation\n      Versioning\n      Indexing\n    Consumption\n      Navigation\n      Search\n      Offline cache\n    Operations\n      Metrics\n      Logs\n      Recovery",
+      "language": "mermaid",
+      "width": 765.3013916015625,
+      "height": 475.02496337890625,
+      "svg": "/mdvu/assets/diagrams/D024.svg",
+      "sourceSha256": "edccde3942933fb3db71c92f445127a0925b2719f51f83a14e49f13fd41a6cc5",
+      "nativeSvgSha256": "d30816156fb20634a131c18db52d82fe8042d4471643ac5f9bfe6f97ad839d67",
+      "svgSha256": "d30816156fb20634a131c18db52d82fe8042d4471643ac5f9bfe6f97ad839d67"
+    },
+    {
+      "id": "D025",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Treemap",
+        "ru": "Древовидная карта"
+      },
+      "source": "treemap-beta\n    \"Knowledge Platform\"\n      \"Authoring\"\n        \"Markdown\": 25\n        \"Review\": 10\n      \"Publication\"\n        \"Validation\": 20\n        \"Indexing\": 15\n      \"Consumption\"\n        \"Viewer\": 20\n        \"Search\": 10",
+      "language": "mermaid",
+      "width": 996.0,
+      "height": 371.0,
+      "svg": "/mdvu/assets/diagrams/D025.svg",
+      "sourceSha256": "012c7fec0752760f002fe48041a64bceb77a3cb13cc3fe443d371efac8d08c7f",
+      "nativeSvgSha256": "515614c03144d6c1798c7f75d0d4ca5528f5fc05ce6507bc9b6bf43a98ea3fb3",
+      "svgSha256": "515614c03144d6c1798c7f75d0d4ca5528f5fc05ce6507bc9b6bf43a98ea3fb3"
+    },
+    {
+      "id": "D027",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Class diagram",
+        "ru": "Диаграмма классов"
+      },
+      "source": "classDiagram\n    class Document {\n      +String id\n      +String title\n      +String locale\n      +List~Block~ blocks\n      +render()\n    }\n    class Block {\n      <<interface>>\n      +render()\n    }\n    class MarkdownBlock\n    class MermaidBlock {\n      +String source\n      +renderSvg()\n    }\n    Document \"1\" *-- \"1..*\" Block\n    Block <|.. MarkdownBlock\n    Block <|.. MermaidBlock",
+      "language": "mermaid",
+      "width": 374.3828125,
+      "height": 659.0,
+      "svg": "/mdvu/assets/diagrams/D027.svg",
+      "sourceSha256": "f86adf3c638018ee1bbfad4b55b2c7d4a55cf0397601a62a7a4568d1639fbb49",
+      "nativeSvgSha256": "97434ba180cc829927d48c7c61aa3899cb1906bd3babebcd6fdbc2a0b940a78c",
+      "svgSha256": "97434ba180cc829927d48c7c61aa3899cb1906bd3babebcd6fdbc2a0b940a78c"
+    },
+    {
+      "id": "D028",
+      "engine": "Mermaid",
+      "title": {
+        "en": "User journey",
+        "ru": "Путь пользователя"
+      },
+      "source": "journey\n    title Reader opens a newly published handbook\n    section Discover\n      Search topic: 4: Reader\n      Review result list: 4: Reader\n    section Read\n      Open document: 5: Reader\n      Navigate headings: 5: Reader\n      Inspect diagram: 4: Reader\n    section Reuse\n      Copy link: 5: Reader\n      Save offline: 4: Reader",
+      "language": "mermaid",
+      "width": 1700.0,
+      "height": 540.0,
+      "svg": "/mdvu/assets/diagrams/D028.svg",
+      "sourceSha256": "30a92deab1103bca822e69d2a789c41cf09f995db4b706f6d0ac6e654b4b6aa6",
+      "nativeSvgSha256": "26db0bc1a9726336114d7fcbf8c25b809bc5069710bc75591df08c9361cccfe7",
+      "svgSha256": "df8b2d5923bf04a9e20b6b15db4ea12c26b434e94d70bf5a0f6c9ea906242185"
+    },
+    {
+      "id": "D029",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Pie chart",
+        "ru": "Круговая диаграмма"
+      },
+      "source": "pie showData title Example document block mix\n    \"Prose\" : 55\n    \"Tables and lists\" : 15\n    \"Code\" : 12\n    \"Mermaid\" : 18",
+      "language": "mermaid",
+      "width": 665.1875,
+      "height": 450.0,
+      "svg": "/mdvu/assets/diagrams/D029.svg",
+      "sourceSha256": "5978bd4c159c9ede1c7871b830c2efbbb55ac77d17867a8bd853b4b48481d01c",
+      "nativeSvgSha256": "38a516553dc722a5cf712f94e8713c7dff603f695b354baf4b058127a481453e",
+      "svgSha256": "38a516553dc722a5cf712f94e8713c7dff603f695b354baf4b058127a481453e"
+    },
+    {
+      "id": "D030",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Block diagram",
+        "ru": "Диаграмма блоков"
+      },
+      "source": "block-beta\n    columns 4\n    A[\"Source\"] B(\"Parser\") C((\"Renderer\")) D[(\"Cache\")]\n    A --> B\n    B --> C\n    C --> D",
+      "language": "mermaid",
+      "width": 353.5625,
+      "height": 87.23062896728516,
+      "svg": "/mdvu/assets/diagrams/D030.svg",
+      "sourceSha256": "5a07f02d95b378f54e914748fd7c2ff2df3601b4fadc7dbe01dc10ed66209d3e",
+      "nativeSvgSha256": "c14d65e69d622865b4a7605643f3909dc9fc2f69a0a730f2ec0e0f631878443b",
+      "svgSha256": "c14d65e69d622865b4a7605643f3909dc9fc2f69a0a730f2ec0e0f631878443b"
+    },
+    {
+      "id": "D031",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Packet layout",
+        "ru": "Структура пакета"
+      },
+      "source": "packet\n    title Simplified content envelope\n    0-7: \"Version\"\n    8-15: \"Flags\"\n    16-31: \"Header length\"\n    32-63: \"Document ID hash\"\n    64-95: \"Content length\"\n    96-127: \"Checksum\"",
+      "language": "mermaid",
+      "width": 1026.0,
+      "height": 235.0,
+      "svg": "/mdvu/assets/diagrams/D031.svg",
+      "sourceSha256": "3b75afe105601e7562354ceb6f6d3bd486617d705d2f2b26a2055dacbe35667c",
+      "nativeSvgSha256": "16ebf53dd15943243e626e0df5dd7158de01e976aa6761ae61c54b3916102d65",
+      "svgSha256": "16ebf53dd15943243e626e0df5dd7158de01e976aa6761ae61c54b3916102d65"
+    },
+    {
+      "id": "D032",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Event modeling",
+        "ru": "Моделирование событий"
+      },
+      "source": "eventmodeling\n    tf 01 ui Editor\n    tf 02 cmd PublishDocument\n    tf 03 evt DocumentPublished\n    tf 04 rmo PublishedDocument\n    tf 05 ui Viewer",
+      "language": "mermaid",
+      "width": 1092.0,
+      "height": 470.0,
+      "svg": "/mdvu/assets/diagrams/D032.svg",
+      "sourceSha256": "90fe8a8856e37349e14d566b70a3ebdcac5bc3cec8b36c0310974f15d1a56370",
+      "nativeSvgSha256": "03c29e0217bd8bd3222bc99da2ee83e5652d10ed2e7164d1c369617e2a277eee",
+      "svgSha256": "d0e52f20adc512ef7aaf0675d5569197313785459512368d7fbc8f2690aba46b"
+    },
+    {
+      "id": "D033",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Tree view",
+        "ru": "Дерево"
+      },
+      "source": "treeView-beta\n    ├── docs/\n    │   ├── architecture.md\n    │   ├── security.md\n    │   └── operations.md\n    ├── diagrams/\n    │   └── platform.mmd\n    ├── assets/\n    │   └── logo.svg\n    └── README.md",
+      "language": "mermaid",
+      "width": 156.953125,
+      "height": 285.9375,
+      "svg": "/mdvu/assets/diagrams/D033.svg",
+      "sourceSha256": "fde21f34a96db39b389ddec7ef727f328614e5cb860ef5f6f0605aa311a3703b",
+      "nativeSvgSha256": "55f28a04cdbf46f495b73ea86d717bddf08b5723423f5a9cbe82e935b2e62e46",
+      "svgSha256": "55f28a04cdbf46f495b73ea86d717bddf08b5723423f5a9cbe82e935b2e62e46"
+    },
+    {
+      "id": "D034",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Venn diagram",
+        "ru": "Диаграмма Венна"
+      },
+      "source": "venn-beta\n    title \"Viewer compatibility\"\n    set Markdown[\"Markdown\"]:80\n    set Mermaid[\"Mermaid\"]:70\n    set Unicode[\"Unicode\"]:90\n    union Markdown,Mermaid[\"Fenced diagrams\"]:25\n    union Mermaid,Unicode[\"Unicode labels\"]:20\n    union Markdown,Unicode[\"Multilingual prose\"]:35\n    union Markdown,Mermaid,Unicode[\"Production document\"]:15",
+      "language": "mermaid",
+      "width": 800.0,
+      "height": 450.0,
+      "svg": "/mdvu/assets/diagrams/D034.svg",
+      "sourceSha256": "6ed8559f37bb1cb518d216a895f1088c16ffd6bf60d628d49a8020ebd74a010f",
+      "nativeSvgSha256": "50e112ca0dc002ce166857014fc7a330de200e26a49acbda6e72631cfee50e9e",
+      "svgSha256": "50e112ca0dc002ce166857014fc7a330de200e26a49acbda6e72631cfee50e9e"
+    },
+    {
+      "id": "D035",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Wardley map",
+        "ru": "Карта Уордли"
+      },
+      "source": "wardley-beta\n    title Knowledge Delivery Stack\n    size [900, 520]\n    evolution Genesis@0.25 -> Custom@0.5 -> Product@0.75 -> Commodity@1.0\n    anchor Reader [0.95, 0.90]\n    component \"Viewer\" [0.80, 0.65] (build)\n    component \"Markdown parser\" [0.62, 0.85] (buy)\n    component \"Mermaid renderer\" [0.55, 0.76] (buy)\n    component \"Unicode fonts\" [0.35, 0.95] (market)\n    Reader -> \"Viewer\"\n    \"Viewer\" -> \"Markdown parser\"\n    \"Viewer\" -> \"Mermaid renderer\"\n    \"Mermaid renderer\" -> \"Unicode fonts\"",
+      "language": "mermaid",
+      "width": 900.0,
+      "height": 520.0,
+      "svg": "/mdvu/assets/diagrams/D035.svg",
+      "sourceSha256": "07105ee8fbea2160d88e5ca156932e268b099c17b4881db4c3ddc8a4aa80a7a8",
+      "nativeSvgSha256": "75b68d3a073afeb2dca3f4849a227b81ac56f6a3bbe5c72448ee4e948a2b2750",
+      "svgSha256": "75b68d3a073afeb2dca3f4849a227b81ac56f6a3bbe5c72448ee4e948a2b2750"
+    },
+    {
+      "id": "D036",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Cynefin framework",
+        "ru": "Модель Cynefin"
+      },
+      "source": "cynefin-beta\n    title Documentation Platform Problems\n    complex\n      \"Mixed bidi rendering\"\n      \"Unexpected content interaction\"\n    complicated\n      \"SVG performance profiling\"\n      \"Search ranking tuning\"\n    clear\n      \"Broken relative link\"\n      \"Missing asset\"\n    chaotic\n      \"Renderer process crash\"\n    confusion\n      \"Unclassified failure\"",
+      "language": "mermaid",
+      "width": 880.0,
+      "height": 680.0,
+      "svg": "/mdvu/assets/diagrams/D036.svg",
+      "sourceSha256": "28201ca56d8a68a44b1240fcafe25abf3e0554df396e1df0e35f4d0d9d5abc2b",
+      "nativeSvgSha256": "e43f8c9be450c5c6206c6f4e5b486419e4946fc4e35b1fd11bfd3237c813904b",
+      "svgSha256": "e43f8c9be450c5c6206c6f4e5b486419e4946fc4e35b1fd11bfd3237c813904b"
+    },
+    {
+      "id": "D038",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Sequence diagram",
+        "ru": "Диаграмма последовательности"
+      },
+      "source": "@startuml\ntitle Publication sequence — Русский / 中文 / العربية 🚀\nautonumber\nactor Reader\nparticipant Viewer\nparticipant \"Knowledge API\" as API\ndatabase Cache\nReader -> Viewer : Open document\nactivate Viewer\nViewer -> API : GET /document\nactivate API\nalt cached\n  API -> Cache : lookup(id)\n  Cache --> API : Markdown\nelse not cached\n  API -> API : load immutable release\nend\nAPI --> Viewer : UTF-8 Markdown\nViewer --> Reader : Rendered document ✅\ndeactivate API\ndeactivate Viewer\nnote over Viewer,API\n  Unicode: ÅÄÖ · Русский · 中文 · العربية · 日本語\nend note\n@enduml",
+      "language": "plantuml",
+      "width": 550.0,
+      "height": 532.0,
+      "svg": "/mdvu/assets/diagrams/D038.svg",
+      "sourceSha256": "060703e9a76059b458d23b97a7bf7604f90d0c6bc74c53a3fe8f61902bdf98e4",
+      "nativeSvgSha256": "77902250500cc20e6b942269b92baad3a2da4aa0f487cfc43d46b6e5dae9c091",
+      "svgSha256": "77902250500cc20e6b942269b92baad3a2da4aa0f487cfc43d46b6e5dae9c091"
+    },
+    {
+      "id": "D039",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Use cases",
+        "ru": "Варианты использования"
+      },
+      "source": "@startuml\nleft to right direction\nactor Reader\nactor Author\nrectangle \"mdvu\" {\n  usecase \"Open Markdown\" as UC1\n  usecase \"Navigate headings\" as UC2\n  usecase \"Render diagrams\" as UC3\n  usecase \"Search document\" as UC4\n}\nReader --> UC1\nReader --> UC2\nReader --> UC4\nAuthor --> UC1\nUC1 .> UC3 : <<include>>\n@enduml",
+      "language": "plantuml",
+      "width": 342.0,
+      "height": 350.0,
+      "svg": "/mdvu/assets/diagrams/D039.svg",
+      "sourceSha256": "d35799f61cf1bffccf5524eb2b1bbb45ba7e81b9d0389abea424a2d703847992",
+      "nativeSvgSha256": "beaedca4f2c58e2bd831eaaf99eb2ad77c31c625e311a203187eb4b91a433712",
+      "svgSha256": "beaedca4f2c58e2bd831eaaf99eb2ad77c31c625e311a203187eb4b91a433712"
+    },
+    {
+      "id": "D040",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Class diagram",
+        "ru": "Диаграмма классов"
+      },
+      "source": "@startuml\ninterface Renderer<T> {\n  +render(source: T): String\n}\nabstract class Block {\n  +language: String\n}\nclass MermaidBlock\nclass PlantUMLBlock\nclass Document {\n  +id: String\n  +title: String\n}\nRenderer <|.. MermaidBlock\nRenderer <|.. PlantUMLBlock\nBlock <|-- MermaidBlock\nBlock <|-- PlantUMLBlock\nDocument \"1\" *-- \"1..*\" Block\n@enduml",
+      "language": "plantuml",
+      "width": 358.0,
+      "height": 329.0,
+      "svg": "/mdvu/assets/diagrams/D040.svg",
+      "sourceSha256": "eda18a6c48f716fcb5447a4a04a55a4d47a9dcbf8a28e13368ac642c4c9946fb",
+      "nativeSvgSha256": "243ad73a078936a846e79a324a0f86ab59a8ef2554be4748edad57675182aee9",
+      "svgSha256": "243ad73a078936a846e79a324a0f86ab59a8ef2554be4748edad57675182aee9"
+    },
+    {
+      "id": "D041",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Object diagram",
+        "ru": "Диаграмма объектов"
+      },
+      "source": "@startuml\nobject document {\n  id = \"architecture/overview\"\n  locale = \"fi-FI\"\n  title = \"Arkkitehtuuri\"\n}\nobject release {\n  version = \"2026.09\"\n  immutable = true\n}\nobject manifest {\n  encoding = \"UTF-8\"\n  diagrams = \"Mermaid + PlantUML\"\n}\ndocument --> release\nrelease --> manifest\n@enduml",
+      "language": "plantuml",
+      "width": 244.0,
+      "height": 333.0,
+      "svg": "/mdvu/assets/diagrams/D041.svg",
+      "sourceSha256": "8a7a09ed051cc3e2eb38a80e0baebb942138430d6bb9eb5d4f0cff129c2619ea",
+      "nativeSvgSha256": "b7bc4bc3e71a44aa84f49856ff0ffb35898a22db57388560aab9bee1be9b3bff",
+      "svgSha256": "b7bc4bc3e71a44aa84f49856ff0ffb35898a22db57388560aab9bee1be9b3bff"
+    },
+    {
+      "id": "D042",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Activity · current syntax",
+        "ru": "Активности · современный синтаксис"
+      },
+      "source": "@startuml\nstart\n:Open Markdown file;\nif (front matter present?) then (yes)\n  :Parse metadata;\nendif\n:Parse Markdown blocks;\nif (diagram block?) then (yes)\n  :Dispatch to diagram renderer;\nelse (no)\n  :Render native Markdown;\nendif\n:Build navigation index;\nstop\n@enduml",
+      "language": "plantuml",
+      "width": 364.0,
+      "height": 503.0,
+      "svg": "/mdvu/assets/diagrams/D042.svg",
+      "sourceSha256": "a899ab3a5ea1a79de96ed7484f4b68cf33724e6ea3a186735d3a341459a0793b",
+      "nativeSvgSha256": "e65f540345e110b1eef2cb4e94df81252f6ec7c6401cc15677211194b18357d1",
+      "svgSha256": "e65f540345e110b1eef2cb4e94df81252f6ec7c6401cc15677211194b18357d1"
+    },
+    {
+      "id": "D043",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Activity · legacy syntax",
+        "ru": "Активности · классический синтаксис"
+      },
+      "source": "@startuml\n(*) --> \"Open document\"\n--> \"Parse Markdown\"\nif \"Has diagrams?\" then\n  -->[yes] \"Render diagrams\"\n  --> \"Display\"\nelse\n  ->[no] \"Display\"\nendif\n--> (*)\n@enduml",
+      "language": "puml",
+      "width": 231.0,
+      "height": 476.0,
+      "svg": "/mdvu/assets/diagrams/D043.svg",
+      "sourceSha256": "59a06806f53acb61d847d3e8048f352b7baa9d51c2777fd2a75e98e0111c8e0c",
+      "nativeSvgSha256": "bdfb92b8a63efa4318ffdcb26a23d136a1726ac8509aa704a0735f09e0a7ed0d",
+      "svgSha256": "bdfb92b8a63efa4318ffdcb26a23d136a1726ac8509aa704a0735f09e0a7ed0d"
+    },
+    {
+      "id": "D044",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Component diagram",
+        "ru": "Диаграмма компонентов"
+      },
+      "source": "@startuml\npackage \"Viewer\" {\n  [Document Loader] as Loader\n  [Markdown Parser] as Parser\n  [Navigation Index] as Nav\n  [Diagram Router] as Router\n}\ncomponent \"Mermaid 11.17.2\" as Mermaid\ncomponent \"PlantUML 1.2026.7\" as PUML\nLoader --> Parser\nParser --> Nav\nParser --> Router\nRouter --> Mermaid\nRouter --> PUML\n@enduml",
+      "language": "plantuml",
+      "width": 452.0,
+      "height": 414.0,
+      "svg": "/mdvu/assets/diagrams/D044.svg",
+      "sourceSha256": "3b0c6d072be42b368c9a84d231015f7834f3c99d1e3fff2ad9e78fbd8d92d3e7",
+      "nativeSvgSha256": "ca3960ad25ed5bd86b852ba9b72e04cd33a0eb14d0ad44759582b6d8ed32d3c0",
+      "svgSha256": "ca3960ad25ed5bd86b852ba9b72e04cd33a0eb14d0ad44759582b6d8ed32d3c0"
+    },
+    {
+      "id": "D045",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Deployment diagram",
+        "ru": "Диаграмма развёртывания"
+      },
+      "source": "@startuml\nnode \"Desktop\" as desktop {\n  artifact \"test-complete.md\" as doc\n  component \"mdvu\" as viewer\n}\nnode \"Diagram Runtime\" as runtime {\n  component \"Mermaid\" as mermaid\n  component \"PlantUML\" as plantuml\n}\ndatabase \"Local cache\" as cache\ndoc --> viewer\nviewer --> mermaid\nviewer --> plantuml\nviewer --> cache\n@enduml",
+      "language": "plantuml",
+      "width": 403.0,
+      "height": 353.0,
+      "svg": "/mdvu/assets/diagrams/D045.svg",
+      "sourceSha256": "6a8169beb9ab019e4ea87c0c65c0a866922a9757dda3af015f8057d08ce4eb68",
+      "nativeSvgSha256": "488d87176017b9891585dad4668ffcb4f30b13685e6736962a5d64adeb023fd2",
+      "svgSha256": "488d87176017b9891585dad4668ffcb4f30b13685e6736962a5d64adeb023fd2"
+    },
+    {
+      "id": "D046",
+      "engine": "PlantUML",
+      "title": {
+        "en": "State diagram",
+        "ru": "Диаграмма состояний"
+      },
+      "source": "@startuml\n[*] --> Loading\nLoading --> Ready : parsed\nLoading --> Error : invalid input\nReady --> Rendering : diagram pending\nRendering --> Ready : diagram complete\nRendering --> Error : renderer failure\nError --> Ready : recoverable block skipped\nReady --> Closed\nClosed --> [*]\n@enduml",
+      "language": "plantuml",
+      "width": 622.0,
+      "height": 526.0,
+      "svg": "/mdvu/assets/diagrams/D046.svg",
+      "sourceSha256": "3d0227c78c1c5a1a651edb887237f1c50cc60c57cffd20d9236fc44c51764a8b",
+      "nativeSvgSha256": "a64527ca65bd729abd60a8d60a8c04aafdc344a85646e3b033f138b83ddf791f",
+      "svgSha256": "a64527ca65bd729abd60a8d60a8c04aafdc344a85646e3b033f138b83ddf791f"
+    },
+    {
+      "id": "D047",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Timing diagram",
+        "ru": "Временная диаграмма"
+      },
+      "source": "@startuml\nrobust \"Viewer\" as V\nconcise \"Reader\" as R\n@0\nR is Idle\nV is Loading\n@100\nR is Waiting\nV is Parsing\n@220\nV is Rendering\n@420\nV is Ready\nR is Reading\n@700\nR is Idle\n@enduml",
+      "language": "plantuml",
+      "width": 1886.0,
+      "height": 194.0,
+      "svg": "/mdvu/assets/diagrams/D047.svg",
+      "sourceSha256": "528f8c85414761522523f19685e58eccf07445b44f8f43dbf55d9c37ee3fec55",
+      "nativeSvgSha256": "28b1714ca3568709f717180ee728ed3d7759fe1ee970f3ac709b4b49a4d8ea4b",
+      "svgSha256": "28b1714ca3568709f717180ee728ed3d7759fe1ee970f3ac709b4b49a4d8ea4b"
+    },
+    {
+      "id": "D048",
+      "engine": "PlantUML",
+      "title": {
+        "en": "JSON data",
+        "ru": "Данные JSON"
+      },
+      "source": "@startjson\n{\n  \"document\": {\n    \"id\": \"unicode-demo\",\n    \"title\": \"Русский / 中文 / العربية 🚀\",\n    \"locales\": [\"en\", \"fi\", \"ru\", \"zh-CN\", \"ar\"],\n    \"valid\": true\n  }\n}\n@endjson",
+      "language": "plantuml",
+      "width": 452.0,
+      "height": 102.0,
+      "svg": "/mdvu/assets/diagrams/D048.svg",
+      "sourceSha256": "0b60e044b8aa20a5ef6234472d160cec96f6ca5a814175eb4e457d95edc015cd",
+      "nativeSvgSha256": "8c95ff3d7cb5af23a766dfc0ab03c4dcb4628c8f940108f486928a512898a39e",
+      "svgSha256": "8c95ff3d7cb5af23a766dfc0ab03c4dcb4628c8f940108f486928a512898a39e"
+    },
+    {
+      "id": "D049",
+      "engine": "PlantUML",
+      "title": {
+        "en": "YAML data",
+        "ru": "Данные YAML"
+      },
+      "source": "@startyaml\ndocument:\n  id: unicode-demo\n  title: \"Åä Русский 中文 العربية 🚀\"\n  locales:\n    - en\n    - fi\n    - ru\n    - zh-CN\n    - ar\n  valid: true\n@endyaml",
+      "language": "plantuml",
+      "width": 457.0,
+      "height": 102.0,
+      "svg": "/mdvu/assets/diagrams/D049.svg",
+      "sourceSha256": "31aa8c3cf8271b660f42c2a36e30c2d79bcfe337b0884375b5db8c970530822c",
+      "nativeSvgSha256": "c8bdcb024fbf00326fc8b2d4d68be6223a419d177f325ba9acb6a5ae5716fe78",
+      "svgSha256": "c8bdcb024fbf00326fc8b2d4d68be6223a419d177f325ba9acb6a5ae5716fe78"
+    },
+    {
+      "id": "D050",
+      "engine": "PlantUML",
+      "title": {
+        "en": "EBNF grammar",
+        "ru": "Грамматика EBNF"
+      },
+      "source": "@startebnf\ntitle Compact Markdown heading grammar\nheading = atx_heading | setext_heading;\natx_heading = \"#\", {\"#\"}, \" \", text;\nsetext_heading = text, (\"=\" | \"-\");\ntext = ? Unicode text ?;\n@endebnf",
+      "language": "plantuml",
+      "width": 281.0,
+      "height": 413.0,
+      "svg": "/mdvu/assets/diagrams/D050.svg",
+      "sourceSha256": "268f3a767d0128b5adfb4541f504292ce05112e9aff0ae37b6f4f49a3903b190",
+      "nativeSvgSha256": "734c89c30dc09c933bb67b0f8c8a58fe5bd3b46e0bd6464bdd1cbb1b6c628c77",
+      "svgSha256": "734c89c30dc09c933bb67b0f8c8a58fe5bd3b46e0bd6464bdd1cbb1b6c628c77"
+    },
+    {
+      "id": "D051",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Regular expression",
+        "ru": "Регулярное выражение"
+      },
+      "source": "@startregex\n!option language en\n!option useDescriptiveNames true\n^(?<scheme>https?)://(?<host>[\\w.-]+)(?<path>/[^\\s]*)?$\n@endregex",
+      "language": "plantuml",
+      "width": 596.0,
+      "height": 138.0,
+      "svg": "/mdvu/assets/diagrams/D051.svg",
+      "sourceSha256": "892e100586e585c5bcba5e6c3fbcaa1880c44adbdd7546313af7235efdd3c0e3",
+      "nativeSvgSha256": "764113819e6ef0e39b1cb35a8e7c942eba9485e25b4914d78831df6b3b0d1366",
+      "svgSha256": "764113819e6ef0e39b1cb35a8e7c942eba9485e25b4914d78831df6b3b0d1366"
+    },
+    {
+      "id": "D052",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Network · nwdiag",
+        "ru": "Сеть · nwdiag"
+      },
+      "source": "@startnwdiag\nnetwork dmz {\n  address = \"203.0.113.0/24\"\n  gateway [address = \"203.0.113.1\"];\n  viewer [address = \"203.0.113.20\"];\n}\nnetwork internal {\n  address = \"10.0.0.0/24\"\n  viewer [address = \"10.0.0.20\"];\n  cache [address = \"10.0.0.30\", shape = database];\n}\n@endnwdiag",
+      "language": "plantuml",
+      "width": 275.0,
+      "height": 278.0,
+      "svg": "/mdvu/assets/diagrams/D052.svg",
+      "sourceSha256": "7ace21c3f060084c6a6f4510959a27e1c48933e25890f4a56d78d607834eceae",
+      "nativeSvgSha256": "b1795704cc1f83c4536214538c9bc2c03c0320666c62e983f239ced5ef798fa3",
+      "svgSha256": "b1795704cc1f83c4536214538c9bc2c03c0320666c62e983f239ced5ef798fa3"
+    },
+    {
+      "id": "D053",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Salt wireframe",
+        "ru": "Макет интерфейса Salt"
+      },
+      "source": "@startsalt\n{\n  {+ mdvu Viewer\n    File | \"test-complete.md\"\n    Search | \"Unicode Mermaid PlantUML\"\n    [Open] | [Reload]\n    [X] Table of contents\n    [X] Diagram rendering\n    Locale | ^English^Русский^中文^العربية^\n  }\n}\n@endsalt",
+      "language": "plantuml",
+      "width": 324.0,
+      "height": 169.0,
+      "svg": "/mdvu/assets/diagrams/D053.svg",
+      "sourceSha256": "836129217350f36962264015fc667a5da8a74fb3d5322171bf9094e15cabb069",
+      "nativeSvgSha256": "e083c0f542397a8e021bef8a287ffa65c9827306d406b52df88cf02c08b5717a",
+      "svgSha256": "e083c0f542397a8e021bef8a287ffa65c9827306d406b52df88cf02c08b5717a"
+    },
+    {
+      "id": "D054",
+      "engine": "PlantUML",
+      "title": {
+        "en": "ArchiMate shapes",
+        "ru": "Фигуры ArchiMate"
+      },
+      "source": "@startuml\narchimate #Business \"Reader\" as reader <<business-actor>>\narchimate #Application \"mdvu\" as app <<application-component>>\narchimate #Technology \"Diagram Runtime\" as runtime <<technology-device>>\nreader --> app : reads\napp --> runtime : renders\n@enduml",
+      "language": "plantuml",
+      "width": 194.0,
+      "height": 326.0,
+      "svg": "/mdvu/assets/diagrams/D054.svg",
+      "sourceSha256": "d0346f832dc447790b8d0addd19ef51d794e57488c6c544af7261a012f5f03e9",
+      "nativeSvgSha256": "d66c416b86a9b7660f8aa0b73f775ca6f853321e8ae91adb9a58b6518096601f",
+      "svgSha256": "d66c416b86a9b7660f8aa0b73f775ca6f853321e8ae91adb9a58b6518096601f"
+    },
+    {
+      "id": "D055",
+      "engine": "PlantUML",
+      "title": {
+        "en": "SDL shapes",
+        "ru": "Фигуры SDL"
+      },
+      "source": "@startuml\nstart\n:Receive Markdown; <<input>>\n:Parse document; <<procedure>>\n:Load renderer; <<load>>\n:Render output; <<task>>\n:Store cache; <<save>>\n:Display document; <<output>>\nstop\n@enduml",
+      "language": "plantuml",
+      "width": 168.0,
+      "height": 401.0,
+      "svg": "/mdvu/assets/diagrams/D055.svg",
+      "sourceSha256": "c5d6f4e932d7752fd1a2d6b106c57ffbf119685c398079092263a894f4117909",
+      "nativeSvgSha256": "8b6e4ebbd7da2bc6e29ed2248c94ce61e46c11719662909187496af7ed54dbff",
+      "svgSha256": "8b6e4ebbd7da2bc6e29ed2248c94ce61e46c11719662909187496af7ed54dbff"
+    },
+    {
+      "id": "D057",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Gantt chart",
+        "ru": "Диаграмма Ганта"
+      },
+      "source": "@startgantt\nProject starts the 2026-09-01\n[Fixture draft] lasts 2 days\n[Review] starts at [Fixture draft]'s end and lasts 2 days\n[Renderer validation] starts at [Review]'s end and lasts 2 days\n[Release] happens at [Renderer validation]'s end\n@endgantt",
+      "language": "plantuml",
+      "width": 334.0,
+      "height": 146.0,
+      "svg": "/mdvu/assets/diagrams/D057.svg",
+      "sourceSha256": "b8a9221dfbd61308b50e8c923ee998187ecdb3cd859ca9d747ca2c6b70896791",
+      "nativeSvgSha256": "f9c27a374a204572d00b853a2329d2f3c7c599165d494fa47a1663f0bbe5efcb",
+      "svgSha256": "f9c27a374a204572d00b853a2329d2f3c7c599165d494fa47a1663f0bbe5efcb"
+    },
+    {
+      "id": "D059",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Mind map",
+        "ru": "Карта мыслей"
+      },
+      "source": "@startmindmap\n* mdvu\n** Markdown\n*** Navigation\n*** Tables\n*** Unicode\n** Mermaid\n*** 11.17.2\n** PlantUML\n*** 1.2026.7\n** Languages\n*** Русский\n*** 中文\n*** العربية\n@endmindmap",
+      "language": "plantuml",
+      "width": 335.0,
+      "height": 449.0,
+      "svg": "/mdvu/assets/diagrams/D059.svg",
+      "sourceSha256": "dd3c68e981c6d6d823767b380176d8658a45e1d8e8a27019b19d0f918a77af25",
+      "nativeSvgSha256": "a89db156fd492b9512bb90b71cf6923631e743c91fa8c9628cda5a47a0c6d140",
+      "svgSha256": "a89db156fd492b9512bb90b71cf6923631e743c91fa8c9628cda5a47a0c6d140"
+    },
+    {
+      "id": "D060",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Work breakdown structure",
+        "ru": "Структура работ WBS"
+      },
+      "source": "@startwbs\n* Complete functional validation\n** Markdown\n*** Blocks\n*** Inline syntax\n*** Navigation\n** Diagrams\n*** Mermaid\n*** ZenUML\n*** PlantUML\n** Unicode\n*** LTR\n*** RTL\n*** CJK\n@endwbs",
+      "language": "plantuml",
+      "width": 398.0,
+      "height": 276.0,
+      "svg": "/mdvu/assets/diagrams/D060.svg",
+      "sourceSha256": "30d34657494c8aa77fe8cbb05bee12a9c153566637025cf743adabe9088eccdd",
+      "nativeSvgSha256": "f7dd19443b38f5fbfd4871a1d4e538cfef7fc7367744b71911a4443b71838c1e",
+      "svgSha256": "f7dd19443b38f5fbfd4871a1d4e538cfef7fc7367744b71911a4443b71838c1e"
+    },
+    {
+      "id": "D063",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Information engineering",
+        "ru": "Информационное моделирование"
+      },
+      "source": "@startuml\nentity DOCUMENT {\n  * id : UUID\n  --\n  * title : TEXT\n  locale : TEXT\n}\nentity RELEASE {\n  * id : UUID\n  --\n  * version : TEXT\n}\nDOCUMENT ||--o{ RELEASE : publishes\n@enduml",
+      "language": "plantuml",
+      "width": 135.0,
+      "height": 270.0,
+      "svg": "/mdvu/assets/diagrams/D063.svg",
+      "sourceSha256": "0d2ec3dc7b20a27705d320acd2bd4c2833dd652fe22c643ccf65d8aefd7ffe6d",
+      "nativeSvgSha256": "3197a27c8ab3f832688b10b5d7b6f15fa658b8d8dd7a8b494b42032297b9f011",
+      "svgSha256": "3197a27c8ab3f832688b10b5d7b6f15fa658b8d8dd7a8b494b42032297b9f011"
+    },
+    {
+      "id": "D065",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Chart",
+        "ru": "График"
+      },
+      "source": "@startchart\nh-axis [Markdown, Mermaid, PlantUML, Unicode]\nv-axis \"Coverage\" 0 --> 100\nbar \"Functional fixture\" [95, 100, 100, 95]\nline \"Smoke fixture\" [60, 35, 20, 45]\nlegend right\n@endchart",
+      "language": "plantuml",
+      "width": 634.0,
+      "height": 410.0,
+      "svg": "/mdvu/assets/diagrams/D065.svg",
+      "sourceSha256": "f9ff0dbe0ca3632362bbbb3045962f1664d9f3211a6606248ac5668b0a4b678b",
+      "nativeSvgSha256": "1350fbe16e0babcc0a57c2289010fc8ca9fcd01cedab064951017caea4786197",
+      "svgSha256": "1350fbe16e0babcc0a57c2289010fc8ca9fcd01cedab064951017caea4786197"
+    },
+    {
+      "id": "D075",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Use cases",
+        "ru": "Варианты использования"
+      },
+      "source": "usecase-beta\ndirection LR\nactor Customer(\"Customer\")\nsystemBoundary \"Order system\"\n  Checkout(\"Place order\")\nend\nCustomer --> Checkout",
+      "language": "mermaid",
+      "width": 378.6875,
+      "height": 180.5,
+      "svg": "/mdvu/assets/diagrams/D075.svg",
+      "sourceSha256": "00339c496aec5a45f8f5caf77b60b01088186cac9d7fdf4773d046e5d289bc46",
+      "nativeSvgSha256": "2b6a9b5a856feebb1c4c5be2f1a359be3dbfb87cc8b669c50f5b6b0444309444",
+      "svgSha256": "2b6a9b5a856feebb1c4c5be2f1a359be3dbfb87cc8b669c50f5b6b0444309444"
+    },
+    {
+      "id": "D076",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Agent flow",
+        "ru": "Поток агентов"
+      },
+      "source": "agentflow-beta TB\n  flow reviewer[\"Review Agent\"]\n    changes[\"Gather changes\"]@{ shape: input }\n    analyse[\"Analyse diff\"]@{ shape: task }\n    lint[\"run_linter\"]@{ shape: tool }\n    ok[\"Clean?\"]@{ shape: decision }\n\n    changes --> analyse --> lint --> ok\n  end",
+      "language": "mermaid",
+      "width": 253.0,
+      "height": 466.0,
+      "svg": "/mdvu/assets/diagrams/D076.svg",
+      "sourceSha256": "55831a75f37d1eeb46ac1403b17e96c8e0a95da90a4664088cc243842e8e29ef",
+      "nativeSvgSha256": "7aaab2bfa47faf0552facbf449956e47bd07e2a2106c14a51e6c5998cf504528",
+      "svgSha256": "7aaab2bfa47faf0552facbf449956e47bd07e2a2106c14a51e6c5998cf504528"
+    },
+    {
+      "id": "D077",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Railroad diagram",
+        "ru": "Синтаксическая диаграмма"
+      },
+      "source": "railroad-beta\ntitle Expression Grammar\n\nexpression = sequence(\n    nonterminal(\"term\"),\n    zeroOrMore(sequence(\n        choice(terminal(\"+\"), terminal(\"-\")),\n        nonterminal(\"term\")\n    ))\n) ;\nterm = sequence(\n    nonterminal(\"factor\"),\n    zeroOrMore(sequence(\n        choice(terminal(\"*\"), terminal(\"/\")),\n        nonterminal(\"factor\")\n    ))\n) ;\nfactor = choice(\n    nonterminal(\"number\"),\n    sequence(terminal(\"(\"), nonterminal(\"expression\"), terminal(\")\"))\n) ;\nnumber = oneOrMore(nonterminal(\"digit\")) ;\ndigit = choice(terminal(\"0\"), terminal(\"1\"), terminal(\"2\"), terminal(\"3\"), terminal(\"4\"), terminal(\"5\"), terminal(\"6\"), terminal(\"7\"), terminal(\"8\"), terminal(\"9\")) ;",
+      "language": "mermaid",
+      "width": 401.203125,
+      "height": 1012.796875,
+      "svg": "/mdvu/assets/diagrams/D077.svg",
+      "sourceSha256": "013df6171827f1deac1fecbaa17447f1df6b96ef66498b21cbba0f998bbff825",
+      "nativeSvgSha256": "e0d455d607d931db21ad812e78b64b08014b7ec82ad4fa5f743ecccea1a1993a",
+      "svgSha256": "e0d455d607d931db21ad812e78b64b08014b7ec82ad4fa5f743ecccea1a1993a"
+    },
+    {
+      "id": "D078",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Railroad · EBNF",
+        "ru": "Синтаксическая диаграмма · EBNF"
+      },
+      "source": "railroad-ebnf-beta\ntitle \"Digit Definition\"\n\ndigit = \"0\" | \"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"7\" | \"8\" | \"9\" ;",
+      "language": "mermaid",
+      "width": 189.015625,
+      "height": 505.9375,
+      "svg": "/mdvu/assets/diagrams/D078.svg",
+      "sourceSha256": "7eaf506537b9c6a56fe02f6ee2a872d9a5d9411002460550d4fe42de71823405",
+      "nativeSvgSha256": "70969d3b3bd2d19b5e5f179e56204012346126f0a8942096d03b456bba8b967f",
+      "svgSha256": "70969d3b3bd2d19b5e5f179e56204012346126f0a8942096d03b456bba8b967f"
+    },
+    {
+      "id": "D079",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Railroad · ABNF",
+        "ru": "Синтаксическая диаграмма · ABNF"
+      },
+      "source": "railroad-abnf-beta\ntitle \"Email Address\"\n\naddress = local-part \"@\" domain ;\nlocal-part = 1*( ALPHA / DIGIT / \".\" / \"-\" ) ;\ndomain = label *( \".\" label ) ;\nlabel = 1*( ALPHA / DIGIT / \"-\" ) ;",
+      "language": "mermaid",
+      "width": 357.28125,
+      "height": 600.046875,
+      "svg": "/mdvu/assets/diagrams/D079.svg",
+      "sourceSha256": "41e29febcb6136f5d838a66449cb0fe3297408d67fe1778b413198efa182e724",
+      "nativeSvgSha256": "8dda76217a38f570a8aebed07262253a5b3789b36a0a24d8245833a6834c2db6",
+      "svgSha256": "8dda76217a38f570a8aebed07262253a5b3789b36a0a24d8245833a6834c2db6"
+    },
+    {
+      "id": "D080",
+      "engine": "Mermaid",
+      "title": {
+        "en": "Railroad · PEG",
+        "ru": "Синтаксическая диаграмма · PEG"
+      },
+      "source": "railroad-peg-beta\ntitle \"Calculator Grammar\"\n\nExpression <- Term ((\"+\" / \"-\") Term)* ;\nTerm <- Factor ((\"*\" / \"/\") Factor)* ;\nFactor <- Number / \"(\" Expression \")\" ;\nNumber <- Digit+ ;\nDigit <- \"0\" / \"1\" / \"2\" / \"3\" / \"4\" / \"5\" / \"6\" / \"7\" / \"8\" / \"9\" ;",
+      "language": "mermaid",
+      "width": 406.921875,
+      "height": 1012.796875,
+      "svg": "/mdvu/assets/diagrams/D080.svg",
+      "sourceSha256": "e825d5ab3c9b8fcf823583929f71237fb7f18d4ee348f648db686fe59dccd230",
+      "nativeSvgSha256": "ec9020cee5375d0f1de787d3ab57d30cbd27b737af06eccf8f99d2dae850fca5",
+      "svgSha256": "ec9020cee5375d0f1de787d3ab57d30cbd27b737af06eccf8f99d2dae850fca5"
+    },
+    {
+      "id": "D090",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Graphviz · DOT",
+        "ru": "Graphviz · DOT"
+      },
+      "source": "@startdot\ndigraph G {\n Reader -> Parser -> Renderer;\n}\n@enddot",
+      "language": "plantuml",
+      "width": 101.0,
+      "height": 188.0,
+      "svg": "/mdvu/assets/diagrams/D090.svg",
+      "sourceSha256": "f2f1291531d9d8100b1e4ba81da62de2aec521410fe90ac6545e65db80d2ead9",
+      "nativeSvgSha256": "af76145f76a32fa6df220c7766dccc3cc16df8800e463c7c9ba8185b5386ecc1",
+      "svgSha256": "af76145f76a32fa6df220c7766dccc3cc16df8800e463c7c9ba8185b5386ecc1"
+    },
+    {
+      "id": "D091",
+      "engine": "PlantUML",
+      "title": {
+        "en": "Packet layout",
+        "ru": "Структура пакета"
+      },
+      "source": "@startpacketdiag\npacketdiag {\n0-7: Source Port\n8-15: Destination Port\n16-31: Sequence Number\n}\n@endpacketdiag",
+      "language": "plantuml",
+      "width": 714.0,
+      "height": 121.0,
+      "svg": "/mdvu/assets/diagrams/D091.svg",
+      "sourceSha256": "fa4947adf130e16f4fcea9df07fabd20a41e58a86794995da91d7ce9b3b8e9bd",
+      "nativeSvgSha256": "279b550b7e5f03476f7e89254beb26744accb26c5ccd4d583d4393da75237b78",
+      "svgSha256": "279b550b7e5f03476f7e89254beb26744accb26c5ccd4d583d4393da75237b78"
+    },
+    {
+      "id": "D100",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Context",
+        "ru": "C4-PlantUML · Контекст"
+      },
+      "source": "@startuml\n!include <C4/C4_Context>\nPerson(user, \"Reader\")\nSystem(viewer, \"Viewer\")\nRel(user, viewer, \"Reads\")\n@enduml",
+      "language": "plantuml",
+      "width": 92.0,
+      "height": 248.0,
+      "svg": "/mdvu/assets/diagrams/D100.svg",
+      "sourceSha256": "e74763f48a0b7e7a289dac20d211d442e95a5f00142981a2425fa00a8b0777c6",
+      "nativeSvgSha256": "ed8e11f5d87f799c0d3a4d7e16d3bea45058b8a48d2e1e7145f9ba9a9367113f",
+      "svgSha256": "ed8e11f5d87f799c0d3a4d7e16d3bea45058b8a48d2e1e7145f9ba9a9367113f"
+    },
+    {
+      "id": "D101",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Landscape",
+        "ru": "C4-PlantUML · Ландшафт"
+      },
+      "source": "@startuml\n!include <C4/C4_Context>\nSystem(a, \"Viewer\")\nSystem_Ext(b, \"Repository\")\nRel(a, b, \"Reads\")\n@enduml",
+      "language": "plantuml",
+      "width": 138.0,
+      "height": 197.0,
+      "svg": "/mdvu/assets/diagrams/D101.svg",
+      "sourceSha256": "9f86672ecf56afcefa1c30afe58358b50ddd31b930479fe92b499c7bae8cad72",
+      "nativeSvgSha256": "88b7673631be5eade1b6068a65dbcdcdf3bb76d10c6894cf0e29475c0538f052",
+      "svgSha256": "88b7673631be5eade1b6068a65dbcdcdf3bb76d10c6894cf0e29475c0538f052"
+    },
+    {
+      "id": "D102",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Container",
+        "ru": "C4-PlantUML · Контейнеры"
+      },
+      "source": "@startuml\n!include <C4/C4_Container>\nContainer(a, \"App\", \"Native\")\nContainerDb(b, \"Cache\", \"Files\")\nRel(a, b, \"Reads\")\n@enduml",
+      "language": "plantuml",
+      "width": 111.0,
+      "height": 245.0,
+      "svg": "/mdvu/assets/diagrams/D102.svg",
+      "sourceSha256": "bdd04769f47f70e2db2bd2f2f081e29273602f6dc6fa57617abe347075bcbd9f",
+      "nativeSvgSha256": "75fa9ab948f6095d6b3c8e3e7b76731664c1744c508073130c4aa4e55ed8844e",
+      "svgSha256": "75fa9ab948f6095d6b3c8e3e7b76731664c1744c508073130c4aa4e55ed8844e"
+    },
+    {
+      "id": "D103",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Component",
+        "ru": "C4-PlantUML · Компоненты"
+      },
+      "source": "@startuml\n!include <C4/C4_Component>\nComponent(a, \"Parser\", \"Rust\")\nComponent(b, \"Renderer\", \"WebKit\")\nRel(a, b, \"HTML\")\n@enduml",
+      "language": "plantuml",
+      "width": 110.0,
+      "height": 225.0,
+      "svg": "/mdvu/assets/diagrams/D103.svg",
+      "sourceSha256": "5717dc40a3b0660c7756c42e7c3ed703def4a7b02a70b97685929eaf92eb2053",
+      "nativeSvgSha256": "b9824d5ee1dece2a0a50fe7f02cea2c4c1e59121ea5c9037df780a061ffa1f02",
+      "svgSha256": "b9824d5ee1dece2a0a50fe7f02cea2c4c1e59121ea5c9037df780a061ffa1f02"
+    },
+    {
+      "id": "D104",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Dynamic",
+        "ru": "C4-PlantUML · Динамика"
+      },
+      "source": "@startuml\n!include <C4/C4_Dynamic>\nPerson(a, \"Reader\")\nSystem(b, \"Viewer\")\nRel(a, b, \"Open\")\n@enduml",
+      "language": "plantuml",
+      "width": 100.0,
+      "height": 248.0,
+      "svg": "/mdvu/assets/diagrams/D104.svg",
+      "sourceSha256": "d1bd0bd87a9fe878cf2677610ce6f1ab30d5282ada865cd301314bda7c4f68fb",
+      "nativeSvgSha256": "b12cc77f608d9ce8505416864e455b65936d6e732778d1c6ce64587d229ce048",
+      "svgSha256": "b12cc77f608d9ce8505416864e455b65936d6e732778d1c6ce64587d229ce048"
+    },
+    {
+      "id": "D105",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Deployment",
+        "ru": "C4-PlantUML · Развёртывание"
+      },
+      "source": "@startuml\n!include <C4/C4_Deployment>\nDeployment_Node(mac, \"Mac\", \"macOS\") {\nContainer(app, \"Viewer\", \"Native\")\n}\n@enduml",
+      "language": "plantuml",
+      "width": 131.0,
+      "height": 163.0,
+      "svg": "/mdvu/assets/diagrams/D105.svg",
+      "sourceSha256": "08e9c5250939f1a95718ffb90c6aa6a9363199e2e5778b96e021bffe5b85bbbd",
+      "nativeSvgSha256": "840f55b298fbda6b3a88f5c46593db3ece425bf71ed56ad3e877b3de653bebdf",
+      "svgSha256": "840f55b298fbda6b3a88f5c46593db3ece425bf71ed56ad3e877b3de653bebdf"
+    },
+    {
+      "id": "D106",
+      "engine": "PlantUML",
+      "title": {
+        "en": "C4-PlantUML · Sequence",
+        "ru": "C4-PlantUML · Последовательность"
+      },
+      "source": "@startuml\n!include <C4/C4_Sequence>\nPerson(a, \"Reader\")\nSystem(b, \"Viewer\")\nRel(a, b, \"Open\")\n@enduml",
+      "language": "plantuml",
+      "width": 154.0,
+      "height": 156.0,
+      "svg": "/mdvu/assets/diagrams/D106.svg",
+      "sourceSha256": "98ee6b673543df2793fba0dbabd618e2e71e9bc5cae187e4c0e52cebfd12ed07",
+      "nativeSvgSha256": "904eb7275ccb3b019a61856a1821a97f4d2fdb8244412a9dcce7e4ebe62b357c",
+      "svgSha256": "904eb7275ccb3b019a61856a1821a97f4d2fdb8244412a9dcce7e4ebe62b357c"
+    },
+    {
+      "id": "D110",
+      "engine": "PlantUML",
+      "title": {
+        "en": "ArchiMate · three layers",
+        "ru": "ArchiMate · три слоя"
+      },
+      "source": "@startuml\n!include <archimate/Archimate>\nleft to right direction\nBusiness_Actor(reader, \"Reader\")\nBusiness_Process(reading, \"Read document\")\nApplication_Component(app, \"MDVu\")\nApplication_Service(render, \"Render Markdown\")\nTechnology_Node(device, \"Mac / Windows\")\nTechnology_Service(runtime, \"WebKit / WebView2\")\nRel_Assignment(reader, reading)\nRel_Serving_Up(render, reading, \"supports\")\nRel_Assignment(app, render)\nRel_Serving_Up(runtime, app, \"renders\")\nRel_Assignment(device, runtime)\n@enduml",
+      "language": "plantuml",
+      "width": 661.0,
+      "height": 235.0,
+      "svg": "/mdvu/assets/diagrams/D110.svg",
+      "sourceSha256": "fd61109bfe34124684ace76e916bee4d4a03fd043e103095baea556d2f4c0c1e",
+      "nativeSvgSha256": "6beec4bbba8d112bca737e2d09b6c39d469f263f818ca5b7b423126e553baeb2",
+      "svgSha256": "6beec4bbba8d112bca737e2d09b6c39d469f263f818ca5b7b423126e553baeb2"
+    }
+  ]
+}

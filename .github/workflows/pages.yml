@@ -1,16 +1,20 @@
 name: Deploy MDVu website
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: github-pages
+  group: website-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 jobs:
   build:
+    name: Website build and tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Generate both languages and verify the site
@@ -21,7 +25,7 @@ jobs:
           node --check mdvu/assets/site.js
           node --check mdvu/assets/theme.js
           node scripts/check-theme.cjs
-          git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html 404.html
+          git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html mdvu/performance/index.html mdvu/diagrams/index.html mdvu/ru/performance/index.html mdvu/ru/diagrams/index.html 404.html
       - name: Resolve currently published download assets
         env:
           GH_TOKEN: ${{ github.token }}
@@ -39,6 +43,7 @@ jobs:
         with:
           path: _site
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
