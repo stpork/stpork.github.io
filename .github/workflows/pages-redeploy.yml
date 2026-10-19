@@ -1,0 +1,52 @@
+name: Redeploy verified website artifact
+on:
+  workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Main-branch website run containing the verified github-pages artifact
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Verify artifact source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RUN_ID: ${{ inputs.build_run_id }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          run_id = os.environ['BUILD_RUN_ID']
+          assert run_id.isdigit(), 'Expected a workflow run ID'
+          run = json.loads(subprocess.check_output(['gh', 'api', f'repos/stpork/stpork.github.io/actions/runs/{run_id}']))
+          assert run['head_branch'] == 'main'
+          assert run['head_repository']['full_name'] == 'stpork/stpork.github.io'
+          assert run['event'] in ('push', 'workflow_dispatch')
+          assert run['path'] == '.github/workflows/pages.yml'
+          PY
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: github-pages
+          path: verified-site
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.build_run_id }}
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: github-pages
+          path: verified-site/artifact.tar
+          if-no-files-found: error
+          retention-days: 1
+      - name: Deploy verified public files
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

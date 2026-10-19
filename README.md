@@ -38,6 +38,8 @@ Download buttons use permanent GitHub URLs such as `https://github.com/stpork/md
 
 Pull requests to `develop`/`main` and pushes to `develop` run the build and tests without deploying. Only a `main` push or a manual **Deploy MDVu website** dispatch on `main` can deploy; use them only when publication is authorized. GitHub Pages must use GitHub Actions as its source. The application publish helper dispatches this workflow after release. For a manual tag release, refresh the release snapshot and push the regenerated pages to `main`, or dispatch the workflow on `main` when no source change is needed.
 
+If hosted deployment runners are unavailable, **Redeploy verified website artifact** can publish a completed main-branch build's `github-pages` artifact using a temporary self-hosted runner with Python 3 and GitHub CLI. Pass the original website workflow run ID. The workflow verifies the source repository, main branch and workflow before downloading the existing artifact; it does not rebuild the site. Remove the temporary runner after the single deployment.
+
 ## Comparison evidence and synchronization
 
 `mdvu/data/full-pass-performance.json` supplies the eight-app size, cold/warm startup and memory data. `diagram-compatibility.json` supplies the paired 73-case outcomes. The landing table uses rounded installed Universal-app MiB, warm Light memory and warm process-start-to-first-visible Mermaid. Its short **Render · Page** heading has a tooltip explaining that cached SVGs are allowed; **Formats** links to the gallery. Results are macOS-only and individual paired observations. The full study is incomplete (136/192 qualified startup cells, 135/192 verified EOF passes); the detailed page and report retain missing outcomes and historical methods.
