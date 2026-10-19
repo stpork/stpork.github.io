@@ -64,7 +64,10 @@ for lang in ('en','ru'):
     assert page.meta['og:url']==canonical_url
     assert data['@graph'][0]['url']=='https://stpork.github.io/mdvu/'
     assert data['@graph'][2]['url']==canonical_url
-    for image_url in [page.meta['og:image'], page.meta['twitter:image'], data['@graph'][0]['image'], data['@graph'][0]['screenshot']]:
+    screenshots = data['@graph'][0]['screenshot']
+    if isinstance(screenshots, str):
+        screenshots = [screenshots]
+    for image_url in [page.meta['og:image'], page.meta['twitter:image'], data['@graph'][0]['image'], *screenshots]:
         parsed_image = urlsplit(image_url)
         assert parsed_image.netloc=='stpork.github.io' and parsed_image.path.startswith('/mdvu/assets/')
         assert (ROOT / parsed_image.path.lstrip('/')).is_file(), 'Missing SEO image: '+image_url
@@ -89,7 +92,10 @@ for lang in ('en','ru'):
         assert source.count('macOS · DMG ↓') == 2 and source.count('Windows · MSI ↗') == 2
         assert 'Other versions · portable ZIPs' in source
         assert release['packages']['macos.dmg']['url'] in page.links
+        if 'windows-x86_64.msi' in release['packages']:
+            assert source.count('href="'+release['packages']['windows-x86_64.msi']['url']+'"') == 2
         assert 'id="comparison"' in source and 'class="landing-table"' in source
+        assert source.split('class="landing-table"', 1)[1].split('</thead>', 1)[0].count('<strong>') == 5
         assert source.index('id="comparison"') < source.index('id="why"')
         assert all(p['name'] in source for p in comparison['products'])
         assert ('/mdvu/' + ('ru/' if lang=='ru' else '') + 'performance/') not in page.links
@@ -169,9 +175,11 @@ for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     else:
         assert 'noindex' in redirect.meta['robots']
 print('PASS migration: root and old Russian URL redirect to canonical pages, verification retained')
-assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5000
+assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5500
 assert (ROOT/'mdvu/assets/theme.js').stat().st_size < 4000
-assert (ROOT/'mdvu/assets/mdvu.webp').stat().st_size < 150000
+for platform in ('mac', 'win'):
+    assert (ROOT/f'mdvu/assets/mdvu-{platform}.webp').stat().st_size < 200000
+    assert (ROOT/f'mdvu/assets/mdvu-{platform}-720.webp').stat().st_size < 80000
 print('PASS sitemap and asset budgets')
 for doc in ['COMPARISON.md','BENCHMARK-PROTOCOL.md','comparison-history-2026-10-17.md']:
     file = ROOT/'mdvu/data'/doc

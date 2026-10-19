@@ -67,7 +67,7 @@ def landing_comparison(lang):
     return ('<section class="landing-comparison" id="comparison" aria-labelledby="comparison-title">'
             '<h2 id="comparison-title">'+t('Comparison', 'Сравнение')+'</h2>'
             '<div class="table-scroll" tabindex="0" role="region" aria-label="'+t('Application comparison', 'Сравнение приложений')+'">'
-            '<table class="landing-table"><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in headings)+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+            '<table class="landing-table"><thead><tr>'+''.join('<th scope="col"><strong>'+h+'</strong></th>' for h in headings)+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
             '</section>')
 
 
@@ -170,6 +170,22 @@ def diagram_demo(case_id, panel, lang):
             f'<div class="render-pane">{diagram_preview(case, lang)}</div></div>')
 
 
+def hero_screenshots(lang):
+    labels = {'mac': 'macOS', 'win': 'Windows'}
+    tabs, panels = [], []
+    for platform, label in labels.items():
+        selected = platform == 'mac'
+        tabs.append(f'<button type="button" role="tab" id="tab-{platform}" aria-controls="screenshot-{platform}" aria-selected="{str(selected).lower()}" tabindex="{0 if selected else -1}" data-platform="{platform}">{label}</button>')
+        alt = (f'MDVu на {label}: Markdown, формулы, выноски и диаграммы, оглавление и навигатор файлов' if lang == 'ru' else f'MDVu on {label} showing Markdown, math, callouts and diagrams, with a table of contents and file navigator')
+        enlarge = f'Увеличить скриншот {label}' if lang == 'ru' else f'Enlarge the {label} screenshot'
+        asset = f'/mdvu/assets/mdvu-{platform}'
+        urls = {suffix: asset+suffix+'?v='+hashlib.sha256((ROOT/(asset+suffix).lstrip('/')).read_bytes()).hexdigest()[:12]
+                for suffix in ('.jpg', '.webp', '-720.webp')}
+        panels.append(f'<div id="screenshot-{platform}" role="tabpanel" aria-labelledby="tab-{platform}"{ " hidden" if not selected else ""}><a class="screenshot-link" href="{urls[".jpg"]}" data-preview aria-haspopup="dialog" aria-label="{enlarge}"><picture><source type="image/webp" srcset="{urls["-720.webp"]} 720w, {urls[".webp"]} 1440w" sizes="(max-width: 760px) 92vw, 55vw"><img class="app-screenshot" src="{urls[".jpg"]}" width="1440" height="1760" loading="lazy" alt="{alt}"></picture>{preview_badge()}</a></div>')
+    label = 'Платформа' if lang == 'ru' else 'Platform'
+    return f'<figure class="hero-visual"><div class="platform-tabs" role="tablist" aria-label="{label}">{"".join(tabs)}</div>{"".join(panels)}</figure>'
+
+
 def page(lang, section=None):
     ru = lang == 'ru'
     css_version = hashlib.sha256((ROOT/'mdvu/assets/site.css').read_bytes()).hexdigest()[:12]
@@ -186,10 +202,9 @@ def page(lang, section=None):
         title += ' — MDVu'
         description = (t('Compare Markdown viewers on the same files: application size, memory, cold and warm opening times, plus 73 diagram examples. Recorded methods and results.', 'Сравнение просмотрщиков Markdown на одинаковых файлах: размер, память, холодный и тёплый запуск, 73 примера диаграмм. Методика и результаты.') if section == 'performance' else t('73 Markdown diagram examples with source and rendered SVG: Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 and ArchiMate. Browse the MDVu diagram gallery.', '73 примера диаграмм Markdown: исходный код и SVG для Mermaid, PlantUML, ZenUML, Graphviz DOT, C4 и ArchiMate. Галерея поддерживаемых форматов MDVu.'))
     def download_buttons():
-        return f'<div class="hero-buttons"><a class="button" href="{DOWNLOAD}">macOS · DMG ↓</a><a class="button button-outline" href="{WINDOWS or REPO + "/releases"}">Windows · MSI ↗</a></div><div class="download-links"><a href="{REPO}/releases">{t("Other versions · portable ZIPs", "Other versions · portable ZIPs")} ↗</a></div>'
-    preview_version = DIAGRAMS['applications']['MDVu']['version']
+        return f'<div class="hero-buttons"><a class="button" data-download-platform="mac" href="{DOWNLOAD}">macOS · DMG ↓</a><a class="button button-outline" data-download-platform="win" href="{WINDOWS or REPO + "/releases"}">Windows · MSI ↗</a></div><div class="download-links"><a href="{REPO}/releases">{t("Other versions · portable ZIPs", "Other versions · portable ZIPs")} ↗</a></div>'
     faqs = [
-        (t('Which version is available?', 'Какая версия доступна?'), t(f'The current public release is {VERSION}. '+('It is macOS-only. ' if not WINDOWS else '')+f'The features, 73-example gallery and comparison on this site describe the {preview_version} development build. '+('Windows MSI and ZIP are planned for that release.' if not WINDOWS else 'Download the available installers from the links above.'), f'Текущий публичный релиз — {VERSION}. '+('Он доступен только для macOS. ' if not WINDOWS else '')+f'Возможности, галерея из 73 примеров и сравнение на сайте относятся к разрабатываемой версии {preview_version}. '+('MSI и ZIP для Windows появятся с этим релизом.' if not WINDOWS else 'Доступные установщики — по ссылкам выше.'))),
+        (t('Which version is available?', 'Какая версия доступна?'), t(f'The current release is {VERSION}. '+('Install it with the macOS DMG or Windows MSI, or choose portable ZIPs on GitHub Releases.' if WINDOWS else 'Download the macOS DMG or a portable ZIP on GitHub Releases. Windows packages are not available in this release.'), f'Текущий релиз — {VERSION}. '+('Установите его из DMG для macOS или MSI для Windows. Переносимые ZIP-архивы доступны на GitHub Releases.' if WINDOWS else 'Скачайте DMG для macOS или переносимый ZIP-архив на GitHub Releases. В этом релизе пакетов для Windows нет.'))),
         (t('What makes a Markdown viewer feel blazing fast?', 'За счёт чего MDVu работает быстро?'), t('A shared Rust parser, native windows and diagram engines loaded only when needed. Cached SVGs speed up repeated document opening. The comparison table reports observed size, memory and first-render times on the same Mac.', 'Общий парсер на Rust, нативные окна и движки диаграмм, которые загружаются по необходимости. Кеш SVG ускоряет повторное открытие документов. В таблице — реальные размер, память и время первого отображения на одном Mac.')),
         (t('What is a Markdown viewer?', 'Что такое просмотрщик Markdown?'), t('A Markdown viewer, also called an MD viewer, displays plain .md files as formatted documents, with readable headings, tables, code and links. MDVu provides a native Markdown preview on Mac and Windows, including offline math and diagram rendering.', 'Просмотрщик Markdown отображает обычные MD-файлы как оформленные документы: с заголовками, таблицами, кодом и ссылками. MDVu даёт нативный просмотр Markdown на Mac и Windows, включая локальное отображение формул и диаграмм.')),
         (t('Which Markdown files can I open?', 'Какие Markdown-файлы можно открыть?'), t('MDVu is an MD file viewer for .md, .markdown, .mdown and .mkd documents. Open a README, project documentation or a folder of notes directly from Finder, Explorer or the command line. The original Markdown files stay where they are.', 'MDVu открывает документы с расширениями .md, .markdown, .mdown и .mkd. Откройте README, документацию проекта или папку заметок прямо из Finder, Проводника или командной строки. Исходные Markdown-файлы остаются на своих местах.')),
@@ -201,7 +216,7 @@ def page(lang, section=None):
         (t('Is it free for commercial use?', 'Можно использовать бесплатно в работе?'), t('Yes. MDVu is released under the MIT license, with no subscription or paid feature tier. Bundled third-party components retain their own licenses, listed in the repository.', 'Да. MDVu распространяется под лицензией MIT, без подписки и платных уровней функций. Встроенные сторонние компоненты сохраняют собственные лицензии, перечисленные в репозитории.')),
     ]
     structured = {'@context':'https://schema.org','@graph':[
-        {'@type':'SoftwareApplication','@id':BASE+'/#app','name':'MDVu','url':BASE+'/', 'applicationCategory':'UtilitiesApplication','operatingSystem':(['macOS 13+', 'Windows 10/11 x64'] if WINDOWS else ['macOS 13+']),'softwareVersion':VERSION,'description':app_description,'image':BASE+'/assets/mdvu.jpg','screenshot':BASE+'/assets/mdvu.jpg','downloadUrl':DOWNLOAD,'license':'https://opensource.org/license/mit','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'},'author':{'@type':'Person','name':'Finn de Bear','url':'https://github.com/stpork'}},
+        {'@type':'SoftwareApplication','@id':BASE+'/#app','name':'MDVu','url':BASE+'/', 'applicationCategory':'UtilitiesApplication','operatingSystem':(['macOS 13+', 'Windows 10/11 x64'] if WINDOWS else ['macOS 13+']),'softwareVersion':VERSION,'description':app_description,'image':BASE+'/assets/mdvu-mac.jpg','screenshot':[BASE+'/assets/mdvu-mac.jpg',BASE+'/assets/mdvu-win.jpg'],'downloadUrl':DOWNLOAD,'license':'https://opensource.org/license/mit','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'},'author':{'@type':'Person','name':'Finn de Bear','url':'https://github.com/stpork'}},
         {'@type':'WebSite','@id':BASE+'/#website','name':'MDVu','url':BASE+'/','inLanguage':'en'},
         {'@type':'WebPage','@id':url+'#webpage','url':url,'name':title,'description':description,'inLanguage':lang,'isPartOf':{'@id':BASE+'/#website'},'about':{'@id':BASE+'/#app'}}
     ]}
@@ -258,7 +273,7 @@ def page(lang, section=None):
 {download_buttons()}
 <p class="hero-meta">macOS 13+ <span>·</span> Windows 10/11 x64 <span>·</span> {t('Free · MIT','Бесплатно · MIT')}</p>
 <div class="hero-terminal"><span aria-hidden="true">$</span><code>brew install --cask stpork/tap/mdvu</code><button class="copy" type="button" data-copy="brew install --cask stpork/tap/mdvu" aria-label="{t('Copy Homebrew command','Скопировать команду Homebrew')}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></svg></button></div>
-</div><figure class="hero-visual"><div class="visual-label">MDVu · macOS</div><a class="screenshot-link" href="/mdvu/assets/mdvu.jpg" data-preview aria-haspopup="dialog" aria-label="{t('Enlarge the MDVu screenshot','Увеличить скриншот MDVu')}"><picture><source type="image/webp" srcset="/mdvu/assets/mdvu-768.webp 768w, /mdvu/assets/mdvu.webp 1228w" sizes="(max-width: 760px) 92vw, 55vw"><img class="app-screenshot" src="/mdvu/assets/mdvu.jpg" width="1228" height="1317" fetchpriority="high" alt="{t('MDVu on macOS showing Markdown, math, callouts and diagrams, with a table of contents and file navigator','MDVu на macOS: Markdown, формулы, выноски и диаграммы, оглавление и навигатор файлов')}"></picture>{preview_badge()}</a></figure></section>
+</div>{hero_screenshots(lang)}</section>
 <div class="container comparison-section">{landing_comparison(lang)}</div>
 <section class="section container overview" id="why" aria-label="{t('Overview','Обзор')}"><div class="principles">{features_html}</div></section>
 
@@ -289,7 +304,7 @@ Euler’s identity: <span class="code-blue">$e^&#123;i\\pi&#125; + 1 = 0$</span>
 <section class="section container faq-section"><div><p class="eyebrow">FAQ</p><h2>{t('Questions and answers','Вопросы и ответы')}</h2><p>{t('More details in the','Подробнее — в')} <a href="{REPO}#readme">README ↗</a></p></div><div class="faq">{faq_html}</div></section>
 </main>
 <footer class="container footer"><a class="brand" href="{'/mdvu/ru/' if ru else '/mdvu/'}"><img src="/mdvu/assets/icon.webp" width="28" height="28" loading="lazy" alt=""><span>MDVu<span class="brand-dot">.</span></span></a><p>Markdown · Mermaid · PlantUML · ZenUML</p><nav aria-label="{t('Footer navigation','Ссылки в подвале')}"><a href="{REPO}/blob/develop/LICENSE">MIT License</a><a href="{REPO}/releases">{t('Changelog','Релизы')}</a><a href="{REPO}/issues">{t('Feedback','Обратная связь')} ↗</a></nav><small><a href="mailto:finndebear@gmail.com">© 2026 Finn de Bear</a></small></footer>
-<dialog class="image-dialog" aria-label="{t('Image preview','Просмотр изображения')}"><button type="button" class="close-dialog" aria-label="{t('Close preview','Закрыть изображение')}">✕</button><div class="preview-content" hidden></div><img src="/mdvu/assets/mdvu.webp" width="1228" height="1317" loading="lazy" alt="{t('Full MDVu application screenshot','Полный скриншот приложения MDVu')}"></dialog><div class="toast" role="status" aria-live="polite"></div>
+<dialog class="image-dialog" aria-label="{t('Image preview','Просмотр изображения')}"><button type="button" class="close-dialog" aria-label="{t('Close preview','Закрыть изображение')}">✕</button><div class="preview-content" hidden></div><img width="1440" height="1760" alt="{t('Full MDVu application screenshot','Полный скриншот приложения MDVu')}"></dialog><div class="toast" role="status" aria-live="polite"></div>
 </body></html>'''
     if section:
         heading = t('Performance','Быстродействие') if section == 'performance' else t('Diagrams','Диаграммы')

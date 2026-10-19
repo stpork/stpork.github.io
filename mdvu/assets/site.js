@@ -1,29 +1,41 @@
 'use strict';
 document.documentElement.classList.add('js');
 const ru = document.documentElement.lang === 'ru';
-const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-function activateTab(tab) {
-  tabs.forEach(item => {
-    const selected = item === tab;
-    item.setAttribute('aria-selected', String(selected));
-    item.tabIndex = selected ? 0 : -1;
-    document.getElementById(item.getAttribute('aria-controls')).hidden = !selected;
+const platform = /Win/i.test(navigator.userAgentData?.platform || navigator.platform) ? 'win' : 'mac';
+function selectPlatform(value) {
+  document.querySelectorAll('[data-download-platform]').forEach(link => {
+    link.classList.toggle('button-outline', link.dataset.downloadPlatform !== value);
   });
 }
-if (tabs.length) activateTab(tabs[0]);
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => activateTab(tab));
-  tab.addEventListener('keydown', event => {
-    let next;
-    if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-    if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
-    if (event.key === 'Home') next = 0;
-    if (event.key === 'End') next = tabs.length - 1;
-    if (next !== undefined) {
-      event.preventDefault();
-      activateTab(tabs[next]);
-      tabs[next].focus();
-    }
+selectPlatform(platform);
+document.querySelectorAll('[role="tablist"]').forEach(group => {
+  const tabs = [...group.querySelectorAll('[role="tab"]')];
+  function activateTab(tab) {
+    tabs.forEach(item => {
+      const active = item === tab;
+      item.setAttribute('aria-selected', String(active));
+      item.tabIndex = active ? 0 : -1;
+      document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
+    });
+    const image = document.getElementById(tab.getAttribute('aria-controls')).querySelector('img');
+    if (image) { image.loading = 'eager'; image.fetchPriority = 'high'; }
+    if (tab.dataset.platform) selectPlatform(tab.dataset.platform);
+  }
+  if (tabs.length) activateTab(tabs.find(tab => tab.dataset.platform === platform) || tabs[0]);
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activateTab(tab));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+      if (next !== undefined) {
+        event.preventDefault();
+        activateTab(tabs[next]);
+        tabs[next].focus();
+      }
+    });
   });
 });
 const toast = document.querySelector('.toast');
