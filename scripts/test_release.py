@@ -12,7 +12,7 @@ spec.loader.exec_module(release)
 class ReleaseTests(unittest.TestCase):
     def data(self, version):
         suffixes = ['macos.dmg', 'macos-arm64.zip', 'macos-universal.zip', 'macos-x86_64.zip']
-        if version == '0.5.0':
+        if tuple(map(int, version.split('.'))) >= (0, 5, 0):
             suffixes += ['windows-x86_64.msi', 'windows-x86_64.zip']
         return {'tag_name': 'v'+version, 'draft': False, 'prerelease': False, 'assets': [
             {'name': f'mdvu-{version}-{suffix}', 'size': 100,
@@ -24,9 +24,11 @@ class ReleaseTests(unittest.TestCase):
         self.assertNotIn('windows-x86_64.msi', result['packages'])
 
     def test_complete_release_resolves_all_six(self):
-        result = release.snapshot(self.data('0.5.0'))
-        self.assertEqual(len(result['packages']), 6)
-        self.assertTrue(result['packages']['windows-x86_64.msi']['url'].endswith('.msi'))
+        for version in ('0.5.0', '0.5.1'):
+            with self.subTest(version=version):
+                result = release.snapshot(self.data(version))
+                self.assertEqual(len(result['packages']), 6)
+                self.assertTrue(result['packages']['windows-x86_64.msi']['url'].endswith('.msi'))
 
     def test_new_release_must_be_complete(self):
         data = self.data('0.5.0'); data['assets'].pop()
@@ -43,6 +45,21 @@ class ReleaseTests(unittest.TestCase):
 
 
 class DownloadButtonsTests(unittest.TestCase):
+    def test_patch_release_updates_downloads_faq_and_search_metadata(self):
+        version = '0.5.1'
+        prefix = release.REPO + '/releases/download/v' + version + '/mdvu-' + version
+        mac, windows = prefix + '-macos.dmg', prefix + '-windows-x86_64.msi'
+        with patch.dict(build.page.__globals__, VERSION=version, DOWNLOAD=mac, WINDOWS=windows):
+            for lang in ('en', 'ru'):
+                with self.subTest(lang=lang):
+                    html = build.page(lang)
+                    self.assertIn('"softwareVersion":"0.5.1"', html)
+                    self.assertIn(release.REPO + '/releases/tag/v0.5.1', html)
+                    self.assertEqual(html.count(f'href="{mac}" download'), 2)
+                    self.assertEqual(html.count(f'href="{windows}" download'), 2)
+                    self.assertNotIn('/releases/download/v0.5.0/', html)
+                    self.assertIn('The current release is 0.5.1.' if lang == 'en' else 'Текущий релиз — 0.5.1.', html)
+
     def test_hero_links_to_releases_and_does_not_invent_msi(self):
         with patch.dict(build.page.__globals__, WINDOWS=None):
             for lang in ['en', 'ru']:
