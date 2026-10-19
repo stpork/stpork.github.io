@@ -1,6 +1,6 @@
 # MDVu website
 
-The product website for [MDVu](https://github.com/stpork/mdvu), hosted at **https://stpork.github.io/mdvu/**. Work in this branch is a local preview until explicitly approved for publication.
+The product website for [MDVu](https://github.com/stpork/mdvu), hosted at **https://stpork.github.io/mdvu/**.
 
 ## Develop
 
@@ -30,11 +30,11 @@ The site follows system light/dark mode and supports a persistent manual overrid
 
 ## Downloads and release scope
 
-The hero and installation section each provide **macOS · DMG** and **Windows · MSI** buttons. **Other versions · portable ZIPs** links to GitHub Releases. MSI uses the release index until an installer exists; never invent a direct download URL.
+The hero and installation section each provide **macOS · DMG** and **Windows · MSI** buttons. **Other versions · portable ZIPs** links to GitHub Releases. Both installer links come from verified public release assets. The browser's operating system selects the highlighted download and the matching screenshot tab; choosing another screenshot tab switches the highlight too.
 
-`mdvu/data/release.json` snapshots the latest public stable release; refresh it with `python3 scripts/update-release.py`. Starting with 0.5.0, metadata refresh rejects releases missing any of the six packages: macOS DMG, ARM/Universal/Intel ZIPs, Windows x64 MSI and ZIP. The public release is currently 0.4.1 (macOS); the engine features, gallery and comparison describe the 0.5.0 development build. The FAQ explains that distinction. Release metadata must not silently relabel benchmark results.
+`mdvu/data/release.json` snapshots the latest public stable release; refresh it with `python3 scripts/update-release.py`. Starting with 0.5.0, metadata refresh rejects releases missing any of the six packages: macOS DMG, ARM/Universal/Intel ZIPs, Windows x64 MSI and ZIP. The 0.5.0 release includes both platforms and the engines used by the 73-example gallery. Comparison observations retain their recorded test-build identities; release metadata must not silently relabel benchmark results.
 
-Pull requests to `develop`/`main` and pushes to `develop` run the build and tests without deploying. Only a `main` push or a manual **Deploy MDVu website** dispatch on `main` can deploy; use them only when publication is authorized. GitHub Pages must use GitHub Actions as its source. The application publish helper dispatches this workflow after release; manual tag releases need the same dispatch.
+Pull requests to `develop`/`main` and pushes to `develop` run the build and tests without deploying. Only a `main` push or a manual **Deploy MDVu website** dispatch on `main` can deploy; use them only when publication is authorized. GitHub Pages must use GitHub Actions as its source. The application publish helper dispatches this workflow after release. For a manual tag release, refresh the release snapshot and push the regenerated pages to `main`, or dispatch the workflow on `main` when no source change is needed.
 
 ## Comparison evidence and synchronization
 

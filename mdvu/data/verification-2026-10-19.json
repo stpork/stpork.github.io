@@ -1,0 +1,1674 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "complete": true,
+  "firstFrameReview": "All 32 selected startup observations visually reviewed: 16 readable Light bodies, 14 visible two-node Mermaid graphs and 2 source-only MD Viewer controls. No restored extra documents in selected frames.",
+  "machine": "Apple M1 \u00b7 8 GiB \u00b7 macOS 27.0.1",
+  "mdvuRelease": {
+    "version": "0.5.0",
+    "commit": "302c509d52bced2979f4172783ca1f0cf9f01703",
+    "ciRun": 39237625561
+  },
+  "memoryScope": "Sum of physical footprints for bundle processes, descendants and all system/XPC services attributed to the application by the operating system responsible PID. Not RSS.",
+  "startupMemoryWindowSeconds": [
+    7,
+    8
+  ],
+  "afterEOFMemoryWindowSeconds": [
+    5,
+    10
+  ],
+  "sampleIntervalMs": 200,
+  "scope": "One paired observation per cell; application caches cleared for cold, OS file cache retained; fresh process for warm after completed cold traversal. Default window geometries differ. No statistical ranking.",
+  "apps": [
+    {
+      "name": "MDVu",
+      "version": "0.5.0",
+      "installedBytes": 7297308,
+      "binarySha256": "fb502f13b3c033531f56364ed34e3772d763d9263bb2d7852d1356fdc9c3ddbe"
+    },
+    {
+      "name": "Typora",
+      "version": "1.14.10",
+      "installedBytes": 46692423,
+      "binarySha256": "479720a91fdce1188bbe232c19e25b5a40b83b94e84392871c2859be3c4a3ca6"
+    },
+    {
+      "name": "Obsidian",
+      "version": "1.14.4",
+      "installedBytes": 552891932,
+      "binarySha256": "0f0195afd45f4befbd552050d542886e1c203d012c66976745538e9408754d52"
+    },
+    {
+      "name": "MacDown 3000",
+      "version": "3000.0.7",
+      "installedBytes": 17342211,
+      "binarySha256": "dfdba444326b2e820e4a438ed16dcfc7c286d9e1f06218cb8204f2a821696e2c"
+    },
+    {
+      "name": "MarkViewer",
+      "version": "1.8.15",
+      "installedBytes": 60972586,
+      "binarySha256": "4a6ce25a3105c43f51601ae386061d7e935f7d00f7ac6eea2a20f4afef38e3ea"
+    },
+    {
+      "name": "MD Viewer",
+      "version": "1.2.1",
+      "installedBytes": 429942186,
+      "binarySha256": "091f97fea5c33e449be33bffb084a6c35e987f1c03e493736fce8f4bbe58287f"
+    },
+    {
+      "name": "VS Code",
+      "version": "1.142.0",
+      "installedBytes": 1456402208,
+      "binarySha256": "5fe274bdd21ff88d1ae34e3691572fb2544660bcba3db77f2a92d8e2d2718e5c"
+    },
+    {
+      "name": "Marked",
+      "version": "3.2.21",
+      "installedBytes": 152235136,
+      "binarySha256": "af556ad8c3cea9ffb47d71cde18bb72909bb9a32fdb2d479db00ff2112bef62f"
+    }
+  ],
+  "measurements": [
+    {
+      "app": "MDVu",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "MDVu-common-test-light-release20261019h-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 146.16016387939453,
+        "peakMiBFirst8s": 174.51953887939453,
+        "peakMiBFullPass": 482.505859375,
+        "totalObservationSeconds": 23.640436374931596,
+        "droppedFrames": 0,
+        "appPID": 14041
+      },
+      "timing": {
+        "launchToContentMs": 1313.239875016734,
+        "dispatchToContentMs": 1373.0574999935925,
+        "firstPaintFrameBracketMs": [
+          1356.390833389014,
+          1373.0574999935925
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 54,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "5b663bfae1558b788c3a4c36bcb8bb37f5ca19bf596c82babcbc4e756087677d",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "f83e21f9b2c1adf74892434c22417b32d6aff40af85b288ebac6dab06d6f36e1",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "MDVu-common-test-light-release20261019h-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 142.97268676757812,
+        "peakMiBFirst8s": 177.00393676757812,
+        "peakMiBFullPass": 481.6621322631836,
+        "totalObservationSeconds": 33.48773183301091,
+        "droppedFrames": 0,
+        "appPID": 14215,
+        "medianMiBAfterEOF": 190.03699493408203,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792409055.7839339
+      },
+      "timing": {
+        "launchToContentMs": 776.4504582155496,
+        "dispatchToContentMs": 803.5039582755417,
+        "firstPaintFrameBracketMs": [
+          786.8372916709632,
+          803.5039582755417
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 54,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "5b663bfae1558b788c3a4c36bcb8bb37f5ca19bf596c82babcbc4e756087677d",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "f83e21f9b2c1adf74892434c22417b32d6aff40af85b288ebac6dab06d6f36e1",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "MDVu-diagram-control-release20261019h-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 118.4255599975586,
+        "peakMiBFirst8s": 270.47328186035156,
+        "peakMiBFullPass": 270.47328186035156,
+        "totalObservationSeconds": 20.276429791236296,
+        "droppedFrames": 0,
+        "appPID": 14444,
+        "medianMiBAfterEOF": 130.9653091430664,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792409077.580914
+      },
+      "timing": {
+        "launchToContentMs": 1197.8978333063424,
+        "dispatchToContentMs": 1225.9030832210556,
+        "firstPaintFrameBracketMs": [
+          1209.236416616477,
+          1225.9030832210556
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 3,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "5b663bfae1558b788c3a4c36bcb8bb37f5ca19bf596c82babcbc4e756087677d",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "f83e21f9b2c1adf74892434c22417b32d6aff40af85b288ebac6dab06d6f36e1",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "MDVu-diagram-control-release20261019h-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 91.59736633300781,
+        "peakMiBFirst8s": 116.56609344482422,
+        "peakMiBFullPass": 116.56609344482422,
+        "totalObservationSeconds": 20.13650299969595,
+        "droppedFrames": 0,
+        "appPID": 14603,
+        "medianMiBAfterEOF": 104.19182586669922,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792409099.3747258
+      },
+      "timing": {
+        "launchToContentMs": 660.705624264665,
+        "dispatchToContentMs": 685.9719993080944,
+        "firstPaintFrameBracketMs": [
+          669.3053327035159,
+          685.9719993080944
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 3,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "5b663bfae1558b788c3a4c36bcb8bb37f5ca19bf596c82babcbc4e756087677d",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "f83e21f9b2c1adf74892434c22417b32d6aff40af85b288ebac6dab06d6f36e1",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "test-complete.md",
+      "cacheState": "cold",
+      "label": "MDVu-test-complete-release20261019k-cold",
+      "sourceSha256": "1758df456e7b9f3a1a0445d4f4c6ca9bd72ca6408dd0cb3a2d69e27cbcc662cd",
+      "sourceBytes": 228154,
+      "memory": {
+        "medianMiBAt8s": 166.91048431396484,
+        "peakMiBFirst8s": 200.03546142578125,
+        "peakMiBFullPass": 964.7891693115234,
+        "totalObservationSeconds": 65.97125562431756,
+        "droppedFrames": 0,
+        "appPID": 38412,
+        "medianMiBAfterEOF": 294.6777801513672,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792412810.1634948
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 210,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "test-complete.md",
+      "cacheState": "warm",
+      "label": "MDVu-test-complete-release20261019k-warm",
+      "sourceSha256": "1758df456e7b9f3a1a0445d4f4c6ca9bd72ca6408dd0cb3a2d69e27cbcc662cd",
+      "sourceBytes": 228154,
+      "memory": {
+        "medianMiBAt8s": 195.05106353759766,
+        "peakMiBFirst8s": 235.31668853759766,
+        "peakMiBFullPass": 664.4449157714844,
+        "totalObservationSeconds": 65.74096958269365,
+        "droppedFrames": 0,
+        "appPID": 38846,
+        "medianMiBAfterEOF": 296.7090301513672,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792412877.775118
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 211,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "test-heavy.md",
+      "cacheState": "cold",
+      "label": "MDVu-test-heavy-release20261019k-cold",
+      "sourceSha256": "7c0543f86ca09f1f43d6e2fd4d92e5a36ebb1eeaf652dbb4a01bcc10a4276f74",
+      "sourceBytes": 1653057,
+      "memory": {
+        "medianMiBAt8s": 195.06675720214844,
+        "peakMiBFirst8s": 221.30113220214844,
+        "peakMiBFullPass": 1306.4001235961914,
+        "totalObservationSeconds": 232.22209745796863,
+        "droppedFrames": 0,
+        "appPID": 39269,
+        "medianMiBAfterEOF": 710.8044967651367,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792413112.090942
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 859,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MDVu",
+      "fixture": "test-heavy.md",
+      "cacheState": "warm",
+      "label": "MDVu-test-heavy-release20261019k-warm",
+      "sourceSha256": "7c0543f86ca09f1f43d6e2fd4d92e5a36ebb1eeaf652dbb4a01bcc10a4276f74",
+      "sourceBytes": 1653057,
+      "memory": {
+        "medianMiBAt8s": 297.66050720214844,
+        "peakMiBFirst8s": 356.19175720214844,
+        "peakMiBFullPass": 1102.4621658325195,
+        "totalObservationSeconds": 234.78418966627214,
+        "droppedFrames": 0,
+        "appPID": 40606,
+        "medianMiBAfterEOF": 752.538688659668,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792413348.881877
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        392,
+        86,
+        1095,
+        912
+      ],
+      "steps": 857,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Typora",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "Typora-common-test-light-release20261019i-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 347.3496551513672,
+        "peakMiBFirst8s": 474.6919860839844,
+        "peakMiBFullPass": 603.2887802124023,
+        "totalObservationSeconds": 20.2347210412845,
+        "droppedFrames": 0,
+        "appPID": 26463
+      },
+      "timing": {
+        "launchToContentMs": 2185.562041006051,
+        "dispatchToContentMs": 2234.3701659701765,
+        "firstPaintFrameBracketMs": [
+          2201.036832644604,
+          2234.3701659701765
+        ],
+        "frameGapMs": 33.33333332557231
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        327,
+        68,
+        1024,
+        922
+      ],
+      "steps": 49,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Typora",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "Typora-common-test-light-release20261019i-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 343.0214614868164,
+        "peakMiBFirst8s": 467.84814453125,
+        "peakMiBFullPass": 660.5702362060547,
+        "totalObservationSeconds": 20.142103541642427,
+        "droppedFrames": 0,
+        "appPID": 26633
+      },
+      "timing": {
+        "launchToContentMs": 1363.0890416679904,
+        "dispatchToContentMs": 1391.7732083937153,
+        "firstPaintFrameBracketMs": [
+          1358.439875068143,
+          1391.7732083937153
+        ],
+        "frameGapMs": 33.33333332557231
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        327,
+        68,
+        1024,
+        922
+      ],
+      "steps": 49,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Typora",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "Typora-diagram-control-release20261019i-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 284.1309280395508,
+        "peakMiBFirst8s": 354.4263610839844,
+        "peakMiBFullPass": 354.4263610839844,
+        "totalObservationSeconds": 10.119933457695879,
+        "droppedFrames": 0,
+        "appPID": 26795
+      },
+      "timing": {
+        "launchToContentMs": 1761.7072076536715,
+        "dispatchToContentMs": 1803.1061659567058,
+        "firstPaintFrameBracketMs": [
+          1786.4394993521273,
+          1803.1061659567058
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        327,
+        68,
+        1024,
+        922
+      ],
+      "steps": 6,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Typora",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "Typora-diagram-control-release20261019i-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 286.8495178222656,
+        "peakMiBFirst8s": 357.7387237548828,
+        "peakMiBFullPass": 357.7387237548828,
+        "totalObservationSeconds": 9.880860541015863,
+        "droppedFrames": 0,
+        "appPID": 26902
+      },
+      "timing": {
+        "launchToContentMs": 1389.3964580493048,
+        "dispatchToContentMs": 1414.0382080804557,
+        "firstPaintFrameBracketMs": [
+          1397.3715413594618,
+          1414.0382080804557
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        327,
+        68,
+        1024,
+        922
+      ],
+      "steps": 5,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Obsidian",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "Obsidian-common-test-light-release20261019i-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 476.8815689086914,
+        "peakMiBFirst8s": 531.7565689086914,
+        "peakMiBFullPass": 630.1635971069336,
+        "totalObservationSeconds": 26.73225291632116,
+        "droppedFrames": 0,
+        "appPID": 27023
+      },
+      "timing": {
+        "launchToContentMs": 1749.3255831068382,
+        "dispatchToContentMs": 1781.8383331177756,
+        "firstPaintFrameBracketMs": [
+          1765.1716663967818,
+          1781.8383331177756
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 69,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Obsidian",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "Obsidian-common-test-light-release20261019i-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 417.8503646850586,
+        "peakMiBFirst8s": 558.2566146850586,
+        "peakMiBFullPass": 614.7573699951172,
+        "totalObservationSeconds": 26.76052666665055,
+        "droppedFrames": 0,
+        "appPID": 27230
+      },
+      "timing": {
+        "launchToContentMs": 1453.097041347064,
+        "dispatchToContentMs": 1493.449916364625,
+        "firstPaintFrameBracketMs": [
+          1476.7832496436313,
+          1493.449916364625
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 69,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Obsidian",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "Obsidian-diagram-control-release20261019i-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 240.2093963623047,
+        "peakMiBFirst8s": 313.8187255859375,
+        "peakMiBFullPass": 313.8187255859375,
+        "totalObservationSeconds": 11.563177458243445,
+        "droppedFrames": 0,
+        "appPID": 27434
+      },
+      "timing": {
+        "launchToContentMs": 1323.1489582685754,
+        "dispatchToContentMs": 1363.009833265096,
+        "firstPaintFrameBracketMs": [
+          1346.3431666605175,
+          1363.009833265096
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Obsidian",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "Obsidian-diagram-control-release20261019i-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 248.28754425048828,
+        "peakMiBFirst8s": 327.4594192504883,
+        "peakMiBFullPass": 327.4594192504883,
+        "totalObservationSeconds": 11.449197624693625,
+        "droppedFrames": 0,
+        "appPID": 27562
+      },
+      "timing": {
+        "launchToContentMs": 1205.1247496856377,
+        "dispatchToContentMs": 1232.3509163688868,
+        "firstPaintFrameBracketMs": [
+          1215.684249647893,
+          1232.3509163688868
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "MacDown3000-common-test-light-release20261019i-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 138.42503356933594,
+        "peakMiBFirst8s": 141.62669372558594,
+        "peakMiBFullPass": 200.33203887939453,
+        "totalObservationSeconds": 63.57677116594277,
+        "droppedFrames": 0,
+        "appPID": 24274
+      },
+      "timing": {
+        "launchToContentMs": 1369.2467493237928,
+        "dispatchToContentMs": 1408.7341242702678,
+        "firstPaintFrameBracketMs": [
+          1392.0674576656893,
+          1408.7341242702678
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1023,
+        606
+      ],
+      "steps": 57,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": {
+        "reason": "Fast OCR garbled final English marker; no application movement failure. CUA confirmed visible final context, MDVU-LIGHT-END and terminal scrollbar 1, in the same single document.",
+        "frame": "Retained final compositor probe.png and CUA screenshot; no additional input or document changes."
+      },
+      "harnessSha256": {
+        "NativeWalker.swift": "7017b06208b5efa876bdb148b8f94765333f6621a8a8beb2a800da5ec8d24682",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "dc8346aa8926310ea77abe4ed8091930b0383bddd993cf4ae82278e435ec1f02",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "MacDown3000-common-test-light-release20261019i-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 149.09693145751953,
+        "peakMiBFirst8s": 149.84693145751953,
+        "peakMiBFullPass": 199.44141387939453,
+        "totalObservationSeconds": 25.597433374263346,
+        "droppedFrames": 0,
+        "appPID": 25201
+      },
+      "timing": {
+        "launchToContentMs": 1636.0327913425863,
+        "dispatchToContentMs": 1680.1797079388052,
+        "firstPaintFrameBracketMs": [
+          1663.5130413342267,
+          1680.1797079388052
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1023,
+        606
+      ],
+      "steps": 57,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "MacDown3000-diagram-control-release20261019i-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 149.7685546875,
+        "peakMiBFirst8s": 207.6108856201172,
+        "peakMiBFullPass": 207.6108856201172,
+        "totalObservationSeconds": 9.569761832710356,
+        "droppedFrames": 0,
+        "appPID": 25398
+      },
+      "timing": {
+        "launchToContentMs": 1040.7585416687652,
+        "dispatchToContentMs": 1069.5661667268723,
+        "firstPaintFrameBracketMs": [
+          1052.8995000058785,
+          1069.5661667268723
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1319,
+        877
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "MacDown3000-diagram-control-release20261019i-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 154.0185546875,
+        "peakMiBFirst8s": 212.5015106201172,
+        "peakMiBFullPass": 212.5015106201172,
+        "totalObservationSeconds": 9.604671083274297,
+        "droppedFrames": 0,
+        "appPID": 25488
+      },
+      "timing": {
+        "launchToContentMs": 711.5824996726587,
+        "dispatchToContentMs": 737.8100829664618,
+        "firstPaintFrameBracketMs": [
+          721.143416245468,
+          737.8100829664618
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1319,
+        877
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "test-complete.md",
+      "cacheState": "cold",
+      "label": "MacDown3000-test-complete-release20261019i-cold",
+      "sourceSha256": "1758df456e7b9f3a1a0445d4f4c6ca9bd72ca6408dd0cb3a2d69e27cbcc662cd",
+      "sourceBytes": 228154,
+      "memory": {
+        "medianMiBAt8s": 207.3455581665039,
+        "peakMiBFirst8s": 208.0330581665039,
+        "peakMiBFullPass": 375.1446304321289,
+        "totalObservationSeconds": 70.88950529170688,
+        "droppedFrames": 0,
+        "appPID": 25582,
+        "medianMiBAfterEOF": 334.8008575439453,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792410748.877204
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1023,
+        606
+      ],
+      "steps": 238,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MacDown 3000",
+      "fixture": "test-complete.md",
+      "cacheState": "warm",
+      "label": "MacDown3000-test-complete-release20261019i-warm",
+      "sourceSha256": "1758df456e7b9f3a1a0445d4f4c6ca9bd72ca6408dd0cb3a2d69e27cbcc662cd",
+      "sourceBytes": 228154,
+      "memory": {
+        "medianMiBAt8s": 217.9236602783203,
+        "peakMiBFirst8s": 238.93926239013672,
+        "peakMiBFullPass": 388.7540054321289,
+        "totalObservationSeconds": 70.37719420762733,
+        "droppedFrames": 0,
+        "appPID": 26010,
+        "medianMiBAfterEOF": 347.1758575439453,
+        "afterEOFWindowSeconds": [
+          5,
+          10
+        ],
+        "afterEOFObservationEpoch": 1792410823.08463
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        298,
+        173,
+        1023,
+        606
+      ],
+      "steps": 237,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MarkViewer",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "MarkViewer-common-test-light-release20261019l-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 358.59825897216797,
+        "peakMiBFirst8s": 607.160758972168,
+        "peakMiBFullPass": 703.4281463623047,
+        "totalObservationSeconds": 26.53492816607468,
+        "droppedFrames": 0,
+        "appPID": 28966
+      },
+      "timing": {
+        "launchToContentMs": 2147.8890411090106,
+        "dispatchToContentMs": 2200.899249408394,
+        "firstPaintFrameBracketMs": [
+          2184.2325826874003,
+          2200.899249408394
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        539,
+        186,
+        751,
+        804
+      ],
+      "steps": 74,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MarkViewer",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "MarkViewer-common-test-light-release20261019l-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 356.1296920776367,
+        "peakMiBFirst8s": 637.1296920776367,
+        "peakMiBFullPass": 715.6001815795898,
+        "totalObservationSeconds": 26.643042999668978,
+        "droppedFrames": 0,
+        "appPID": 29198
+      },
+      "timing": {
+        "launchToContentMs": 2156.0774999670684,
+        "dispatchToContentMs": 2192.4877082929015,
+        "firstPaintFrameBracketMs": [
+          2159.154374967329,
+          2192.4877082929015
+        ],
+        "frameGapMs": 33.33333332557231
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        539,
+        186,
+        751,
+        804
+      ],
+      "steps": 74,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MarkViewer",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "MarkViewer-diagram-control-release20261019m-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 255.20722198486328,
+        "peakMiBFirst8s": 404.9572219848633,
+        "peakMiBFullPass": 404.9572219848633,
+        "totalObservationSeconds": 8.862542457762174,
+        "droppedFrames": 0,
+        "appPID": 38175
+      },
+      "timing": {
+        "launchToContentMs": 1399.4301663478836,
+        "dispatchToContentMs": 1428.989416337572,
+        "firstPaintFrameBracketMs": [
+          1412.3227497329935,
+          1428.989416337572
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        72,
+        1587,
+        918
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MarkViewer",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "MarkViewer-diagram-control-release20261019m-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 252.87916564941406,
+        "peakMiBFirst8s": 449.33229064941406,
+        "peakMiBFullPass": 449.33229064941406,
+        "totalObservationSeconds": 8.96545099990908,
+        "droppedFrames": 0,
+        "appPID": 38288
+      },
+      "timing": {
+        "launchToContentMs": 1189.0438327100128,
+        "dispatchToContentMs": 1215.2357909362763,
+        "firstPaintFrameBracketMs": [
+          1198.5691243316978,
+          1215.2357909362763
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        72,
+        1587,
+        918
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MD Viewer",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "MDViewer-common-test-light-release20261019i-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 428.75526428222656,
+        "peakMiBFirst8s": 467.81776428222656,
+        "peakMiBFullPass": 553.6935653686523,
+        "totalObservationSeconds": 23.290806208271533,
+        "droppedFrames": 0,
+        "appPID": 29691
+      },
+      "timing": {
+        "launchToContentMs": 2493.264041026123,
+        "dispatchToContentMs": 2523.8569993525743,
+        "firstPaintFrameBracketMs": [
+          2507.1903326315805,
+          2523.8569993525743
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 51,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MD Viewer",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "MDViewer-common-test-light-release20261019i-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 447.77093505859375,
+        "peakMiBFirst8s": 487.52093505859375,
+        "peakMiBFullPass": 545.1311340332031,
+        "totalObservationSeconds": 22.971229125047103,
+        "droppedFrames": 0,
+        "appPID": 29915
+      },
+      "timing": {
+        "launchToContentMs": 1834.2197496676818,
+        "dispatchToContentMs": 1871.0842080181465,
+        "firstPaintFrameBracketMs": [
+          1854.417541413568,
+          1871.0842080181465
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 51,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MD Viewer",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "MDViewer-diagram-control-release20261019i-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 274.4425582885742,
+        "peakMiBFirst8s": 325.3488311767578,
+        "peakMiBFullPass": 325.3488311767578,
+        "totalObservationSeconds": 9.698510083253495,
+        "droppedFrames": 0,
+        "appPID": 30107
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "MD Viewer",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "MDViewer-diagram-control-release20261019i-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 272.0050811767578,
+        "peakMiBFirst8s": 322.9113311767578,
+        "peakMiBFullPass": 322.9113311767578,
+        "totalObservationSeconds": 9.69658141664695,
+        "droppedFrames": 0,
+        "appPID": 30212
+      },
+      "timing": {},
+      "verifiedEOF": true,
+      "viewport": [
+        30,
+        40,
+        1587,
+        950
+      ],
+      "steps": 4,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "VS Code",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "VSCode-common-test-light-release20261019i-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 1245.4855270385742,
+        "peakMiBFirst8s": 1290.4074020385742,
+        "peakMiBFullPass": 1290.4074020385742,
+        "totalObservationSeconds": 266.430605624686,
+        "droppedFrames": 0,
+        "appPID": 30332
+      },
+      "timing": {
+        "launchToContentMs": 3561.5573743125424,
+        "dispatchToContentMs": 4027.465582592413,
+        "firstPaintFrameBracketMs": [
+          4010.798915871419,
+          4027.465582592413
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        383,
+        128,
+        1229,
+        830
+      ],
+      "steps": 893,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": {
+        "reason": "Fast OCR missed the final context; Chrome/status-bar changes fooled a whole-window movement check. Initial startup interval remained untouched.",
+        "evidence": "0037.png visibly contains final context and MDVU-LIGHT-END with terminal scroll thumb; subsequent retained frames show stable final marker and end padding. One preview tab, unchanged input."
+      },
+      "harnessSha256": {
+        "NativeWalker.swift": "629aa8cabae7d5721ca30d6e047f85283ecac1e175a5f4d108db73fd1024f5b9",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "c5d8b7684cece31435e22fb6f466f2ab19bd11ef5586c00e129277d19cb4f4ba",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "VS Code",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "VSCode-common-test-light-release20261019i-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 1272.0635375976562,
+        "peakMiBFirst8s": 1304.5010375976562,
+        "peakMiBFullPass": 1351.6267929077148,
+        "totalObservationSeconds": 274.6309597493382,
+        "droppedFrames": 0,
+        "appPID": 32225
+      },
+      "timing": {
+        "launchToContentMs": 3125.1007913379,
+        "dispatchToContentMs": 3425.5346663994715,
+        "firstPaintFrameBracketMs": [
+          3408.8679996784776,
+          3425.5346663994715
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        383,
+        128,
+        1229,
+        830
+      ],
+      "steps": 1157,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": {
+        "reason": "OCR failed to retain final context before the preview entered end padding; ongoing injected overscroll prevented an automatic stable-end decision. Startup interval remained untouched.",
+        "evidence": "0037.png visibly shows unique final context, MDVU-LIGHT-END and bottom scroll thumb, followed by stable final-marker/end-padding frames. Complete overlapping traversal, one preview tab, unchanged source."
+      },
+      "harnessSha256": {
+        "NativeWalker.swift": "8489159af1c1ddd920c211a7f5f521c9d3ff7157e766454830fcf5a91cf83dd7",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "6a9606e6c20a82e9afb4128165adb3378a596a7694fbec43816a7495e7b0bf67",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "VS Code",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "VSCode-diagram-control-release20261019i-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 1213.0478439331055,
+        "peakMiBFirst8s": 1272.3446502685547,
+        "peakMiBFullPass": 1272.3446502685547,
+        "totalObservationSeconds": 12.402450790978037,
+        "droppedFrames": 0,
+        "appPID": 33990
+      },
+      "timing": {
+        "launchToContentMs": 3311.1772080883384,
+        "dispatchToContentMs": 3635.504624689929,
+        "firstPaintFrameBracketMs": [
+          3618.8379579689354,
+          3635.504624689929
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        383,
+        128,
+        1229,
+        830
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "21728e22883694a69b9451e6e8c0a0f027a8f7ca43aec186e4961b5c138e83e3",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "2bd057485219f6063ccef2a71c8b03cb1f11e4e9a224cd352e95f3107183718c",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "VS Code",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "VSCode-diagram-control-release20261019i-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 1130.6412734985352,
+        "peakMiBFirst8s": 1197.2037734985352,
+        "peakMiBFullPass": 1197.2037734985352,
+        "totalObservationSeconds": 12.339295624755323,
+        "droppedFrames": 0,
+        "appPID": 34169
+      },
+      "timing": {
+        "launchToContentMs": 2511.7309583583847,
+        "dispatchToContentMs": 2705.716625088826,
+        "firstPaintFrameBracketMs": [
+          2689.049958367832,
+          2705.716625088826
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        383,
+        128,
+        1229,
+        830
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "21728e22883694a69b9451e6e8c0a0f027a8f7ca43aec186e4961b5c138e83e3",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "2bd057485219f6063ccef2a71c8b03cb1f11e4e9a224cd352e95f3107183718c",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Marked",
+      "fixture": "common-test-light.md",
+      "cacheState": "cold",
+      "label": "Marked-common-test-light-release20261019p-cold",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 314.6283874511719,
+        "peakMiBFirst8s": 402.8929138183594,
+        "peakMiBFullPass": 469.7853698730469,
+        "totalObservationSeconds": 22.425938541651703,
+        "droppedFrames": 0,
+        "appPID": 37622
+      },
+      "timing": {
+        "launchToContentMs": 4031.175708398223,
+        "dispatchToContentMs": 4075.2270417287946,
+        "firstPaintFrameBracketMs": [
+          4041.8937084032223,
+          4075.2270417287946
+        ],
+        "frameGapMs": 33.33333332557231
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        0,
+        62,
+        1618,
+        956
+      ],
+      "steps": 52,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Marked",
+      "fixture": "common-test-light.md",
+      "cacheState": "warm",
+      "label": "Marked-common-test-light-release20261019p-warm",
+      "sourceSha256": "ee007297552fa4a610332da70869687fa34c3a1f8cb0b36b00165168014dfde0",
+      "sourceBytes": 91722,
+      "memory": {
+        "medianMiBAt8s": 309.1439895629883,
+        "peakMiBFirst8s": 400.70507049560547,
+        "peakMiBFullPass": 463.6603012084961,
+        "totalObservationSeconds": 22.240993958315812,
+        "droppedFrames": 0,
+        "appPID": 37803
+      },
+      "timing": {
+        "launchToContentMs": 3013.458291301504,
+        "dispatchToContentMs": 3057.059374637902,
+        "firstPaintFrameBracketMs": [
+          3040.3927080333233,
+          3057.059374637902
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        0,
+        62,
+        1618,
+        956
+      ],
+      "steps": 52,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Marked",
+      "fixture": "diagram-control.md",
+      "cacheState": "cold",
+      "label": "Marked-diagram-control-release20261019p-cold",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 234.20632934570312,
+        "peakMiBFirst8s": 302.9236602783203,
+        "peakMiBFullPass": 302.9236602783203,
+        "totalObservationSeconds": 8.728616999345832,
+        "droppedFrames": 0,
+        "appPID": 37988
+      },
+      "timing": {
+        "launchToContentMs": 3225.6210000487044,
+        "dispatchToContentMs": 3261.7312083020806,
+        "firstPaintFrameBracketMs": [
+          3245.064541581087,
+          3261.7312083020806
+        ],
+        "frameGapMs": 16.666666720993817
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        0,
+        62,
+        1618,
+        886
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    },
+    {
+      "app": "Marked",
+      "fixture": "diagram-control.md",
+      "cacheState": "warm",
+      "label": "Marked-diagram-control-release20261019p-warm",
+      "sourceSha256": "d537cc4ad3648c267450abad1e325aab712c1409781d2fd8d5cfdfc43660ea46",
+      "sourceBytes": 91,
+      "memory": {
+        "medianMiBAt8s": 235.05007934570312,
+        "peakMiBFirst8s": 302.9563293457031,
+        "peakMiBFullPass": 302.9563293457031,
+        "totalObservationSeconds": 8.73678154090885,
+        "droppedFrames": 0,
+        "appPID": 38079
+      },
+      "timing": {
+        "launchToContentMs": 2943.6448329361156,
+        "dispatchToContentMs": 2969.894832931459,
+        "firstPaintFrameBracketMs": [
+          2953.2281663268805,
+          2969.894832931459
+        ],
+        "frameGapMs": 16.666666604578495
+      },
+      "verifiedEOF": true,
+      "viewport": [
+        0,
+        62,
+        1618,
+        886
+      ],
+      "steps": 0,
+      "samplerAttribution": "app bundle processes, descendants and all XPC/system services whose responsible PID belongs to that app",
+      "manualEOFReview": null,
+      "harnessSha256": {
+        "NativeWalker.swift": "574f549f8f2243b96c93d4a2ae4c872329311131b42a55e8049825873247ddc6",
+        "MDVu Benchmark Input.app/Contents/MacOS/NativeWalker": "8ac49695af78380359b43cc6e561c5d015830ae9cd461becabb069af6904a773",
+        "capture/record": "0a611707cf4879ac12506e6862eb9e2a11cad8ca31d8a1e70eaa1f9fb30455a5",
+        "sample.py": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665"
+      }
+    }
+  ],
+  "empty": [
+    {
+      "state": "fresh empty window, no document argument; verify through Accessibility",
+      "sampleFile": "MDVu-empty-all-services-release20261019.jsonl",
+      "steadyWindowSeconds": [
+        30,
+        40
+      ],
+      "medianSteadyMiB": 100.59864807128906,
+      "sampledPeakMiB": 107.50492095947266,
+      "samplerSha256": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665",
+      "app": "MDVu"
+    },
+    {
+      "state": "CUA-verified single blank Untitled preview window, no file argument",
+      "sampleFile": "MacDown3000-empty-all-services-release20261019.jsonl",
+      "steadyWindowSeconds": [
+        30,
+        40
+      ],
+      "medianSteadyMiB": 103.4873275756836,
+      "sampledPeakMiB": 103.5342025756836,
+      "samplerSha256": "42d02423e2c8a79cf7114a9402be1c28d418345fffc9cf724ebe8e3169517665",
+      "app": "MacDown 3000"
+    }
+  ],
+  "boundedOutcomes": [
+    {
+      "app": "MacDown 3000",
+      "fixture": "test-heavy.md",
+      "epoch": 1792408104.804482,
+      "kernelCounter": "RUSAGE_INFO_V4.ri_lifetime_max_phys_footprint",
+      "footprintBytes": 789271400,
+      "lifetimePeakBytes": 5945481792,
+      "fullTraversalVerified": false,
+      "sourceSha256": "7c0543f86ca09f1f43d6e2fd4d92e5a36ebb1eeaf652dbb4a01bcc10a4276f74",
+      "reason": "No ready window accessible at initial attempt or follow-up after more than six minutes; JavaScript/WebCore work still active in system sample. Warm blocked because no completed cold traversal.",
+      "elapsedSeconds": 462,
+      "warmBlocked": true,
+      "scope": "Main process kernel lifetime peak, not a sampled concurrent process-tree peak; no verified EOF."
+    }
+  ]
+}

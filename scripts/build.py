@@ -46,9 +46,10 @@ def diagram_comparison(lang):
 
 def landing_comparison(lang):
     def t(en, ru): return ru if lang == 'ru' else en
-    data = json.loads((ROOT/'mdvu/data/full-pass-performance.json').read_text())
+    verification = ROOT/'mdvu/data/verification-2026-10-19.json'
+    data = json.loads((verification if verification.exists() else ROOT/'mdvu/data/full-pass-performance.json').read_text())
     records = {(r['app'], r['fixture']): r for r in data['measurements']
-               if r.get('selectedForComparison') and r['cacheState'] == 'warm'}
+               if r.get('selectedForComparison', data.get('complete', False)) and r['cacheState'] == 'warm'}
     home = '/mdvu/' + ('ru/' if lang == 'ru' else '')
     headings = [t('Application', 'Приложение'), '<span title="'+t('Installed Universal app; excludes system browser runtime and user profiles', 'Установленное Universal-приложение; без системного браузерного движка и профилей')+'">'+t('Size · MiB', 'Размер · MiB')+'</span>', '<span title="'+t('Warm Light file; main and helper processes, median footprint at 7–8 seconds', 'Тёплый Light: память основного и вспомогательных процессов, медиана на 7–8-й секунде')+'">RAM · MiB</span>',
                 '<span title="'+t('Warm process start to the first visible two-node Mermaid diagram; cached SVG allowed', 'Тёплый запуск до первой видимой Mermaid из двух узлов; допускается SVG из кеша')+'">'+t('Render · Page', 'Рендер · Страница')+'</span>', '<a href="'+home+'diagrams/">'+t('Formats', 'Форматы')+' ↗</a>']
@@ -57,8 +58,7 @@ def landing_comparison(lang):
         name = app['name']
         light = records[name, 'common-test-light.md']
         graph = records[name, 'diagram-control.md']
-        ms = graph['timing'].get('launchToContentMs')
-        seconds = f'{ms/1000:.1f} '+t('s', 'с') if ms is not None else 'N/A'
+        seconds = observed_seconds(graph['timing'], 1).replace(' s', ' '+t('s', 'с'))
         rendered = sum(r['status'] == 'rendered' for r in DIAGRAMS['applications'][name]['results'].values())
         values = [f"{app['installedBytes']/1048576:.0f}",
                   f"{light['memory']['medianMiBAt8s']:.0f}", seconds,
@@ -139,7 +139,49 @@ def full_pass_observations(lang):
             note = t('RAM: median at 8 s / startup peak / full-pass peak. The full-pass peak includes later Accessibility overhead and is a diagnostic, not a clean startup-memory ranking.', 'RAM: медиана на 8-й секунде / пик старта / пик полного прохода. Последний включает накладные расходы Accessibility и служит диагностикой, а не чистым рейтингом памяти запуска.')
             html += '<details><summary>'+title+'</summary><p class="comparison-note">'+note+'</p>'+table(items)+'</details>'
     html += '<div class="sources"><a href="/mdvu/data/full-pass-performance.json">'+t('Every attempt (JSON)','Все попытки (JSON)')+' ↓</a><a href="/mdvu/data/BENCHMARK-PROTOCOL.md">'+t('Protocol','Методика')+' ↓</a></div>'
+    verification = ROOT/'mdvu/data/verification-2026-10-19.json'
+    if verification.exists():
+        return verified_observations(json.loads(verification.read_text()), lang) + '<details><summary>'+t('18 October archive · superseded RAM attribution', 'Архив 18 октября · прежний учёт RAM')+'</summary><p class="comparison-note">'+t('The current comparison above replaces these older size, startup and RAM observations. The older sampler used temporal attribution for WebKit and did not consistently count other application-owned XPC services; use the new responsible-PID measurements for RAM comparisons.', 'Новое сравнение выше заменяет прежние наблюдения размера, старта и RAM. Старый стенд относил WebKit по времени запуска и не всегда учитывал другие XPC-службы приложения; для сравнения RAM используйте новые измерения с системной атрибуцией владельца.')+'</p>'+html+'</details>'
     return html
+
+
+def observed_seconds(timing, precision=2):
+    ms = timing.get('launchToContentMs')
+    if ms is None:
+        return 'N/A'
+    if timing.get('frameGapMs', 0) >= 80 and 'firstPaintFrameBracketMs' in timing:
+        low, high = timing['firstPaintFrameBracketMs']
+        offset = ms - timing['dispatchToContentMs']
+        return f'{(low+offset)/1000:.{precision}f}–{(high+offset)/1000:.{precision}f} s'
+    return f'{ms/1000:.{precision}f} s'
+
+
+def verified_observations(data, lang):
+    def t(en, ru): return ru if lang == 'ru' else en
+    records = {(r['app'], r['fixture'], r['cacheState']): r for r in data['measurements']}
+    def table(headings, rows):
+        return '<div class="table-scroll" tabindex="0"><table class="performance-summary"><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in headings)+'</tr></thead><tbody>'+''.join('<tr><th scope="row">'+escape(row[0])+'</th>'+''.join('<td>'+escape(str(v))+'</td>' for v in row[1:])+'</tr>' for row in rows)+'</tbody></table></div>'
+    html = '<h2>'+t('Release 0.5.0 verification · 19 October', 'Проверка релиза 0.5.0 · 19 октября')+'</h2><p class="comparison-note">'+escape(data['machine'])+'</p><p class="comparison-note">'+t('Same inputs, one document per fresh process, built-in renderers. Cold clears identified application caches; the OS file cache remains. Warm follows a completed cold traversal. Times come from compositor frames and process birth, before input. Each cell is one observation, not a statistical ranking. Default window sizes differ between apps.', 'Одинаковые файлы, один документ на новый процесс, встроенные движки. Холодный запуск — после очистки известных кешей приложения; файловый кеш ОС остаётся. Тёплый — после полного холодного прохода. Время определяется по системным кадрам от рождения процесса, до ввода. Каждая ячейка — одно наблюдение, а не статистический рейтинг. Размеры окон по умолчанию различаются.')+'</p>'
+    for phase in ['cold', 'warm']:
+        rows = []
+        for app in data['apps']:
+            name = app['name']
+            light = records[name, 'common-test-light.md', phase]
+            graph = records[name, 'diagram-control.md', phase]
+            rows.append([name, f"{app['installedBytes']/1048576:.2f}", observed_seconds(light['timing']), observed_seconds(graph['timing']), f"{light['memory']['medianMiBAt8s']:.1f}"])
+        html += '<h3>'+t('Cold start' if phase == 'cold' else 'Warm start', 'Холодный запуск' if phase == 'cold' else 'Тёплый запуск')+'</h3>'+table([t('Application', 'Приложение'), t('Size · MiB', 'Размер · MiB'), 'Light', t('First Mermaid', 'Первая Mermaid'), 'RAM · MiB'], rows)
+    html += '<p class="comparison-note">'+t('Size is the complete Universal app, excluding mutable profiles and the system browser runtime. Light is the same 91,722-byte diagram-free derivative. RAM is summed physical footprint, median at seconds 7–8, including bundle processes, descendants and all system/XPC services owned by the app according to the OS responsible PID. The Mermaid control has two nodes; Render · Page is its first visible graph, not full-document completion. N/A means source was displayed instead of a diagram.', 'Размер — полное Universal-приложение без изменяемых профилей и системного браузерного движка. Light — одинаковый файл на 91 722 байта без диаграмм. RAM — суммарная физическая память, медиана на 7–8-й секунде: процессы приложения, потомки и все принадлежащие ему системные/XPC-службы по владельцу, указанному ОС. Контроль Mermaid содержит два узла; «Рендер · Страница» означает первую видимую диаграмму, а не готовность всего документа. N/A — вместо диаграммы показан код.')+'</p>'
+    rows = [[r['app'], f"{r['medianSteadyMiB']:.1f}", f"{r['sampledPeakMiB']:.1f}"] for r in data['empty']]
+    html += '<h3>'+t('No document', 'Без документа')+'</h3>'+table([t('Application', 'Приложение'), t('Settled RAM · MiB', 'RAM после стабилизации · MiB'), t('Observed peak · MiB', 'Наблюдаемый пик · MiB')], rows)+'<p class="comparison-note">'+t('Median at seconds 30–40. MDVu shows the system Open dialog; MacDown shows an empty Untitled document. These are different default states, not identical blank-viewer workloads.', 'Медиана на 30–40-й секунде. MDVu показывает системный диалог открытия; MacDown — пустой документ Untitled. Это разные стартовые состояния, а не одинаковая нагрузка пустого просмотрщика.')+'</p>'
+    rows = []
+    for r in data['measurements']:
+        if r['fixture'] not in ['test-complete.md', 'test-heavy.md']: continue
+        m = r['memory']
+        rows.append([r['app']+' · '+r['fixture']+' · '+r['cacheState'], f"{m['medianMiBAt8s']:.1f}", f"{m['medianMiBAfterEOF']:.1f}", f"{m['peakMiBFullPass']:.1f}"])
+    html += '<h3>'+t('Complete and Heavy · RAM', 'Complete и Heavy · RAM')+'</h3>'+table([t('Application / file / phase', 'Приложение / файл / фаза'), t('At 8 s · MiB', 'На 8-й с · MiB'), t('After EOF · MiB', 'После EOF · MiB'), t('Pass peak · MiB', 'Пик прохода · MiB')], rows)+'<p class="comparison-note">'+t('After EOF is the median 5–10 seconds after verified arrival at the document end. The sampled pass peak includes traversal and Accessibility overhead; it is diagnostic, not clean startup RAM or rendering speed. Reaching EOF does not establish that every optional diagram is supported.', 'После EOF — медиана через 5–10 секунд после подтверждённого достижения конца документа. Пик выборки включает проход и накладные расходы Accessibility; это диагностика, а не чистая память старта или скорость рендера. EOF не доказывает поддержку каждой дополнительной диаграммы.')+'</p>'
+    for outcome in data['boundedOutcomes']:
+        html += '<p class="comparison-note">'+t(f"MacDown Heavy: the main process kernel lifetime peak reached {outcome['lifetimePeakBytes']/1048576:.1f} MiB. EOF remained unconfirmed after 7 min 42 s; warm was not run. This is a main-process lifetime counter, not the sampled concurrent process-tree peak in the table.", f"MacDown Heavy: системный счётчик пика основного процесса достиг {outcome['lifetimePeakBytes']/1048576:.1f} MiB. Через 7 мин 42 с EOF не подтверждён; тёплый проход не запускался. Это пик за время жизни основного процесса, а не пик одновременной выборки дерева процессов в таблице.")+'</p>'
+    return html+'<div class="sources"><a href="/mdvu/data/verification-2026-10-19.json">'+t('Verified results (JSON)', 'Проверенные результаты (JSON)')+' ↓</a><a href="/mdvu/data/COMPARISON.md">COMPARISON.md ↓</a></div>'
 
 
 def diagram_preview(case, lang):

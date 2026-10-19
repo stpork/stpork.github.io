@@ -1,6 +1,26 @@
 # macOS comparison protocol · complete document traversal
 
-Local draft, 18 October 2026. Replaces the incomplete fixed-eight-second cache-cleared experiment. Earlier observations remain evidence for their original protocols; they are not reused as results of this method.
+Protocol begun 18 October 2026; release verification updated 19 October. Earlier observations retain their original scope and are not silently relabelled as release measurements.
+
+## Release verification · 19 October 2026
+
+Recheck all eight applications on unchanged `common-test-light.md` and `diagram-control.md`, in separate cold/warm fresh processes. Additionally compare MDVu and MacDown on the original Complete and Heavy inputs and without a document. MDVu is the public 0.5.0 Universal package from tag revision `302c509`, not an older test build. Retain version, executable/input hashes and actual window geometry. Window sizes are their retained defaults and differ between applications; do not claim identical viewports.
+
+Replace temporal WebKit attribution with the operating system's responsible PID. Sum physical footprint for app-bundle processes, descendants and **all** system/XPC services owned by that application, including non-WebKit services. Exclude unrelated applications even if their helper started during the observation. The earlier sampler's temporal WebKit heuristic could misattribute processes and omit native services; historical RAM is superseded for comparison purposes.
+
+Keep the first eight seconds untouched. After successful verified EOF, keep recording for ten further seconds without UI input; report the median footprint in seconds 5–10 of that interval. Retain the sampled pass peak separately. It includes traversal/Accessibility overhead and is diagnostic, not a clean startup-memory ranking. A kernel main-process lifetime maximum is labelled separately: it is not the concurrent sampled process-tree peak. Never call first-eight-second memory a fully loaded Heavy result when EOF is unconfirmed. An incomplete cold pass blocks its warm phase.
+
+Where the real preview exposes a native scrollbar/Scroll Down action, the approved input helper uses that Accessibility scroller with viewport overlap; otherwise it uses the previously validated targeted pointer transport. PID identity is checked against the kernel executable path. Window/title/single-document checks remain mandatory. A transient empty Accessibility reply is retried without input; a wrong document or extra window invalidates the attempt. These changes concern traversal, not the untouched startup timing. Offline frame analysis runs only between measured processes.
+
+Traversal uses fast Vision OCR with retained frames and final visual review. Retrospective EOF recovery is bounded to the last 32 frames; it must not scan the entire document again. Accurate whole-frame OCR on dense multilingual Heavy text stalled and consumed several GiB in the helper, not MDVu. In the completed MDVu cold Heavy pass, the helper was stopped while the app, compositor recording and RAM sampler continued. Two overlapping CUA scrolls completed the remaining viewport; the visible final marker and stable scrollbar at 1 independently verified EOF. That manual review is retained in the result. Its long traversal wall time is not an app-render timing; the sampled RAM peak remains diagnostic with harness overhead. Subsequent traversals bound the history to 32 frames and drain an autorelease pool for each OCR request. Fast OCR drives movement; stationary frames and bounded EOF recovery may use accurate OCR. Loaded MDVu Complete/Heavy RAM is repeated in a preselected clean series after this correction, so helper memory pressure does not define its reported loaded-RAM result. Untouched first-eight-second measurements are unchanged.
+
+Without a document, observe seconds 30–40. MDVu's default state is a system Open dialog, while MacDown's is an empty Untitled document. Include owned file-dialog services and disclose that these are different default states.
+
+The 19 October summary uses the explicitly selected completed verification series, without choosing observations by favourable values. One observation per cell does not establish a statistical ranking. Missing timing or an incomplete pass remains explicit. The 73-format matrix is unchanged by this size/RAM/startup recheck.
+
+The first frames of all 32 selected Light/control startup observations were visually reviewed. MacDown cold Light and both VS Code Light EOFs were independently confirmed from final-context frames and terminal scroll state after the adapter missed OCR context; their untouched startup observations remain valid. Manual reviews are explicit in the JSON. Reader-only geometry avoids mistaking toolbar/status changes for document movement. A complete one-screen control with its final marker already visible requires no artificial scroll. Restored MarkViewer tabs and Marked update/announcement/recovery dialogs invalidate a trial; close them outside measurement and repeat. Native cleanup cancels any automatic file picker and quits normally, checking process exit through the kernel rather than a stale workspace lookup.
+
+## Original full-traversal protocol · 18 October
 
 ## Applications and inputs
 

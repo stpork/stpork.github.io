@@ -30,6 +30,30 @@ class Page(HTMLParser):
 seo_titles = set()
 seo_descriptions = set()
 linked_page_ids = {}
+verification_path = ROOT/'mdvu/data/verification-2026-10-19.json'
+if verification_path.exists():
+    verification = json.loads(verification_path.read_text())
+    assert verification['complete'] and verification['date'] == '2026-10-19'
+    names = {app['name'] for app in verification['apps']}
+    assert len(names) == 8
+    rows = verification['measurements']
+    keys = {(r['app'], r['fixture'], r['cacheState']) for r in rows}
+    assert len(keys) == len(rows) == 38
+    assert all((name, fixture, phase) in keys for name in names for fixture in ['common-test-light.md', 'diagram-control.md'] for phase in ['cold', 'warm'])
+    for row in rows:
+        assert row['verifiedEOF'] and 'all XPC/system services' in row['samplerAttribution']
+        assert re.fullmatch('[0-9a-f]{64}', row['sourceSha256'])
+        assert row['memory']['peakMiBFullPass'] >= row['memory']['medianMiBAt8s'] > 0
+        if row['fixture'] in ['test-complete.md', 'test-heavy.md']:
+            assert row['memory']['medianMiBAfterEOF'] > 0
+        if row['app'] == 'MD Viewer' and row['fixture'] == 'diagram-control.md':
+            assert 'launchToContentMs' not in row['timing']
+        elif row['fixture'] in ['common-test-light.md', 'diagram-control.md']:
+            assert row['timing']['launchToContentMs'] > 0
+    for fixture in {r['fixture'] for r in rows}:
+        assert len({r['sourceSha256'] for r in rows if r['fixture'] == fixture}) == 1
+    assert {row['app'] for row in verification['empty']} == {'MDVu', 'MacDown 3000'}
+    print('PASS current comparison: complete pairs, consistent inputs, process ownership and explicit timing scope')
 for lang in ('en','ru'):
  for section in ('','performance/','diagrams/'):
     rel = 'mdvu/' + ('ru/' if lang=='ru' else '') + section + 'index.html'
