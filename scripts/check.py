@@ -82,12 +82,23 @@ for lang in ('en','ru'):
     structured = source.split('<script type="application/ld+json">')[1].split('</script>')[0]
     data=json.loads(structured)
     assert data['@graph'][0]['offers']['price']=='0'
+    app = data['@graph'][0]
+    release_metadata = json.loads((ROOT/'mdvu/data/release.json').read_text())
+    assert app['softwareVersion'] == release_metadata['version']
+    assert app['isAccessibleForFree'] and app['sameAs'] == 'https://github.com/stpork/mdvu'
+    assert set(app['downloadUrl']) == {release_metadata['packages'][p]['url'] for p in ['macos.dmg', 'windows-x86_64.msi'] if p in release_metadata['packages']}
+    assert len(app['featureList']) >= 3 and 'keywords' not in page.meta
     assert data['@graph'][2]['@type']=='WebPage'
     assert data['@graph'][2]['inLanguage']==lang
     canonical_url = 'https://stpork.github.io/mdvu/' + ('ru/' if lang=='ru' else '') + section
     assert page.meta['og:url']==canonical_url
     assert data['@graph'][0]['url']=='https://stpork.github.io/mdvu/'
     assert data['@graph'][2]['url']==canonical_url
+    if section:
+        breadcrumb = data['@graph'][-1]
+        assert breadcrumb['@type'] == 'BreadcrumbList'
+        assert [item['position'] for item in breadcrumb['itemListElement']] == [1, 2]
+        assert breadcrumb['itemListElement'][-1]['item'] == canonical_url
     screenshots = data['@graph'][0]['screenshot']
     if isinstance(screenshots, str):
         screenshots = [screenshots]
@@ -98,6 +109,8 @@ for lang in ('en','ru'):
     if not section:
         assert 'MDVu' in source.split('<h1')[1].split('</h1>')[0]
         assert sum(tag=='details' for tag,_ in page.tags)>=6
+        hero_images = [attrs for tag, attrs in page.tags if tag == 'img' and attrs.get('class') == 'app-screenshot']
+        assert hero_images[0]['loading'] == 'eager' and hero_images[0]['fetchpriority'] == 'high'
     for link in page.links:
         parsed=urlsplit(link)
         if parsed.scheme or parsed.netloc: continue
