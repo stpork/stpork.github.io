@@ -113,11 +113,13 @@ for lang in ('en','ru'):
     release = json.loads((ROOT/'mdvu/data/release.json').read_text())
     comparison = json.loads((ROOT/'mdvu/data/comparison.json').read_text())
     if not section:
-        assert source.count('macOS · DMG ↓') == 2 and source.count('Windows · MSI ↗') == 2
+        windows_arrow = '↓' if 'windows-x86_64.msi' in release['packages'] else '↗'
+        assert source.count('macOS · DMG ↓') == 2 and source.count('Windows · MSI '+windows_arrow) == 2
         assert 'Other versions · portable ZIPs' in source
         assert release['packages']['macos.dmg']['url'] in page.links
         if 'windows-x86_64.msi' in release['packages']:
-            assert source.count('href="'+release['packages']['windows-x86_64.msi']['url']+'"') == 2
+            for package in ['macos.dmg', 'windows-x86_64.msi']:
+                assert source.count('href="'+release['packages'][package]['url']+'" download') == 2
         assert 'id="comparison"' in source and 'class="landing-table"' in source
         assert source.split('class="landing-table"', 1)[1].split('</thead>', 1)[0].count('<strong>') == 5
         assert source.index('id="comparison"') < source.index('id="why"')

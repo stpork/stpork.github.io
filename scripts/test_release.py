@@ -58,7 +58,10 @@ class DownloadButtonsTests(unittest.TestCase):
         url = release.REPO + '/releases/download/v0.5.0/mdvu-0.5.0-windows-x86_64.msi'
         with patch.dict(build.page.__globals__, WINDOWS=url, VERSION='0.5.0'):
             for lang in ['en', 'ru']:
-                self.assertEqual(build.page(lang).count(f'href="{url}"'), 2)
+                html = build.page(lang)
+                self.assertEqual(html.count(f'href="{url}" download'), 2)
+                self.assertEqual(html.count('Windows · MSI ↓'), 2)
+                self.assertEqual(html.count(f'href="{build.DOWNLOAD}" download'), 2)
 
     def test_direct_url_pages_are_indexable_without_navigation_links(self):
         en, ru = build.page('en'), build.page('ru')
