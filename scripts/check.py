@@ -123,7 +123,7 @@ for lang in ('en','ru'):
         assert 'id="comparison"' in source and 'class="landing-table"' in source
         assert source.split('class="landing-table"', 1)[1].split('</thead>', 1)[0].count('<strong>') == 5
         assert source.index('id="comparison"') < source.index('id="why"')
-        assert all(p['name'] in source for p in comparison['products'])
+        assert all(p.get('displayName', p['name']) in source for p in comparison['products'])
         assert ('/mdvu/' + ('ru/' if lang=='ru' else '') + 'performance/') not in page.links
         assert 'Cold &amp; warm starts' not in source and 'comparison-details' not in source
         assert 'N/A' in source
@@ -131,7 +131,7 @@ for lang in ('en','ru'):
         assert ('Formats ↗</a>' if lang == 'en' else 'Форматы ↗</a>') in source
         assert source.index('class="hero-visual"') < source.index('id="comparison"')
     elif section=='performance/':
-        assert all(p['name'] in source for p in comparison['products'])
+        assert all(p.get('displayName', p['name']) in source for p in comparison['products'])
         assert ('Быстродействие' if lang=='ru' else 'Performance') in source
     else:
         cards=[a for tag,a in page.tags if tag=='article' and 'diagram-card' in a.get('class','')]

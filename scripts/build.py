@@ -13,11 +13,17 @@ BASE = ORIGIN + '/mdvu'
 REPO = 'https://github.com/stpork/mdvu'
 RELEASE_DATA = json.loads((ROOT/'mdvu/data/release.json').read_text())
 DIAGRAMS = json.loads((ROOT/'mdvu/data/diagram-compatibility.json').read_text())
-REPORTED_RESULTS = {p['name']: p['reportedResults'] for p in json.loads((ROOT/'mdvu/data/comparison.json').read_text())['products'] if 'reportedResults' in p}
+PRODUCTS = json.loads((ROOT/'mdvu/data/comparison.json').read_text())['products']
+REPORTED_RESULTS = {p['name']: p['reportedResults'] for p in PRODUCTS if 'reportedResults' in p}
+APP_LABELS = {p['name']: p.get('displayName', p['name']) for p in PRODUCTS}
 VERSION = RELEASE_DATA['version']
 DOWNLOAD = RELEASE_DATA['packages']['macos.dmg']['url']
 WINDOWS = RELEASE_DATA['packages'].get('windows-x86_64.msi', {}).get('url')
 PREVIEW_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg>'
+
+
+def display_name(name):
+    return APP_LABELS.get(name, name)
 
 
 def preview_badge():
@@ -41,9 +47,9 @@ def diagram_comparison(lang):
         engine = 'Mermaid' if case['language'] in {'mermaid','zenuml'} else 'PlantUML'
         kind = case['kind'] if engine == 'Mermaid' else re.sub(r'^\d+(?:\.\d+)*\s+', '',case['heading'])
         rows += '<tr><th scope="row">'+case['id']+'</th><td>'+escape(engine+' / '+kind)+'</td>'+''.join('<td>'+labels[DIAGRAMS['applications'][name]['results'][case['id']]['status']]+'</td>' for name in names)+'</tr>'
-    summary_rows = ''.join('<tr><th scope="row">'+escape(name)+'<small>'+escape(DIAGRAMS['applications'][name]['version'])+'</small></th>'+''.join('<td>'+str(DIAGRAMS['applications'][name]['summary'].get(key,0))+'</td>' for key in ['rendered','error','source'])+'</tr>' for name in names)
+    summary_rows = ''.join('<tr><th scope="row">'+escape(display_name(name))+'<small>'+escape(DIAGRAMS['applications'][name]['version'])+'</small></th>'+''.join('<td>'+str(DIAGRAMS['applications'][name]['summary'].get(key,0))+'</td>' for key in ['rendered','error','source'])+'</tr>' for name in names)
     summary = '<h2>'+t('Diagram formats','Форматы диаграмм')+'</h2><p class="comparison-note">'+t('The same 73 examples in cold and warm passes. Built-in renderers, no extra plugins. A diagram is counted only when drawn; source and errors are separate. This is a catalogue of MDVu-supported inputs, not every feature unique to other apps.', 'Одни и те же 73 примера в холодном и тёплом проходах. Встроенные движки, без дополнительных плагинов. Засчитывается нарисованная диаграмма; код и ошибки — отдельно. Каталог содержит поддерживаемые MDVu входные форматы, а не все уникальные возможности других приложений.')+'</p><div class="table-scroll" tabindex="0"><table class="performance-summary"><thead><tr><th>'+t('Application','Приложение')+'</th><th>'+t('Rendered','Отрисовано')+'</th><th>'+t('Error','Ошибка')+'</th><th>'+t('Source','Код')+'</th></tr></thead><tbody>'+summary_rows+'</tbody></table></div>'
-    return summary+'<details><summary>'+t('All 73 diagram examples','Все 73 примера диаграмм')+'</summary><p class="comparison-note">'+t('Same valid sources, built-in engines. Errors and source code do not count as diagrams. This catalogue covers MDVu-supported inputs, not every feature unique to other apps.','Одинаковые валидные исходники, встроенные движки. Ошибки и исходный код не считаются диаграммами. Каталог охватывает входные форматы MDVu, а не все уникальные возможности других приложений.')+'</p><div class="table-scroll" tabindex="0"><table><thead><tr><th>ID</th><th>'+t('Format','Формат')+'</th>'+''.join('<th>'+escape(n)+'</th>' for n in names)+'</tr></thead><tbody>'+rows+'</tbody></table></div></details><div class="sources"><a href="/mdvu/data/COMPARISON.md">COMPARISON.md ↓</a><a href="/mdvu/data/test-diagrams.md">test-diagrams.md ↓</a><a href="/mdvu/data/diagram-compatibility.json">'+t('Results (JSON)','Результаты (JSON)')+' ↓</a></div>'
+    return summary+'<details><summary>'+t('All 73 diagram examples','Все 73 примера диаграмм')+'</summary><p class="comparison-note">'+t('Same valid sources, built-in engines. Errors and source code do not count as diagrams. This catalogue covers MDVu-supported inputs, not every feature unique to other apps.','Одинаковые валидные исходники, встроенные движки. Ошибки и исходный код не считаются диаграммами. Каталог охватывает входные форматы MDVu, а не все уникальные возможности других приложений.')+'</p><div class="table-scroll" tabindex="0"><table><thead><tr><th>ID</th><th>'+t('Format','Формат')+'</th>'+''.join('<th>'+escape(display_name(n))+'</th>' for n in names)+'</tr></thead><tbody>'+rows+'</tbody></table></div></details><div class="sources"><a href="/mdvu/data/COMPARISON.md">COMPARISON.md ↓</a><a href="/mdvu/data/test-diagrams.md">test-diagrams.md ↓</a><a href="/mdvu/data/diagram-compatibility.json">'+t('Results (JSON)','Результаты (JSON)')+' ↓</a></div>'
 
 def landing_comparison(lang):
     def t(en, ru): return ru if lang == 'ru' else en
@@ -66,7 +72,7 @@ def landing_comparison(lang):
         values = [f"{app['installedBytes']/1048576:.0f}",
                   f"{reported.get('ramMiB', light['memory']['medianMiBAt8s']):.0f}", seconds,
                   f'{rendered}/{len(DIAGRAMS["cases"])}']
-        rows.append('<tr><th scope="row">'+escape(name)+'</th>'+''.join('<td>'+v+'</td>' for v in values)+'</tr>')
+        rows.append('<tr><th scope="row">'+escape(display_name(name))+'</th>'+''.join('<td>'+v+'</td>' for v in values)+'</tr>')
     return ('<section class="landing-comparison" id="comparison" aria-labelledby="comparison-title">'
             '<h2 id="comparison-title">'+t('Comparison', 'Сравнение')+'</h2>'
             '<div class="table-scroll" tabindex="0" role="region" aria-label="'+t('Application comparison', 'Сравнение приложений')+'">'
@@ -110,7 +116,7 @@ def full_pass_observations(lang):
         rows = []
         for (app, fixture), pair in sorted(items):
             values = [timing(pair.get('cold')), memory(pair.get('cold'), True), timing(pair.get('warm')), memory(pair.get('warm'), True)]
-            rows.append('<tr><th scope="row">'+escape(app)+'<small>'+escape(fixture)+'</small></th>'+''.join('<td>'+v+'</td>' for v in values)+'</tr>')
+            rows.append('<tr><th scope="row">'+escape(display_name(app))+'<small>'+escape(fixture)+'</small></th>'+''.join('<td>'+v+'</td>' for v in values)+'</tr>')
         return '<div class="table-scroll" tabindex="0"><table class="performance-summary full-pass-table"><thead><tr>'+''.join('<th scope="col">'+h+'</th>' for h in headings)+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
     total = data.get('verifiedCanonicalCells', 0)
     qualified = data.get('selectedMeasurementCells', total)
@@ -132,7 +138,7 @@ def full_pass_observations(lang):
                 light = pairs[(name, 'common-test-light.md')][phase]
                 graph = pairs.get((name, 'diagram-control.md'), {}).get(phase)
                 values = [f"{app['installedBytes']/1048576:.2f}", timing(light), timing(graph), memory(light)]
-                rows.append('<tr><th scope="row">'+escape(name)+'<small>'+escape(app['version'])+'</small></th>'+''.join('<td>'+value+'</td>' for value in values)+'</tr>')
+                rows.append('<tr><th scope="row">'+escape(display_name(name))+'<small>'+escape(app['version'])+'</small></th>'+''.join('<td>'+value+'</td>' for value in values)+'</tr>')
             html += '<h3>'+title+'</h3><div class="table-scroll" tabindex="0"><table class="performance-summary"><thead><tr>'+''.join('<th scope="col">'+heading+'</th>' for heading in headings)+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
         html += '<p class="comparison-note">'+t('Universal app file bytes, counting symlinks once; system WebKit and browser profiles excluded. Light is the same 91,722-byte text fixture with diagram fences removed. RAM: median at 8 s / first-8-s peak. The Mermaid control is two nodes; full format coverage is reported separately.', 'Размер файлов Universal-приложения, симлинки учтены один раз; без системного WebKit и профилей браузера. Light — один и тот же текстовый файл, 91 722 байта, без блоков диаграмм. RAM: медиана на 8-й секунде / пик за первые 8 с. Контроль Mermaid содержит два узла; полная матрица форматов приведена отдельно.')+'</p>'
     html += '<details><summary>'+t('Method and scope','Методика и границы сравнения')+'</summary>'+method+'</details>'
@@ -173,17 +179,17 @@ def verified_observations(data, lang):
             graph = records[name, 'diagram-control.md', phase]
             reported = REPORTED_RESULTS.get(name, {}) if phase == 'warm' else {}
             graph_timing = {'launchToContentMs': reported['firstMermaidMs']} if 'firstMermaidMs' in reported else graph['timing']
-            rows.append([name, f"{app['installedBytes']/1048576:.2f}", observed_seconds(light['timing']), observed_seconds(graph_timing), f"{reported.get('ramMiB', light['memory']['medianMiBAt8s']):.1f}"])
+            rows.append([display_name(name), f"{app['installedBytes']/1048576:.2f}", observed_seconds(light['timing']), observed_seconds(graph_timing), f"{reported.get('ramMiB', light['memory']['medianMiBAt8s']):.1f}"])
         html += '<h3>'+t('Cold start' if phase == 'cold' else 'Warm start', 'Холодный запуск' if phase == 'cold' else 'Тёплый запуск')+'</h3>'+table([t('Application', 'Приложение'), t('Size · MiB', 'Размер · MiB'), 'Light', t('First Mermaid', 'Первая Mermaid'), 'RAM · MiB'], rows)
     html += '<p class="comparison-note">'+t('The MacDown warm reference uses the maintainer’s final manual measurements: 201 MiB RAM and 1.1 s to the first diagram, supplied on 19 October. The original automated observations remain in the JSON evidence; no benchmark was rerun for this correction.', 'Для тёплого MacDown использованы окончательные ручные замеры автора: 201 MiB RAM и 1,1 с до первой диаграммы, переданные 19 октября. Исходные автоматические наблюдения сохранены в JSON; для этой поправки бенчмарк не перезапускался.')+'</p>'
     html += '<p class="comparison-note">'+t('Size is the complete Universal app, excluding mutable profiles and the system browser runtime. Light is the same 91,722-byte diagram-free derivative. RAM is summed physical footprint, median at seconds 7–8, including bundle processes, descendants and all system/XPC services owned by the app according to the OS responsible PID. The Mermaid control has two nodes; Render · Page is its first visible graph, not full-document completion. N/A means source was displayed instead of a diagram.', 'Размер — полное Universal-приложение без изменяемых профилей и системного браузерного движка. Light — одинаковый файл на 91 722 байта без диаграмм. RAM — суммарная физическая память, медиана на 7–8-й секунде: процессы приложения, потомки и все принадлежащие ему системные/XPC-службы по владельцу, указанному ОС. Контроль Mermaid содержит два узла; «Рендер · Страница» означает первую видимую диаграмму, а не готовность всего документа. N/A — вместо диаграммы показан код.')+'</p>'
-    rows = [[r['app'], f"{r['medianSteadyMiB']:.1f}", f"{r['sampledPeakMiB']:.1f}"] for r in data['empty']]
+    rows = [[display_name(r['app']), f"{r['medianSteadyMiB']:.1f}", f"{r['sampledPeakMiB']:.1f}"] for r in data['empty']]
     html += '<h3>'+t('No document', 'Без документа')+'</h3>'+table([t('Application', 'Приложение'), t('Settled RAM · MiB', 'RAM после стабилизации · MiB'), t('Observed peak · MiB', 'Наблюдаемый пик · MiB')], rows)+'<p class="comparison-note">'+t('Median at seconds 30–40. MDVu shows the system Open dialog; MacDown shows an empty Untitled document. These are different default states, not identical blank-viewer workloads.', 'Медиана на 30–40-й секунде. MDVu показывает системный диалог открытия; MacDown — пустой документ Untitled. Это разные стартовые состояния, а не одинаковая нагрузка пустого просмотрщика.')+'</p>'
     rows = []
     for r in data['measurements']:
         if r['fixture'] not in ['test-complete.md', 'test-heavy.md']: continue
         m = r['memory']
-        rows.append([r['app']+' · '+r['fixture']+' · '+r['cacheState'], f"{m['medianMiBAt8s']:.1f}", f"{m['medianMiBAfterEOF']:.1f}", f"{m['peakMiBFullPass']:.1f}"])
+        rows.append([display_name(r['app'])+' · '+r['fixture']+' · '+r['cacheState'], f"{m['medianMiBAt8s']:.1f}", f"{m['medianMiBAfterEOF']:.1f}", f"{m['peakMiBFullPass']:.1f}"])
     html += '<h3>'+t('Complete and Heavy · RAM', 'Complete и Heavy · RAM')+'</h3>'+table([t('Application / file / phase', 'Приложение / файл / фаза'), t('At 8 s · MiB', 'На 8-й с · MiB'), t('After EOF · MiB', 'После EOF · MiB'), t('Pass peak · MiB', 'Пик прохода · MiB')], rows)+'<p class="comparison-note">'+t('After EOF is the median 5–10 seconds after verified arrival at the document end. The sampled pass peak includes traversal and Accessibility overhead; it is diagnostic, not clean startup RAM or rendering speed. Reaching EOF does not establish that every optional diagram is supported.', 'После EOF — медиана через 5–10 секунд после подтверждённого достижения конца документа. Пик выборки включает проход и накладные расходы Accessibility; это диагностика, а не чистая память старта или скорость рендера. EOF не доказывает поддержку каждой дополнительной диаграммы.')+'</p>'
     for outcome in data['boundedOutcomes']:
         html += '<p class="comparison-note">'+t(f"MacDown Heavy: the main process kernel lifetime peak reached {outcome['lifetimePeakBytes']/1048576:.1f} MiB. EOF remained unconfirmed after 7 min 42 s; warm was not run. This is a main-process lifetime counter, not the sampled concurrent process-tree peak in the table.", f"MacDown Heavy: системный счётчик пика основного процесса достиг {outcome['lifetimePeakBytes']/1048576:.1f} MiB. Через 7 мин 42 с EOF не подтверждён; тёплый проход не запускался. Это пик за время жизни основного процесса, а не пик одновременной выборки дерева процессов в таблице.")+'</p>'
