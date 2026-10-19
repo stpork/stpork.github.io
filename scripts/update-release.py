@@ -15,6 +15,7 @@ def snapshot(data):
     if data['draft'] or data['prerelease'] or not re.fullmatch(r'v\d+\.\d+\.\d+', tag):
         raise ValueError('Expected a public stable release')
     version = tag[1:]
+    stable_names = tuple(map(int, version.split('.'))) >= (0, 5, 1)
     packages = {}
     for suffix in ('macos.dmg', 'macos-arm64.zip', 'macos-universal.zip',
                    'macos-x86_64.zip', 'windows-x86_64.msi', 'windows-x86_64.zip'):
@@ -25,12 +26,21 @@ def snapshot(data):
         url = f'{REPO}/releases/download/{tag}/{name}'
         if item['browser_download_url'] != url or item['size'] <= 0:
             raise ValueError('Invalid release asset: ' + name)
+        if stable_names:
+            alias_name = f'mdvu-{suffix}'
+            alias = next((a for a in data['assets'] if a['name'] == alias_name), None)
+            if (alias is None or alias['size'] != item['size']
+                    or alias['browser_download_url'] != f'{REPO}/releases/download/{tag}/{alias_name}'
+                    or not re.fullmatch(r'sha256:[0-9a-f]{64}', item.get('digest') or '')
+                    or alias.get('digest') != item['digest']):
+                raise ValueError('Missing or mismatched stable release copy: ' + alias_name)
+            url = f'{REPO}/releases/latest/download/{alias_name}'
         packages[suffix] = {'url': url, 'bytes': item['size']}
     if 'macos.dmg' not in packages:
         raise ValueError('Release has no macOS installer')
     if tuple(map(int, version.split('.'))) >= (0, 5, 0) and len(packages) != 6:
         raise ValueError('Release 0.5.0+ must contain all six packages')
-    return {'version': version, 'url': f'{REPO}/releases/tag/{tag}', 'packages': packages}
+    return {'version': version, 'url': f'{REPO}/releases/latest' if stable_names else f'{REPO}/releases/tag/{tag}', 'packages': packages}
 
 
 if __name__ == '__main__':

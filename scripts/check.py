@@ -85,6 +85,11 @@ for lang in ('en','ru'):
     app = data['@graph'][0]
     release_metadata = json.loads((ROOT/'mdvu/data/release.json').read_text())
     assert app['softwareVersion'] == release_metadata['version']
+    assert app['releaseNotes'] == 'https://github.com/stpork/mdvu/releases/latest'
+    if tuple(map(int, release_metadata['version'].split('.'))) >= (0, 5, 1):
+        assert all(p['url'].startswith('https://github.com/stpork/mdvu/releases/latest/download/mdvu-')
+                   for p in release_metadata['packages'].values())
+        assert '/releases/download/v' not in source, 'Download URLs must follow the latest release'
     assert app['isAccessibleForFree'] and app['sameAs'] == 'https://github.com/stpork/mdvu'
     assert set(app['downloadUrl']) == {release_metadata['packages'][p]['url'] for p in ['macos.dmg', 'windows-x86_64.msi'] if p in release_metadata['packages']}
     assert len(app['featureList']) >= 3 and 'keywords' not in page.meta
