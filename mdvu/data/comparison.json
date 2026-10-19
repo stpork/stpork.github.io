@@ -246,6 +246,11 @@
         "bytes": 17342156,
         "architecture": "Universal",
         "source": "/mdvu/data/diagram-compatibility.json"
+      },
+      "reportedResults": {
+        "ramMiB": 201,
+        "firstMermaidMs": 1100,
+        "source": "Final manual measurements supplied by the maintainer on 19 October 2026 for the current home-page comparison. No automated benchmark rerun. Original automated observations remain in verification-2026-10-19.json."
       }
     }
   ],

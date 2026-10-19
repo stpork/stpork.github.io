@@ -13,6 +13,7 @@ BASE = ORIGIN + '/mdvu'
 REPO = 'https://github.com/stpork/mdvu'
 RELEASE_DATA = json.loads((ROOT/'mdvu/data/release.json').read_text())
 DIAGRAMS = json.loads((ROOT/'mdvu/data/diagram-compatibility.json').read_text())
+REPORTED_RESULTS = {p['name']: p['reportedResults'] for p in json.loads((ROOT/'mdvu/data/comparison.json').read_text())['products'] if 'reportedResults' in p}
 VERSION = RELEASE_DATA['version']
 DOWNLOAD = RELEASE_DATA['packages']['macos.dmg']['url']
 WINDOWS = RELEASE_DATA['packages'].get('windows-x86_64.msi', {}).get('url')
@@ -51,17 +52,19 @@ def landing_comparison(lang):
     records = {(r['app'], r['fixture']): r for r in data['measurements']
                if r.get('selectedForComparison', data.get('complete', False)) and r['cacheState'] == 'warm'}
     home = '/mdvu/' + ('ru/' if lang == 'ru' else '')
-    headings = [t('Application', 'Приложение'), '<span title="'+t('Installed Universal app; excludes system browser runtime and user profiles', 'Установленное Universal-приложение; без системного браузерного движка и профилей')+'">'+t('Size · MiB', 'Размер · MiB')+'</span>', '<span title="'+t('Warm Light file; main and helper processes, median footprint at 7–8 seconds', 'Тёплый Light: память основного и вспомогательных процессов, медиана на 7–8-й секунде')+'">RAM · MiB</span>',
+    headings = [t('Application', 'Приложение'), '<span title="'+t('Installed Universal app; excludes system browser runtime and user profiles', 'Установленное Universal-приложение; без системного браузерного движка и профилей')+'">'+t('Size · MiB', 'Размер · MiB')+'</span>', '<span title="'+t('Application memory in MiB; recorded sources in comparison data', 'Память приложения в MiB; источники сохранены в данных сравнения')+'">RAM · MiB</span>',
                 '<span title="'+t('Warm process start to the first visible two-node Mermaid diagram; cached SVG allowed', 'Тёплый запуск до первой видимой Mermaid из двух узлов; допускается SVG из кеша')+'">'+t('Render · Page', 'Рендер · Страница')+'</span>', '<a href="'+home+'diagrams/">'+t('Formats', 'Форматы')+' ↗</a>']
     rows = []
     for app in data['apps']:
         name = app['name']
         light = records[name, 'common-test-light.md']
         graph = records[name, 'diagram-control.md']
-        seconds = observed_seconds(graph['timing'], 1).replace(' s', ' '+t('s', 'с'))
+        reported = REPORTED_RESULTS.get(name, {})
+        graph_timing = {'launchToContentMs': reported['firstMermaidMs']} if 'firstMermaidMs' in reported else graph['timing']
+        seconds = observed_seconds(graph_timing, 1).replace(' s', ' '+t('s', 'с'))
         rendered = sum(r['status'] == 'rendered' for r in DIAGRAMS['applications'][name]['results'].values())
         values = [f"{app['installedBytes']/1048576:.0f}",
-                  f"{light['memory']['medianMiBAt8s']:.0f}", seconds,
+                  f"{reported.get('ramMiB', light['memory']['medianMiBAt8s']):.0f}", seconds,
                   f'{rendered}/{len(DIAGRAMS["cases"])}']
         rows.append('<tr><th scope="row">'+escape(name)+'</th>'+''.join('<td>'+v+'</td>' for v in values)+'</tr>')
     return ('<section class="landing-comparison" id="comparison" aria-labelledby="comparison-title">'
@@ -168,8 +171,11 @@ def verified_observations(data, lang):
             name = app['name']
             light = records[name, 'common-test-light.md', phase]
             graph = records[name, 'diagram-control.md', phase]
-            rows.append([name, f"{app['installedBytes']/1048576:.2f}", observed_seconds(light['timing']), observed_seconds(graph['timing']), f"{light['memory']['medianMiBAt8s']:.1f}"])
+            reported = REPORTED_RESULTS.get(name, {}) if phase == 'warm' else {}
+            graph_timing = {'launchToContentMs': reported['firstMermaidMs']} if 'firstMermaidMs' in reported else graph['timing']
+            rows.append([name, f"{app['installedBytes']/1048576:.2f}", observed_seconds(light['timing']), observed_seconds(graph_timing), f"{reported.get('ramMiB', light['memory']['medianMiBAt8s']):.1f}"])
         html += '<h3>'+t('Cold start' if phase == 'cold' else 'Warm start', 'Холодный запуск' if phase == 'cold' else 'Тёплый запуск')+'</h3>'+table([t('Application', 'Приложение'), t('Size · MiB', 'Размер · MiB'), 'Light', t('First Mermaid', 'Первая Mermaid'), 'RAM · MiB'], rows)
+    html += '<p class="comparison-note">'+t('The MacDown warm reference uses the maintainer’s final manual measurements: 201 MiB RAM and 1.1 s to the first diagram, supplied on 19 October. The original automated observations remain in the JSON evidence; no benchmark was rerun for this correction.', 'Для тёплого MacDown использованы окончательные ручные замеры автора: 201 MiB RAM и 1,1 с до первой диаграммы, переданные 19 октября. Исходные автоматические наблюдения сохранены в JSON; для этой поправки бенчмарк не перезапускался.')+'</p>'
     html += '<p class="comparison-note">'+t('Size is the complete Universal app, excluding mutable profiles and the system browser runtime. Light is the same 91,722-byte diagram-free derivative. RAM is summed physical footprint, median at seconds 7–8, including bundle processes, descendants and all system/XPC services owned by the app according to the OS responsible PID. The Mermaid control has two nodes; Render · Page is its first visible graph, not full-document completion. N/A means source was displayed instead of a diagram.', 'Размер — полное Universal-приложение без изменяемых профилей и системного браузерного движка. Light — одинаковый файл на 91 722 байта без диаграмм. RAM — суммарная физическая память, медиана на 7–8-й секунде: процессы приложения, потомки и все принадлежащие ему системные/XPC-службы по владельцу, указанному ОС. Контроль Mermaid содержит два узла; «Рендер · Страница» означает первую видимую диаграмму, а не готовность всего документа. N/A — вместо диаграммы показан код.')+'</p>'
     rows = [[r['app'], f"{r['medianSteadyMiB']:.1f}", f"{r['sampledPeakMiB']:.1f}"] for r in data['empty']]
     html += '<h3>'+t('No document', 'Без документа')+'</h3>'+table([t('Application', 'Приложение'), t('Settled RAM · MiB', 'RAM после стабилизации · MiB'), t('Observed peak · MiB', 'Наблюдаемый пик · MiB')], rows)+'<p class="comparison-note">'+t('Median at seconds 30–40. MDVu shows the system Open dialog; MacDown shows an empty Untitled document. These are different default states, not identical blank-viewer workloads.', 'Медиана на 30–40-й секунде. MDVu показывает системный диалог открытия; MacDown — пустой документ Untitled. Это разные стартовые состояния, а не одинаковая нагрузка пустого просмотрщика.')+'</p>'
