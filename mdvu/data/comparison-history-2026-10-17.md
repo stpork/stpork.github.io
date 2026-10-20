@@ -1,6 +1,6 @@
 # Historical measurements — superseded comparison draft
 
-Not the current competitor ranking. Old fixture syntax, SVG error classification and exploratory memory data have been superseded by COMPARISON.md. Native MDVu before/after tests retain their named revisions and protocol.
+Not the current competitor ranking. Old fixture syntax, SVG error classification and exploratory memory data have been superseded by the [19 October verification](verification-2026-10-19.json). Native MDVu before/after tests retain their named revisions and protocol.
 
 <!-- competitor-study-start -->
 ## Local competitor study — 17 October 2026

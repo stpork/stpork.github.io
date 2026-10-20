@@ -52,4 +52,4 @@ python3 scripts/build.py
 python3 scripts/check.py
 ```
 
-The sync copies only linked comparison documents/evidence, preserving recorded values. It rewrites links in downloadable Markdown so they resolve on the website and keeps the historical matrix separate from the current one. Update both language variants together; no local editing step publishes the site.
+The sync copies the local benchmark protocol and diagram fixture, rewriting relative links in downloadable Markdown so they resolve on the website. Existing versioned results retain their recorded values. Update both language variants together; no local editing step publishes the site.

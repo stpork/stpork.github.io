@@ -225,7 +225,7 @@ for platform in ('mac', 'win'):
     assert (ROOT/f'mdvu/assets/mdvu-{platform}.webp').stat().st_size < 200000
     assert (ROOT/f'mdvu/assets/mdvu-{platform}-720.webp').stat().st_size < 80000
 print('PASS sitemap and asset budgets')
-for doc in ['COMPARISON.md','BENCHMARK-PROTOCOL.md','comparison-history-2026-10-17.md']:
+for doc in ['BENCHMARK-PROTOCOL.md','comparison-history-2026-10-17.md']:
     file = ROOT/'mdvu/data'/doc
     for ref in re.findall(r'\]\(([^)\n]+)\)', file.read_text()):
         parsed = urlsplit(ref)

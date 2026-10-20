@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy the local app's versioned comparison evidence and fix download-document links."""
+"""Copy the local benchmark protocol and diagram fixture, fixing document links."""
 from pathlib import Path
 import re
 import sys
@@ -49,7 +49,8 @@ def sync(source):
             (output/name).write_bytes(file.read_bytes())
         return name
 
-    copy(source/'COMPARISON.md')
+    copy(source/'test-results/benchmarks/PROTOCOL.md')
+    copy(source/'tests/fixtures/test-diagrams.md')
     (ROOT/'mdvu/BENCHMARK-PROTOCOL.md').write_bytes((output/'BENCHMARK-PROTOCOL.md').read_bytes())
     print(f'Synced {len(copied)} documentation/evidence files from {source}')
 
