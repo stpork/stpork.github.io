@@ -27,6 +27,17 @@ class Page(HTMLParser):
             assert 'alt' in a and 'width' in a and 'height' in a
         if 'srcset' in a: self.links += [item.strip().split()[0] for item in a['srcset'].split(',')]
 
+public_pages = [ROOT/'index.html', ROOT/'ru/index.html', ROOT/'404.html', *sorted((ROOT/'mdvu').rglob('*.html'))]
+google_loader = 'https://www.googletagmanager.com/gtag/js?id=G-HHVQNXLXCP'
+for file in public_pages:
+    source = file.read_text()
+    head = source.split('<head>', 1)[1].split('</head>', 1)[0]
+    assert head.lstrip().startswith('<!-- Google tag (gtag.js) -->\n<script async src="'+google_loader+'"></script>'), file
+    assert source.count('https://www.googletagmanager.com/gtag/js') == 1, file
+    assert re.findall(r"gtag\(\s*['\"]config['\"]\s*,\s*['\"]([^'\"]+)['\"]", source) == ['G-HHVQNXLXCP'], file
+    assert "gtag('config', 'G-HHVQNXLXCP');" in head, file
+print(f'PASS Google tag: exactly once immediately after <head> on all {len(public_pages)} public pages')
+
 seo_titles = set()
 seo_descriptions = set()
 linked_page_ids = {}

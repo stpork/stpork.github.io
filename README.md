@@ -4,7 +4,7 @@ The product website for [MDVu](https://github.com/stpork/mdvu), hosted at **http
 
 ## Develop
 
-Static HTML and CSS, with small progressive-enhancement scripts. Python 3 builds the pages; Node.js checks browser scripts. No npm dependencies, framework, runtime API calls, analytics, external fonts or third-party scripts.
+Static HTML and CSS, with small progressive-enhancement scripts. Python 3 builds the pages; Node.js checks browser scripts. No npm dependencies, framework, runtime API calls or external fonts. Every public page includes the Google tag `G-HHVQNXLXCP` for website analytics, once immediately after `<head>`.
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py'

@@ -11,6 +11,15 @@ ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = 'https://stpork.github.io'
 BASE = ORIGIN + '/mdvu'
 REPO = 'https://github.com/stpork/mdvu'
+GOOGLE_TAG = '''<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HHVQNXLXCP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HHVQNXLXCP');
+</script>'''
 RELEASE_DATA = json.loads((ROOT/'mdvu/data/release.json').read_text())
 DIAGRAMS = json.loads((ROOT/'mdvu/data/diagram-compatibility.json').read_text())
 PRODUCTS = json.loads((ROOT/'mdvu/data/comparison.json').read_text())['products']
@@ -314,6 +323,7 @@ def page(lang, section=None):
     html = f'''<!doctype html>
 <html lang="{lang}">
 <head>
+{GOOGLE_TAG}
 <meta name="google-site-verification" content="8hoHZ7azFNVSv9x07AUhAS5xpXH3vrk-LlH07z-cgBc">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title><meta name="description" content="{description}">
@@ -390,13 +400,16 @@ def main():
 
     css_version = hashlib.sha256((ROOT/'mdvu/assets/site.css').read_bytes()).hexdigest()[:12]
     theme_version = hashlib.sha256((ROOT/'mdvu/assets/theme.js').read_bytes()).hexdigest()[:12]
-    (ROOT/'404.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f9fc"><title>Page not found — MDVu</title><script src="/mdvu/assets/theme.js?v={theme_version}"></script><link rel="stylesheet" href="/mdvu/assets/site.css?v={css_version}"><link rel="icon" href="/mdvu/assets/favicon-96.png"></head><body><main class="container section"><div class="nav-wrap"><a class="brand" href="/mdvu/"><img src="/mdvu/assets/icon.webp" width="64" height="64" alt="">MDVu.</a>{theme_toggle('en')}</div><p class="eyebrow" style="margin-top:48px">404 / PAGE NOT FOUND</p><h1>A little detour.</h1><p class="section-intro">This page isn’t here. Your next Markdown viewer is.</p><a class="button" href="/mdvu/" style="margin-top:24px">Back to MDVu →</a></main></body></html>''')
+    (ROOT/'404.html').write_text(f'''<!doctype html><html lang="en"><head>
+{GOOGLE_TAG}
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f9fc"><title>Page not found — MDVu</title><script src="/mdvu/assets/theme.js?v={theme_version}"></script><link rel="stylesheet" href="/mdvu/assets/site.css?v={css_version}"><link rel="icon" href="/mdvu/assets/favicon-96.png"></head><body><main class="container section"><div class="nav-wrap"><a class="brand" href="/mdvu/"><img src="/mdvu/assets/icon.webp" width="64" height="64" alt="">MDVu.</a>{theme_toggle('en')}</div><p class="eyebrow" style="margin-top:48px">404 / PAGE NOT FOUND</p><h1>A little detour.</h1><p class="section-intro">This page isn’t here. Your next Markdown viewer is.</p><a class="button" href="/mdvu/" style="margin-top:24px">Back to MDVu →</a></main></body></html>''')
 
 
     def redirect_page(target, lang):
         label = 'Открыть MDVu' if lang == 'ru' else 'Open MDVu'
         return f'''<!doctype html>
 <html lang="{lang}"><head>
+{GOOGLE_TAG}
 <meta charset="utf-8">
 <meta name="google-site-verification" content="8hoHZ7azFNVSv9x07AUhAS5xpXH3vrk-LlH07z-cgBc">
 <meta name="viewport" content="width=device-width, initial-scale=1">
