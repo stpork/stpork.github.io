@@ -25,7 +25,7 @@ jobs:
           node --check mdvu/assets/site.js
           node --check mdvu/assets/theme.js
           node scripts/check-theme.cjs
-          git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html mdvu/performance/index.html mdvu/diagrams/index.html mdvu/ru/performance/index.html mdvu/ru/diagrams/index.html 404.html
+          git diff --exit-code -- index.html ru/index.html mdvu/index.html mdvu/ru/index.html mdvu/performance/index.html mdvu/diagrams/index.html mdvu/ru/performance/index.html mdvu/ru/diagrams/index.html 404.html stplayer/index.html stplayer-releases/index.html
       - name: Resolve currently published download assets
         env:
           GH_TOKEN: ${{ github.token }}
@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html 404.html robots.txt sitemap.xml _site/
-          cp -R ru mdvu _site/
+          cp -R ru mdvu stplayer stplayer-releases _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5.0.0
         with:

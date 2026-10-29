@@ -27,7 +27,9 @@ class Page(HTMLParser):
             assert 'alt' in a and 'width' in a and 'height' in a
         if 'srcset' in a: self.links += [item.strip().split()[0] for item in a['srcset'].split(',')]
 
-public_pages = [ROOT/'index.html', ROOT/'ru/index.html', ROOT/'404.html', *sorted((ROOT/'mdvu').rglob('*.html'))]
+public_pages = [ROOT/'index.html', ROOT/'ru/index.html', ROOT/'404.html',
+                ROOT/'stplayer/index.html', ROOT/'stplayer-releases/index.html',
+                *sorted((ROOT/'mdvu').rglob('*.html'))]
 google_loader = 'https://www.googletagmanager.com/gtag/js?id=G-HHVQNXLXCP'
 for file in public_pages:
     source = file.read_text()
@@ -230,6 +232,19 @@ for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     else:
         assert 'noindex' in redirect.meta['robots']
 print('PASS migration: root and old Russian URL redirect to canonical pages, verification retained')
+stplayer_target = 'https://finndebear.github.io/stplayer/'
+for route in ('stplayer', 'stplayer-releases'):
+    source = (ROOT/route/'index.html').read_text()
+    redirect = Page(source)
+    canonical = [a.get('href') for tag,a in redirect.tags if tag=='link' and a.get('rel')=='canonical']
+    refresh = [a.get('content') for tag,a in redirect.tags if tag=='meta' and a.get('http-equiv')=='refresh']
+    assert canonical == [stplayer_target]
+    assert refresh == ['0;url='+stplayer_target]
+    assert stplayer_target in redirect.links
+    assert 'location.replace('+json.dumps(stplayer_target)+');' in source
+    assert 'location.search' not in source and 'location.hash' not in source
+    assert 'noindex' in redirect.meta['robots']
+print('PASS STPlayer migration: both old entry points redirect to the new website')
 assert (ROOT/'mdvu/assets/site.js').stat().st_size < 5500
 assert (ROOT/'mdvu/assets/theme.js').stat().st_size < 4000
 for platform in ('mac', 'win'):
