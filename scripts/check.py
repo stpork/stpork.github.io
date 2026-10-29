@@ -232,8 +232,10 @@ for rel,target in [('index.html','/mdvu/'),('ru/index.html','/mdvu/ru/')]:
     else:
         assert 'noindex' in redirect.meta['robots']
 print('PASS migration: root and old Russian URL redirect to canonical pages, verification retained')
-stplayer_target = 'https://finndebear.github.io/stplayer/'
-for route in ('stplayer', 'stplayer-releases'):
+for route, stplayer_target in (
+    ('stplayer', 'https://finndebear.github.io/stplayer/'),
+    ('stplayer-releases', 'https://finndebear.github.io/stplayer/latest/'),
+):
     source = (ROOT/route/'index.html').read_text()
     redirect = Page(source)
     canonical = [a.get('href') for tag,a in redirect.tags if tag=='link' and a.get('rel')=='canonical']

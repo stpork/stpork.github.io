@@ -427,8 +427,11 @@ def main():
     (ROOT/'ru').mkdir(exist_ok=True)
     (ROOT/'ru/index.html').write_text(redirect_page('/mdvu/ru/', 'ru'))
 
-    stplayer_target = 'https://finndebear.github.io/stplayer/'
-    stplayer_redirect = f'''<!doctype html>
+    for route, stplayer_target in (
+        ('stplayer', 'https://finndebear.github.io/stplayer/'),
+        ('stplayer-releases', 'https://finndebear.github.io/stplayer/latest/'),
+    ):
+        stplayer_redirect = f'''<!doctype html>
 <html lang="en"><head>
 {GOOGLE_TAG}
 <meta charset="utf-8">
@@ -440,7 +443,6 @@ def main():
 <script>location.replace({json.dumps(stplayer_target)});</script>
 </head><body><p><a href="{stplayer_target}">Open STPlayer</a></p></body></html>
 '''
-    for route in ('stplayer', 'stplayer-releases'):
         directory = ROOT / route
         directory.mkdir(exist_ok=True)
         (directory / 'index.html').write_text(stplayer_redirect)
